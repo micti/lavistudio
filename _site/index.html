@@ -6,6 +6,7 @@
     <link rel="canonical" href="http://lavi.studio">
     <title>Lavi Studio</title>
   </head>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box
@@ -15,6 +16,7 @@
       margin: 0;
       padding: 0;
       background: #D1D3D4;
+      font-family: 'Poppins', sans-serif;
     }
 
     .main {
@@ -41,7 +43,12 @@
     }
 
     .project:hover {
+      /* cursor: none */
       cursor: url("/client/ViewDetail.svg") 40 40, pointer;
+    }
+
+    .project.clicked:hover {
+      cursor: none
     }
 
     .project .count {
@@ -72,16 +79,73 @@
     }
 
     .project .name {
-      font-size: 12vh;
+      font-size: 10vh;
       transform: translate3d(-140px, 0px, 0px);
       width: 100%;
       flex: none;
     }
+
+    .cursor {
+      position: absolute;
+      display: none;
+      width: 123px;
+      height: 82px;
+    }
+
+    .cursor.active {
+      display: block;
+    }
+
+    .cursor .container {
+      position: relative
+    }
+
+    .cursor .text {
+      font-size: 12px;
+      position: absolute;
+      top: 29px;
+      left: 50px;
+      color: #231F20;
+    }
+
+    .contact-info {
+      position: absolute;
+      top: 80px;
+      left: 122px;
+      font-size: 14px;
+      line-height: 30px;
+      font-weight: 500;
+    }
+
+    .intro-text {
+      position: absolute;
+      left: 122px;
+      bottom: 40px;
+      width: 395px;
+      font-size: 14px;
+    }
+
+    .rectange {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      width: 30vw;
+      background: #4a4a4a
+    }
   </style>
 <body>
   <div class="main">
+    <div class="contact-info">
+        +84 9388 999 72<br>
+        hello@lavidesign.studio<br>
+        contact
+    </div>
+    <div class="intro-text">A Saigon-based digital designer, love to crafting beautiful branding, digital experiences with website design and application interface</div>
+    <!-- -->
+    <div class="rectange"></div>
     <div id="project-wrap" class="project-wrap">
-      <section class="project" style="background:url(/client/photo/01.jpg) center center">
+      <section class="project" id="project-1" style="background:url(/client/photo/01.jpg) center center">
         <div class="info">
           <div class="name">Project Name 1</div>
           <div class="count">
@@ -97,7 +161,7 @@
           </div>
         </div>
       </section>
-      <section class="project" style="background:url(/client/photo/02.jpg) center center">
+      <section class="project" id="project-2" style="background:url(/client/photo/02.jpg) center center">
         <div class="info">
           <div class="name">Project Name 2</div>
           <div class="count">
@@ -113,7 +177,7 @@
           </div>
         </div>
       </section>
-      <section class="project" style="background:url(/client/photo/03.jpg) center center">
+      <section class="project" id="project-3" style="background:url(/client/photo/03.jpg) center center">
         <div class="info">
           <div class="name">Project Name 3</div>
           <div class="count">
@@ -129,6 +193,14 @@
           </div>
         </div>
       </section>
+    </div>
+  </div>
+  <div class="cursor">
+    <div class="container">
+      <svg width="123px" height="82px" viewBox="0 0 123 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <circle id="Oval-2" stroke="#231F20" fill="none" stroke-width="1" cx="41" cy="41" r="40"></circle>
+      </svg>
+      <div id="cursor-text" class="text">View Details</div>
     </div>
   </div>
   <script src="/client/js.js"></script>

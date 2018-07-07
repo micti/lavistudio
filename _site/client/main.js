@@ -1,6 +1,18 @@
+let cursorDetailLoading = (project) => {
+  let tl = new S.Timeline()
+  let id = project.id //'#' + id
+  console.log(id)
+  tl.from({el: '#cursor-text', p: {x: [0, -45, 'px']}, d: 500, e: 'Power4Out'})
+  tl.from({el: project, p: {height: [50, 100, 'vh']}, d: 500, e: 'Power4Out'})
+  tl.from({el: project, p: {y: [0, -25, 'vh']}, d: 500, e: 'Power4Out'})
+
+  tl.play()
+}
+
 let main = () => {
   console.log('ok')
   let stopWheelEvent = false
+  let isDetailView = false
   let releaseWheelEvent = () => {
     stopWheelEvent = false
   }
@@ -51,7 +63,28 @@ let main = () => {
     tl.play()
   }
 
+  S.L('.project', 'add', 'click', (e) => {
+      if (isDetailView) return
+      isDetailView = true
+
+      let el = document.querySelector('.cursor')
+      let parent = e.target.closest('.project')
+
+      el.style['top'] = e.pageY  - 41 + 'px'
+      el.style['left'] = e.pageX  - 41 + 'px'
+      el.classList.add('active')
+      parent.classList.add('clicked')
+
+      cursorDetailLoading(parent)
+  })
+
+  S.L('.project', 'add', 'mouseleave', (e) => {
+    // let parent = e.target.closest('.project')
+    // parent.classList.remove('clicked')
+})
+
   S.L(document, 'add', 'mouseWheel', (e) => {
+    if (isDetailView) return
     if (stopWheelEvent) return
     stopWheelEvent = true
     if (e.deltaY > 0) {
@@ -65,3 +98,5 @@ let main = () => {
 }
 
 S.L(document, 'add', 'DOMContentLoaded', main)
+
+
