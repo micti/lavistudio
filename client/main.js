@@ -1,25 +1,40 @@
-let cursorDetailLoading = (project) => {
-  let tl = new S.Timeline()
-  let id = project.id //'#' + id
-  console.log(id)
-  tl.from({el: '#cursor-text', p: {x: [0, -45, 'px']}, d: 500, e: 'Power4Out'})
-  tl.from({el: project, p: {height: [50, 100, 'vh']}, d: 500, e: 'Power4Out'})
-  tl.from({el: '.movex101', p: {x: [0, -365, 'px']}, d: 500, e: 'Power4Out'})
-  tl.from({el: project, p: {y: [0, -25, 'vh']}, d: 500, e: 'Power4Out'})
-
-  tl.play()
-}
-
 let main = () => {
-  console.log('ok')
+
   let stopWheelEvent = false
   let isDetailView = false
+
   let releaseWheelEvent = () => {
     stopWheelEvent = false
   }
+
   let project = 1
   let totalProject = 3;
   let current = 0;
+
+  let cursorEl = document.querySelector('.cursor')
+  let rectangleOnRight = document.getElementById('rectange-on-right')
+
+  let cursorDetailLoading = (project) => {
+    let tl = new S.Timeline()
+    let id = project.id //'#' + id
+    console.log(id)
+    tl.from({el: '#cursor-text', p: {x: [0, -45, 'px']}, d: 500, e: 'Power4Out'})
+    tl.from({el: project, p: {height: [50, 100, 'vh']}, d: 500, e: 'Power4Out'})
+    tl.from({el: '.movex101', p: {x: [0, -365, 'px']}, d: 500, e: 'Power4Out'})
+    tl.from({el: rectangleOnRight, p: {x: [0, 30, 'vw']}, d: 500, e: 'Power4Out'})
+    tl.from({el: project, p: {y: [0, -25, 'vh']}, d: 500, e: 'Power4Out', cb: () => {
+      cursorEl.classList.remove('active')
+      openDetail()
+    }})
+
+    tl.play()
+  }
+
+  let openDetail = () => {
+    let pd = document.getElementById("project-detail")
+    pd.classList.add('active')
+    pd.scrollTop = 0
+  }
 
   nextProject = () => {
     if (project === totalProject) {
@@ -33,11 +48,11 @@ let main = () => {
     project++
 
     let tl = new S.Timeline()
-    tl.from({el: '.name', p: {x: [-140, -180, 'px'], opacity: [1, 0]}, d: 500, e: 'Power4Out'})
+    tl.from({el: '.name', p: {x: [-25, -30, 'vw'], opacity: [1, 0]}, d: 500, e: 'Power4Out'})
     tl.from({el: '.movex100', p: {x: [0, -100, '%']}, d: 500, e: 'Power4Out'})
     tl.from({el: '#project-wrap', p: {y: [now, end, 'vh']}, d: 1000, delay: 500, e: 'Power4Out'})
     tl.from({el: '.movex100', p: {x: [-100, 0, '%']}, d: 500, delay: 1500, e: 'Power4Out'})
-    tl.from({el: '.name', p: {x: [-180, -140, 'px'], opacity: [0, 1]}, d: 500, delay: 0, e: 'Power4Out', cb: releaseWheelEvent})
+    tl.from({el: '.name', p: {x: [-30, -25, 'vw'], opacity: [0, 1]}, d: 500, delay: 0, e: 'Power4Out', cb: releaseWheelEvent})
 
     tl.play()
 
@@ -54,11 +69,11 @@ let main = () => {
     console.log(now, end)
     project--
     let tl = new S.Timeline()
-    tl.from({el: '.name', p: {x: [-140, -180, 'px'], opacity: [1, 0]}, d: 500, e: 'Power4Out'})
+    tl.from({el: '.name', p: {x: [-25, -30, 'vw'], opacity: [1, 0]}, d: 500, e: 'Power4Out'})
     tl.from({el: '.movex100', p: {x: [0, -100, '%']}, d: 500, e: 'Power4Out'})
     tl.from({el: '#project-wrap', p: {y: [now, end, 'vh']}, d: 1000, delay: 500, e: 'Power4Out'})
     tl.from({el: '.movex100', p: {x: [-100, 0, '%']}, d: 500, delay: 1500, e: 'Power4Out'})
-    tl.from({el: '.name', p: {x: [-180, -140, 'px'], opacity: [0, 1]}, d: 500, delay: 0, e: 'Power4Out', cb: releaseWheelEvent})
+    tl.from({el: '.name', p: {x: [-30, -25, 'vw'], opacity: [0, 1]}, d: 500, delay: 0, e: 'Power4Out', cb: releaseWheelEvent})
 
 
     tl.play()

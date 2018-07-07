@@ -27,7 +27,23 @@
       height: 100%;
     }
 
-    .project-wrap {
+    .project-detail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      padding-top: 100vh;
+      overflow-y: scroll;
+      display: none;
+      background: #D1D3D4;
+    }
+
+    .project-detail.active {
+      display: block;
+    }
+
+    .project-detail .header, .project-wrap {
       position: absolute;
       top: 25vh;
       left: 50vw;
@@ -35,26 +51,37 @@
     }
 
     .project {
-      /* margin-top: 25vh; */
       height: 50vh;
       margin-bottom: 25vh;
       display: flex;
       align-items: center;
     }
 
-    .project:hover {
+    .project-detail .header {
+      top: 0vh;
+    }
+
+    .project-detail .header .project {
+      height: 100vh;
+    }
+
+    .project-detail .content {
+      margin: 0 10vw
+    }
+
+    .project-wrap .project:hover {
       /* cursor: none */
       cursor: url("/client/ViewDetail.svg") 40 40, pointer;
     }
 
-    .project.clicked:hover {
+    .project-wrap .project.clicked:hover {
       cursor: none
     }
 
     .project .count {
       display: flex;
       align-items: center;
-      transform: translate3d(-140px, 0px, 0px);
+      transform: translate3d(-25vw, 0px, 0px);
     }
 
     .project .count .no-wrapper, .project .count .total-wrapper {
@@ -80,7 +107,7 @@
 
     .project .name {
       font-size: 10vh;
-      transform: translate3d(-140px, 0px, 0px);
+      transform: translate3d(-25vw, 0px, 0px);
       width: 100%;
       flex: none;
     }
@@ -136,6 +163,42 @@
       width: 30vw;
       background: #4a4a4a
     }
+
+    /* PROJECT DETAIL */
+    .project-detail .project-intro {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .project-detail .project-intro .project-intro-wrapper {
+      margin: 0 auto;
+      max-width: 597px;
+      text-align: center;
+    }
+
+    .project-photo + .project-photo {
+      margin-top: 40px;
+    }
+
+    .project-detail .next-project {
+      margin-top: 80px;
+      width: 100%;
+      background: #4a4a4a;
+      color: #fff;
+      text-align: center;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .next-project-title {
+      font-size: 14px;
+    }
+
+    .next-project-name {
+      margin-top: 20px;
+      font-size: 60px;
+      font-weight: 500;
+    }
   </style>
 <body>
   <div class="main">
@@ -152,7 +215,7 @@
       </div>
     </div>
     <!-- -->
-    <div class="rectange"></div>
+    <div id="rectange-on-right" class="rectange"></div>
     <div id="project-wrap" class="project-wrap">
       <section class="project" id="project-1" style="background:url(/client/photo/01.jpg) center center">
         <div class="info">
@@ -170,9 +233,6 @@
           </div>
         </div>
       </section>
-      <div class="project-detail">
-        ABCBC
-      </div>
       <section class="project" id="project-2" style="background:url(/client/photo/02.jpg) center center">
         <div class="info">
           <div class="name">Project Name 2</div>
@@ -205,6 +265,43 @@
           </div>
         </div>
       </section>
+    </div>
+    <div id="project-detail" class="project-detail">
+      <div class="header">
+        <section class="project" id="project-1" style="background:url(/client/photo/01.jpg) center center">
+          <div class="info">
+            <div class="name">Project Name 1</div>
+            <div class="count">
+              <div class="no-wrapper">
+                <div class="no movex100">1</div>
+              </div>
+              <div class="line-wrapper">
+                <div class="line movex100"></div>
+              </div>
+              <div class="total-wrapper">
+                <div class="total movex100">3</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="content">
+        <div class="project-intro">
+          <p class="project-intro-wrapper">
+            I have detailed below the most cost effective forms of internet marketing to advertising your business using your company website. HTPcompany.com provides marketing, Internet advertising, search engine optimization and sales consulting for businesses, web site promotion and lead generation.
+          </p>
+        </div>
+        <div class="project-photo">
+          <img src="/client/photo/01.jpg" width="100%">
+        </div>
+        <div class="project-photo">
+          <img src="/client/photo/02.jpg" width="100%">
+        </div>
+      </div>
+      <div class="next-project">
+        <div class="next-project-title">Next Project</div>
+        <div class="next-project-name">Project Name 2</div>
+      </div>
     </div>
   </div>
   <div class="cursor">
