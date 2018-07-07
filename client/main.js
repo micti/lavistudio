@@ -10,30 +10,46 @@ let main = () => {
   let project = 1
   let totalProject = 3;
   let current = 0;
+  let currentDetailProject = null
 
   let cursorEl = document.querySelector('.cursor')
   let rectangleOnRight = document.getElementById('rectange-on-right')
+  let closeDetailButton = document.getElementById('close-detail')
+  let pd = document.getElementById("project-detail")
+
 
   let cursorDetailLoading = (project) => {
+    currentDetailProject = project
     let tl = new S.Timeline()
-    let id = project.id //'#' + id
-    console.log(id)
     tl.from({el: '#cursor-text', p: {x: [0, -45, 'px']}, d: 500, e: 'Power4Out'})
     tl.from({el: project, p: {height: [50, 100, 'vh']}, d: 500, e: 'Power4Out'})
     tl.from({el: '.movex101', p: {x: [0, -365, 'px']}, d: 500, e: 'Power4Out'})
     tl.from({el: rectangleOnRight, p: {x: [0, 30, 'vw']}, d: 500, e: 'Power4Out'})
-    tl.from({el: project, p: {y: [0, -25, 'vh']}, d: 500, e: 'Power4Out', cb: () => {
-      cursorEl.classList.remove('active')
-      openDetail()
-    }})
-
+    tl.from({el: project, p: {y: [0, -25, 'vh']}, d: 500, e: 'Power4Out', cb: openDetail})
     tl.play()
+
   }
 
   let openDetail = () => {
-    let pd = document.getElementById("project-detail")
+    currentDetailProject.classList.remove('clicked')
+    cursorEl.classList.remove('active')
     pd.classList.add('active')
     pd.scrollTop = 0
+    new S.Merom({el: closeDetailButton, p: {y: [22, 0, 'px']}, d: 500, e: 'Power4Out'}).play()
+  }
+
+  let closeDetail = () => {
+    pd.classList.remove('active')
+    new S.Merom({el: closeDetailButton, p: {y: [0, -22, 'px']}, d: 500, e: 'Power4Out'}).play({cb: () => {
+      let tl = new S.Timeline()
+      tl.from({el: '#cursor-text', p: {x: [-45, 0, 'px']}, d: 500, e: 'Power4Out'})
+      tl.from({el: currentDetailProject, p: {height: [100, 50, 'vh']}, d: 500, e: 'Power4Out'})
+      tl.from({el: '.movex101', p: {x: [-365, 0, 'px']}, d: 500, e: 'Power4Out'})
+      tl.from({el: rectangleOnRight, p: {x: [30, 0, 'vw']}, d: 500, e: 'Power4Out'})
+      tl.from({el: currentDetailProject, p: {y: [-25, 0, 'vh']}, d: 500, e: 'Power4Out'})
+      tl.play()
+      currentDetailProject = null
+    }})
   }
 
   nextProject = () => {
@@ -80,19 +96,25 @@ let main = () => {
   }
 
   S.L('.project', 'add', 'click', (e) => {
-      if (isDetailView) return
-      isDetailView = true
+    if (isDetailView) return
+    isDetailView = true
 
-      let el = document.querySelector('.cursor')
-      let parent = e.target.closest('.project')
+    let parent = e.target.closest('.project')
 
-      el.style['top'] = e.pageY  - 41 + 'px'
-      el.style['left'] = e.pageX  - 41 + 'px'
-      el.classList.add('active')
-      parent.classList.add('clicked')
+    cursorEl.style['top'] = e.pageY  - 41 + 'px'
+    cursorEl.style['left'] = e.pageX  - 41 + 'px'
+    cursorEl.classList.add('active')
+    parent.classList.add('clicked')
 
-      cursorDetailLoading(parent)
+    cursorDetailLoading(parent)
   })
+
+  S.L(closeDetailButton, 'add', 'click', (e) => {
+    if (!isDetailView) return
+    isDetailView = false
+
+    closeDetail()
+})
 
   S.L('.project', 'add', 'mouseleave', (e) => {
     // let parent = e.target.closest('.project')
@@ -110,6 +132,12 @@ let main = () => {
       // hideProjectName.play({cb: prevProject})
       prevProject()
     }
+  })
+
+  // next project
+  S.L('#next-project', 'add', 'click', () => {
+    // Huy click
+    // Transform len 75
   })
 }
 

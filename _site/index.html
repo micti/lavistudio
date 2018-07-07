@@ -17,6 +17,7 @@
       padding: 0;
       background: #D1D3D4;
       font-family: 'Poppins', sans-serif;
+      font-size: 16px;
     }
 
     .main {
@@ -188,8 +189,8 @@
       text-align: center;
       padding-top: 20px;
       padding-bottom: 20px;
+      cursor: pointer;
     }
-
     .next-project-title {
       font-size: 14px;
     }
@@ -198,6 +199,20 @@
       margin-top: 20px;
       font-size: 60px;
       font-weight: 500;
+    }
+
+    /* CLOSE BUTTON */
+    .close-detail-button {
+      position: absolute;
+      top: 74px;
+      left: 122px;
+      width: 45px;
+      height: 22px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .close-detail-button-text {
+      transform: translate3d(0px, 22px, 0px)
     }
   </style>
 <body>
@@ -298,7 +313,7 @@
           <img src="/client/photo/02.jpg" width="100%">
         </div>
       </div>
-      <div class="next-project">
+      <div id="next-project" class="next-project">
         <div class="next-project-title">Next Project</div>
         <div class="next-project-name">Project Name 2</div>
       </div>
@@ -311,6 +326,9 @@
       </svg>
       <div id="cursor-text" class="text">View Details</div>
     </div>
+  </div>
+  <div class="close-detail-button">
+    <div id="close-detail" class="close-detail-button-text">Close</div>
   </div>
   <script src="/client/js.js"></script>
   <script src="/client/main.js"></script>
