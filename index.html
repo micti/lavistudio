@@ -112,9 +112,11 @@
       position: absolute;
       top: 80px;
       left: 122px;
+      width: 395px;
       font-size: 14px;
       line-height: 30px;
       font-weight: 500;
+      overflow: hidden;
     }
 
     .intro-text {
@@ -123,6 +125,7 @@
       bottom: 40px;
       width: 395px;
       font-size: 14px;
+      overflow: hidden;
     }
 
     .rectange {
@@ -137,11 +140,17 @@
 <body>
   <div class="main">
     <div class="contact-info">
+      <div class="contact-info-wrapper movex101">
         +84 9388 999 72<br>
         hello@lavidesign.studio<br>
         contact
+      </div>
     </div>
-    <div class="intro-text">A Saigon-based digital designer, love to crafting beautiful branding, digital experiences with website design and application interface</div>
+    <div class="intro-text">
+      <div class="contact-info-wrapper movex101">
+        A Saigon-based digital designer, love to crafting beautiful branding, digital experiences with website design and application interface
+      </div>
+    </div>
     <!-- -->
     <div class="rectange"></div>
     <div id="project-wrap" class="project-wrap">
@@ -161,6 +170,9 @@
           </div>
         </div>
       </section>
+      <div class="project-detail">
+        ABCBC
+      </div>
       <section class="project" id="project-2" style="background:url(/client/photo/02.jpg) center center">
         <div class="info">
           <div class="name">Project Name 2</div>

@@ -4,6 +4,7 @@ let cursorDetailLoading = (project) => {
   console.log(id)
   tl.from({el: '#cursor-text', p: {x: [0, -45, 'px']}, d: 500, e: 'Power4Out'})
   tl.from({el: project, p: {height: [50, 100, 'vh']}, d: 500, e: 'Power4Out'})
+  tl.from({el: '.movex101', p: {x: [0, -365, 'px']}, d: 500, e: 'Power4Out'})
   tl.from({el: project, p: {y: [0, -25, 'vh']}, d: 500, e: 'Power4Out'})
 
   tl.play()
