@@ -62,11 +62,21 @@
       top: 0vh;
     }
 
+    .project-detail .fake-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: transparent;
+    }
+
     .project-detail .header .project {
       height: 100vh;
     }
 
     .project-detail .content {
+
       margin: 0 10vw
     }
 
@@ -232,7 +242,7 @@
     <!-- -->
     <div id="rectange-on-right" class="rectange"></div>
     <div id="project-wrap" class="project-wrap">
-      <section class="project" id="project-1" style="background:url(/client/photo/01.jpg) center center">
+      <section class="project" id="project-1" data-project-id="1" style="background:url(/client/photo/01.jpg) center center">
         <div class="info">
           <div class="name">Project Name 1</div>
           <div class="count">
@@ -248,7 +258,7 @@
           </div>
         </div>
       </section>
-      <section class="project" id="project-2" style="background:url(/client/photo/02.jpg) center center">
+      <section class="project" id="project-2" data-project-id="2" style="background:url(/client/photo/02.jpg) center center">
         <div class="info">
           <div class="name">Project Name 2</div>
           <div class="count">
@@ -264,7 +274,7 @@
           </div>
         </div>
       </section>
-      <section class="project" id="project-3" style="background:url(/client/photo/03.jpg) center center">
+      <section class="project" id="project-3" data-project-id="3" style="background:url(/client/photo/03.jpg) center center">
         <div class="info">
           <div class="name">Project Name 3</div>
           <div class="count">
@@ -282,41 +292,7 @@
       </section>
     </div>
     <div id="project-detail" class="project-detail">
-      <div class="header">
-        <section class="project" id="project-1" style="background:url(/client/photo/01.jpg) center center">
-          <div class="info">
-            <div class="name">Project Name 1</div>
-            <div class="count">
-              <div class="no-wrapper">
-                <div class="no movex100">1</div>
-              </div>
-              <div class="line-wrapper">
-                <div class="line movex100"></div>
-              </div>
-              <div class="total-wrapper">
-                <div class="total movex100">3</div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <div class="content">
-        <div class="project-intro">
-          <p class="project-intro-wrapper">
-            I have detailed below the most cost effective forms of internet marketing to advertising your business using your company website. HTPcompany.com provides marketing, Internet advertising, search engine optimization and sales consulting for businesses, web site promotion and lead generation.
-          </p>
-        </div>
-        <div class="project-photo">
-          <img src="/client/photo/01.jpg" width="100%">
-        </div>
-        <div class="project-photo">
-          <img src="/client/photo/02.jpg" width="100%">
-        </div>
-      </div>
-      <div id="next-project" class="next-project">
-        <div class="next-project-title">Next Project</div>
-        <div class="next-project-name">Project Name 2</div>
-      </div>
+
     </div>
   </div>
   <div class="cursor">

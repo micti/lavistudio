@@ -1,0 +1,35 @@
+      <div class="header">
+        <section class="project" style="background:url(/client/photo/02.jpg) center center">
+          <div class="info">
+            <div class="name">Project Name 2</div>
+            <div class="count">
+              <div class="no-wrapper">
+                <div class="no movex100">1</div>
+              </div>
+              <div class="line-wrapper">
+                <div class="line movex100"></div>
+              </div>
+              <div class="total-wrapper">
+                <div class="total movex100">3</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="content">
+        <div class="project-intro">
+          <p class="project-intro-wrapper">
+            I have detailed below the most cost effective forms of internet marketing to advertising your business using your company website. HTPcompany.com provides marketing, Internet advertising, search engine optimization and sales consulting for businesses, web site promotion and lead generation.
+          </p>
+        </div>
+        <div class="project-photo">
+          <img src="/client/photo/01.jpg" width="100%">
+        </div>
+        <div class="project-photo">
+          <img src="/client/photo/02.jpg" width="100%">
+        </div>
+      </div>
+      <div id="next-project" class="next-project">
+        <div class="next-project-title">Next Project</div>
+        <div class="next-project-name">Project Name 3</div>
+      </div>

@@ -31,11 +31,32 @@ let main = () => {
   }
 
   let openDetail = () => {
-    currentDetailProject.classList.remove('clicked')
-    cursorEl.classList.remove('active')
-    pd.classList.add('active')
-    pd.scrollTop = 0
-    new S.Merom({el: closeDetailButton, p: {y: [22, 0, 'px']}, d: 500, e: 'Power4Out'}).play()
+    let id = currentDetailProject.getAttribute('data-project-id')
+
+    fetch('/project_' + id + '.txt')
+      //.then(checkErrorResponse)
+      .then(res => {
+        return res.text()
+      })
+      .then(data => {
+
+        currentDetailProject.classList.remove('clicked')
+        cursorEl.classList.remove('active')
+        pd.innerHTML = data
+        pd.classList.add('active')
+        pd.scrollTop = 0
+        S.L('#next-project', 'add', 'click', nextProjectDetail)
+        new S.Merom({el: closeDetailButton, p: {y: [22, 0, 'px']}, d: 500, e: 'Power4Out'}).play()
+        // if (this.options.history && setState) {
+        //   history.pushState({
+        //     tabName: this.tabName,
+        //     contentid: this.currentTab.getAttribute('data-contentid')
+        //   }, 'A', contentDisplayUrl)
+        // }
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
 
   let closeDetail = () => {
@@ -50,6 +71,29 @@ let main = () => {
       tl.play()
       currentDetailProject = null
     }})
+  }
+
+  let nextProjectDetail = () => {
+    let nextProject = currentDetailProject.nextElementSibling
+    console.log(nextProject)
+    if (!nextProject) {
+      return
+    }
+
+    let id = nextProject.getAttribute('data-project-id')
+    let v = id * 75 - 75
+
+    currentDetailProject.style['height'] = '50vh'
+    currentDetailProject.style['transform'] = 'translate3d(0px, 0px, 0px)'
+    document.getElementById('project-wrap').style['transform'] = 'translate3d(0px, -' + v + 'vh, 0px)'
+
+    pd.classList.remove('active')
+    currentDetailProject.classList.remove('clicked')
+    isDetailView =false
+
+    let e = document.createEvent('HTMLEvents')
+    e.initEvent('click', false, true)
+    nextProject.dispatchEvent(e)
   }
 
   nextProject = () => {
@@ -132,12 +176,6 @@ let main = () => {
       // hideProjectName.play({cb: prevProject})
       prevProject()
     }
-  })
-
-  // next project
-  S.L('#next-project', 'add', 'click', () => {
-    // Huy click
-    // Transform len 75
   })
 }
 
