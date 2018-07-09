@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head itemscope>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="canonical" href="http://lavi.studio">
+    <title>Lavi Studio</title>
+  </head>
+  <style>
+
+#px-render{
+  width: 800px;
+  height: 1200px;
+}
+canvas{
+  width: 800px;
+  height: 1200px;
+}
+.viewport {
+  width: 400px;
+  height: 800px;
+  overflow: hidden;
+}
+.canvas {
+  transform: translate3d(-10px, -10px, 0px)
+}
+  </style>
+<body>
+  <div class="viewport">
+    <div class="canvas" id="px-render"></div>
+  </div>
+
+  <script src="/client/js.js"></script>
+  <script>
+  var width = 800;
+  var height = 1200;
+
+  var canvas;
+  var ratio = 800 /1200;
+  var count = 0;
+  var raf;
+  var renderer = PIXI.autoDetectRenderer(width, height, {transparent:true});
+  renderer.autoResize = true;
+  var tp, preview;
+  var displacementSprite,
+	  displacementFilter,
+	  stage;
+
+  function setScene(id, url){
+    var playground = document.getElementById('project-' + id);
+    playground.appendChild(renderer.view);
+    stage = new PIXI.Container();
+    tp = PIXI.Texture.fromImage(url);
+    preview = new PIXI.Sprite(tp);
+    preview.anchor.x = 0;
+    displacementSprite = PIXI.Sprite.fromImage('/client/photo/clouds.jpg');
+    displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+    displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
+    displacementSprite.scale.y = 0.6;
+    displacementSprite.scale.x = 0.6;
+    stage.addChild(displacementSprite);
+    stage.addChild(preview);
+    animate();
+}
+
+function removeScene(){
+	cancelAnimationFrame(raf);
+	stage.removeChildren();
+	stage.destroy(true);
+	playground.removeChild(canvas);
+}
+
+
+function animate() {
+    raf = requestAnimationFrame(animate);
+
+    displacementSprite.x = count*10;
+	displacementSprite.y = count*10;
+
+	count += 0.05;
+
+    stage.filters = [displacementFilter];
+
+    renderer.render(stage);
+
+    canvas = playground.querySelector('canvas');
+}
+
+setScene('/client/photo/0101.jpg');
+
+  </script>
+</body>
+</html>

@@ -16,7 +16,6 @@ let main = () => {
   let pd = document.getElementById("project-detail")
   let projectWrapper = document.getElementById("project-wrap")
 
-
   let openDetail = (event, project) => {
     // Tiến trình
     // 1. Animation chuyển cảnh (kéo dài hình lên tràn màn hình, dấu các thông tin khác)
@@ -190,6 +189,61 @@ let main = () => {
   })
 }
 
+// Effect
+class ImageEffect {
+  constructor (element, url) {
+    this.width = 1000;
+    this.height = 1300;
+    this.playground = element
+    this.count = 0;
+    this.raf;
+    this.renderer = PIXI.autoDetectRenderer(this.width, this.height, {transparent:true});
+    this.renderer.autoResize = true;
+    this.playground.appendChild(this.renderer.view);
+    this.stage = new PIXI.Container();
+    console.log(url)
+    this.tp = PIXI.Texture.fromImage(url);
+    this.preview = new PIXI.Sprite(this.tp);
+    this.preview.anchor.x = 0;
+    this.displacementSprite = PIXI.Sprite.fromImage('/client/photo/clouds.jpg');
+    this.displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+    this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
+    this.displacementSprite.scale.y = 0.6;
+    this.displacementSprite.scale.x = 0.6;
+    this.stage.addChild(this.displacementSprite);
+    this.stage.addChild(this.preview);
+    this.animate();
+  }
+
+  removeScene() {
+    cancelAnimationFrame(this.raf);
+    this.stage.removeChildren();
+    this.stage.destroy(true);
+    this.playground.removeChild(this.canvas);
+  }
+
+  animate () {
+    this.raf = requestAnimationFrame(() => {
+      this.animate()
+    });
+
+    this.displacementSprite.x = this.count * 10;
+	  this.displacementSprite.y = this.count * 10;
+
+	  this.count += 0.05;
+    this.stage.filters = [this.displacementFilter];
+    this.renderer.render(this.stage);
+    this.canvas = this.playground.querySelector('canvas');
+  }
+}
+
+let abc = () => {
+  new ImageEffect(document.getElementById('canvas-01'), '/client/photo/01.jpg')
+  new ImageEffect(document.getElementById('canvas-02'), '/client/photo/02.jpg')
+  new ImageEffect(document.getElementById('canvas-03'), '/client/photo/03.jpg')
+}
+
 S.L(document, 'add', 'DOMContentLoaded', main)
+S.L(document, 'add', 'DOMContentLoaded', abc)
 
 
