@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head itemscope>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="canonical" href="http://lavi.studio">
+    <title>Lavi Studio</title>
+  </head>
+  <style>
+.shape {
+    fill: none;
+    stroke: pink;
+    opacity: 0;
+}
+  </style>
+<body>
+  <svg width="30" height="30" viewBox="0 0 30 30">
+      <circle class="shape" r="14.5" cx="15" cy="15"></circle>
+  </svg>
+  <script src="/client/js.js"></script>
+  <script>
+    let line = new S.Merom({
+    el: '.shape',
+    line: {
+        elWithLength: this.el,
+        start: 0,
+        end: 25
+    },
+    d: 5000,
+    e: 'Power4Out'
+})
+line.play()
+  </script>
+</body>

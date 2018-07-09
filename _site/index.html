@@ -37,11 +37,17 @@
       padding-top: 100vh;
       overflow-y: scroll;
       display: none;
+      opacity: 0;
       background: #D1D3D4;
+      transition: opacity .5s;
     }
 
     .project-detail.active {
       display: block;
+    }
+
+    .project-detail.display {
+      opacity: 1
     }
 
     .project-detail .header, .project-wrap {
@@ -146,6 +152,14 @@
       color: #231F20;
     }
 
+    .cursor .loading-circle {
+      opacity: 0
+    }
+
+    /* .cursor .loading-circle {
+      opacity: 0
+    } */
+
     .contact-info {
       position: absolute;
       top: 80px;
@@ -201,6 +215,12 @@
       padding-bottom: 20px;
       cursor: pointer;
     }
+
+    .project-detail .next-project.end {
+      height: 0px;
+      padding: 0px;
+    }
+
     .next-project-title {
       font-size: 14px;
     }
@@ -299,6 +319,7 @@
     <div class="container">
       <svg width="123px" height="82px" viewBox="0 0 123 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <circle id="Oval-2" stroke="#231F20" fill="none" stroke-width="1" cx="41" cy="41" r="40"></circle>
+        <circle id="loading-circle" class="loading-circle" stroke="#231F20" stroke-width="1" fill="none"  cx="41" cy="41" r="38"></circle>
       </svg>
       <div id="cursor-text" class="text">View Details</div>
     </div>

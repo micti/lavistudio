@@ -29,3 +29,4 @@
           <img src="/client/photo/02.jpg" width="100%">
         </div>
       </div>
+      <div id="next-project" class="next-project end"></div>
