@@ -227,10 +227,10 @@ class ImageEffect {
       this.animate()
     });
 
-    this.displacementSprite.x = this.count * 10;
-	  this.displacementSprite.y = this.count * 10;
+    this.displacementSprite.x = this.count * 11;
+	  this.displacementSprite.y = this.count * 11;
 
-	  this.count += 0.05;
+	  this.count += 0.5;
     this.stage.filters = [this.displacementFilter];
     this.renderer.render(this.stage);
     this.canvas = this.playground.querySelector('canvas');
