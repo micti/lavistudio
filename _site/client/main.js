@@ -187,6 +187,26 @@ let main = () => {
       prevProject()
     }
   })
+
+  var ts;
+  $(document).bind('touchstart', function (e) {
+    if (isDetailView) return
+    if (isChangingProject) return
+    ts = e.originalEvent.touches[0].clientY;
+  });
+
+  $(document).bind('touchend', function (e) {
+    if (isDetailView) return
+    if (isChangingProject) return
+    var te = e.originalEvent.changedTouches[0].clientY;
+    if (ts > te + 5) {
+      isChangingProject = true
+      prevProject()
+    } else if(ts < te - 5){
+      isChangingProject = true
+      nextProject()
+    }
+  });
 }
 
 // Effect
@@ -259,6 +279,8 @@ var tran2 = function() {
   V.animate({ d: 'M568.950977 392.477271 471.125621 127.292398 423.612408 127.292398 551.251859 450.740296 586.650095 450.740296 713.672135 127.292398 666.158922 127.292398 Z' }, 1000, mina.backout);
   I.animate({ d: 'M733.496361 450.740296 781.491855 450.740296 781.491855 127.292398 733.496361 127.292398' }, 1000, mina.backout);
 }
+
+
 
 S.L(document, 'add', 'DOMContentLoaded', main)
 S.L(document, 'add', 'DOMContentLoaded', abc)
