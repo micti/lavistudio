@@ -113,10 +113,16 @@ let main = () => {
     tl.from({el: project, p: {height: [50, 100, 'vh']}, d: 500, e: 'Power4Out'})
     tl.from({el: '.movex101', p: {x: [0, -365, 'px']}, d: 500, e: 'Power4Out'})
     tl.from({el: rectangleOnRight, p: {x: [0, 30, 'vw']}, d: 500, e: 'Power4Out'})
-    tl.from({el: project, p: {y: [0, -25, 'vh']}, d: 500, e: 'Power4Out', cb: () => {
+    tl.from({el: project, p: {y: [0, -25, 'vh']}, d: 500, e: 'Power4Out'})
+    tl.play()
+
+    let tl2 = new S.Timeline()
+    tl2.from({el: '.category-text-mask', p: {x: [-150, 0, 'px']}, d: 500, e: 'Power4Out'})
+    tl2.from({el: '.category-text', p: {x: [-150, 0, 'px']}, d: 0, delay: 500, e: 'Power4Out'})
+    tl2.from({el: '.category-text-mask', p: {x: [0, 150, 'px']}, d: 500, e: 'Power4Out', cb: () => {
       new S.Merom({el: loadingCircle, line: {elWithLength: this.el, start: 0, end: 80}, d: 500, e: 'Power4Out', cb: loadContent}).play()
     }})
-    tl.play()
+    tl2.play()
   }
 
   let closeDetail = () => {
@@ -130,6 +136,12 @@ let main = () => {
       tl.from({el: rectangleOnRight, p: {x: [30, 0, 'vw']}, d: 500, e: 'Power4Out'})
       tl.from({el: currentDetailProject, p: {y: [-25, 0, 'vh']}, d: 500, e: 'Power4Out'})
       tl.play()
+
+      let tl2 = new S.Timeline()
+      tl2.from({el: '.category-text-mask', p: {x: [150, 0, 'px']}, d: 500, e: 'Power4Out'})
+      tl2.from({el: '.category-text', p: {x: [0, -150, 'px']}, d: 0, delay: 500, e: 'Power4Out'})
+      tl2.from({el: '.category-text-mask', p: {x: [0, -150, 'px']}, d: 500, e: 'Power4Out'})
+      tl2.play()
       currentDetailProject = null
     }})
   }
@@ -148,6 +160,12 @@ let main = () => {
     currentDetailProject.style['transform'] = 'translate3d(0px, 0px, 0px)'
 
     new S.Merom({el: closeDetailButton, p: {y: [0, -22, 'px']}, d: 500, e: 'Power4Out'}).play()
+    let tl2 = new S.Timeline()
+    tl2.from({el: '.category-text-mask', p: {x: [150, 0, 'px']}, d: 500, e: 'Power4Out'})
+    tl2.from({el: '.category-text', p: {x: [0, -150, 'px']}, d: 0, delay: 500, e: 'Power4Out'})
+    tl2.from({el: '.category-text-mask', p: {x: [0, -150, 'px']}, d: 500, e: 'Power4Out'})
+    tl2.play()
+
     new S.Merom({el: pd, p: {opacity: [1, 0]}, d: 1000, e: 'Power4Out'}).play({cb: () => {
       pd.classList.remove('active')
       isDetailView = false

@@ -13,6 +13,16 @@
                 <div class="total movex100">3</div>
               </div>
             </div>
+            <div class="category-wrapper">
+              <div class="category">
+                <div class="category-text">UX</div>
+                <div class="category-text-mask"></div>
+              </div>
+              <div class="category">
+                <div class="category-text">Web Design</div>
+                <div class="category-text-mask"></div>
+              </div>
+            </div>
           </div>
         </section>
       </div>
