@@ -261,7 +261,8 @@ let preload = (cb) => {
     "01.jpg",
     "02.jpg",
     "03.jpg",
-    "clouds.jpg"
+    "clouds.jpg",
+    "avatar.png"
   ]
   let preload = new createjs.LoadQueue(true, "/client/photo/")
 
