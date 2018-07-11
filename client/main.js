@@ -304,8 +304,7 @@ let intro = () => {
 
   let tl = new S.Timeline()
   tl.from({el: '.avatar', p: {opacity: [0, 0.5]}, d: 2000, e: 'Power4Out'}) // 0 - .5
-  tl.from({el: '.is-animation-introtext', p: {x: [-365, 0, 'px']}, d: 500, delay: 2000, e: 'Power4Out'}) // 2 - 2.5
-  tl.from({el: '#rectange-on-right', p: {x: [30, 0, 'vw']}, d: 500, e: 'Power4Out', cb: displayProject})
+  tl.from({el: '.is-animation-introtext', p: {x: [-365, 0, 'px']}, d: 500, delay: 2000, e: 'Power4Out', cb: displayProject}) // 2 - 2.5
   tran1()
   tl.play()
 }
@@ -317,6 +316,7 @@ let displayProject = () => {
   tl.from({el: '.photo', p: {width: [0, 100, '%']}, d: 500, delay: 500, e: 'Power4Out'})
   tl.from({el: '.movex100', p: {x: [-100, 0, '%']}, d: 500, e: 'Power4Out'})
   tl.from({el: '.name', p: {x: [-30, -25, 'vw'], opacity: [0, 1]}, d: 500, e: 'Power4Out', cb: main})
+  tl.from({el: '#rectange-on-right', p: {x: [30, 0, 'vw']}, d: 500, e: 'Power4Out'})
   tl.play()
 }
 
