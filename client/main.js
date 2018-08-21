@@ -276,7 +276,7 @@ let main = () => {
 
 let preload = (cb) => {
   let manifest = [
-    "01.jpg",
+    "01_big.png",
     "02.jpg",
     "03.jpg",
     "clouds.jpg",
@@ -340,7 +340,7 @@ let displayProject = () => {
 }
 
 let photoEffect = () => {
-  new ImageEffect(document.getElementById('canvas-01'), '/client/photo/01.jpg')
+  new ImageEffect(document.getElementById('canvas-01'), '/client/photo/01_big.png')
   new ImageEffect(document.getElementById('canvas-02'), '/client/photo/02.jpg')
   new ImageEffect(document.getElementById('canvas-03'), '/client/photo/03.jpg')
 }

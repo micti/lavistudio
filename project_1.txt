@@ -1,7 +1,7 @@
       <div class="header">
-        <section class="project" style="background:url(/client/photo/01.jpg) center center">
+        <section class="project" style="background:url(/client/photo/01_big.png) center center">
           <div class="info">
-            <div class="name">Project Name 1</div>
+            <div class="name">Pictures in the Sky</div>
             <div class="count">
               <div class="no-wrapper">
                 <div class="no movex100">1</div>
@@ -15,11 +15,15 @@
             </div>
             <div class="category-wrapper">
               <div class="category">
-                <div class="category-text">UX</div>
+                <div class="category-text">Art Direction</div>
                 <div class="category-text-mask"></div>
               </div>
               <div class="category">
-                <div class="category-text">Web Design</div>
+                <div class="category-text">Branding</div>
+                <div class="category-text-mask"></div>
+              </div>
+              <div class="category">
+                <div class="category-text">Website Design</div>
                 <div class="category-text-mask"></div>
               </div>
             </div>
@@ -33,13 +37,13 @@
           </p>
         </div>
         <div class="project-photo">
-          <img src="/client/photo/01.jpg" width="100%">
+          <img src="/client/photo/01_01.png" width="100%">
         </div>
         <div class="project-photo">
-          <img src="/client/photo/02.jpg" width="100%">
+          <img src="/client/photo/01_02.png" width="100%">
         </div>
       </div>
       <div id="next-project" class="next-project">
         <div class="next-project-title">Next Project</div>
-        <div class="next-project-name">Project Name 2</div>
+        <div class="next-project-name">Tan Quang</div>
       </div>

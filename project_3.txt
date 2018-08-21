@@ -1,7 +1,7 @@
       <div class="header">
         <section class="project" style="background:url(/client/photo/03.jpg) center center">
           <div class="info">
-            <div class="name">Project Name 3</div>
+            <div class="name">Freya</div>
             <div class="count">
               <div class="no-wrapper">
                 <div class="no movex100">3</div>
@@ -15,11 +15,11 @@
             </div>
             <div class="category-wrapper">
               <div class="category">
-                <div class="category-text">UX</div>
+                <div class="category-text">Art Direction</div>
                 <div class="category-text-mask"></div>
               </div>
               <div class="category">
-                <div class="category-text">Web Design</div>
+                <div class="category-text">Branding</div>
                 <div class="category-text-mask"></div>
               </div>
             </div>
