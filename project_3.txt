@@ -1,5 +1,5 @@
       <div class="header">
-        <section class="project" style="background:url(/client/photo/03.jpg) center center">
+        <section class="project" style="background:url(/client/photo/03_big.png) center center">
           <div class="info">
             <div class="name">Freya</div>
             <div class="count">
@@ -29,14 +29,11 @@
       <div class="content">
         <div class="project-intro">
           <p class="project-intro-wrapper">
-            I have detailed below the most cost effective forms of internet marketing to advertising your business using your company website. HTPcompany.com provides marketing, Internet advertising, search engine optimization and sales consulting for businesses, web site promotion and lead generation.
+            Freeya is a design studio specialized about dress and girls’ stuff, with their slogan #befree, they aim to show to world that girls can do everything.
           </p>
         </div>
         <div class="project-photo">
-          <img src="/client/photo/01.jpg" width="100%">
-        </div>
-        <div class="project-photo">
-          <img src="/client/photo/02.jpg" width="100%">
+          <img src="/client/photo/03_04.png" width="100%">
         </div>
       </div>
       <div id="next-project" class="next-project end"></div>

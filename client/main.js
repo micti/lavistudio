@@ -278,8 +278,7 @@ let preload = (cb) => {
   let manifest = [
     "01_big.png",
     "02_big.png",
-    "02.jpg",
-    "03.jpg",
+    "03_big.png",
     "clouds.jpg",
     "avatar.png"
   ]
@@ -343,7 +342,7 @@ let displayProject = () => {
 let photoEffect = () => {
   new ImageEffect(document.getElementById('canvas-01'), '/client/photo/01_big.png')
   new ImageEffect(document.getElementById('canvas-02'), '/client/photo/02_big.png')
-  new ImageEffect(document.getElementById('canvas-03'), '/client/photo/03.jpg')
+  new ImageEffect(document.getElementById('canvas-03'), '/client/photo/03_big.png')
 }
 
 S.L(document, 'add', 'DOMContentLoaded', () => {
