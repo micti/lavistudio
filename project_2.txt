@@ -1,5 +1,5 @@
       <div class="header">
-        <section class="project" style="background:url(/client/photo/02.jpg) center center">
+        <section class="project" style="background:url(/client/photo/02_big.png) center center">
           <div class="info">
             <div class="name">Tan Quang</div>
             <div class="count">
@@ -33,14 +33,13 @@
       <div class="content">
         <div class="project-intro">
           <p class="project-intro-wrapper">
-            I have detailed below the most cost effective forms of internet marketing to advertising your business using your company website. HTPcompany.com provides marketing, Internet advertising, search engine optimization and sales consulting for businesses, web site promotion and lead generation.
+            Tan Quang Project Co,. set-up and distributes high-quality mistorizer & industrial refrigerating machine to companies in Vietnam.  The redefinition of the company’s logo, as well as an easy to find presentation of its services.
+            <br><br>
+            By selecting specific design elements, the branding uses typography and colors allow the company to create a timeless impression to customers
           </p>
         </div>
         <div class="project-photo">
-          <img src="/client/photo/01.jpg" width="100%">
-        </div>
-        <div class="project-photo">
-          <img src="/client/photo/02.jpg" width="100%">
+          <img src="/client/photo/02_08.png" width="100%">
         </div>
       </div>
       <div id="next-project" class="next-project">
