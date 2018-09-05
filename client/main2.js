@@ -55,6 +55,9 @@ let projectSlider = {
   current: 0,
   isChange: false,
   projectEffect: [],
+  totalEl: document.getElementById('project-total'),
+  currentEl: document.getElementById('project-current'),
+  autoplayEl: document.getElementById('autoplay-timer'),
 
   wheelAndTouchEvent: (delta, type, event) => {
     if (projectSlider.isChange) {
@@ -75,6 +78,11 @@ let projectSlider = {
     }
   },
 
+  autoPlayEvent: () => {
+    let a = new S.Merom({el: projectSlider.autoplayEl, p: {x: [-100, 0, '%']}, d: 5000, e: 'Power4Out', cb: projectSlider.next})
+    a.play()
+  },
+
   init: () => {
     let projects = document.getElementsByClassName('project')
     projectSlider.total = projects.length
@@ -90,6 +98,7 @@ let projectSlider = {
   
   next: () => {
     projectSlider.isChange = true
+    projectSlider.cancelAutoPlay()
 
     if (projectSlider.current === projectSlider.total) {
       projectSlider.change(1, projectSlider.current, 1)
@@ -100,6 +109,7 @@ let projectSlider = {
 
   prev: () => {
     projectSlider.isChange = true
+    projectSlider.cancelAutoPlay()
     
     if (projectSlider.current === 1) {
       projectSlider.change(projectSlider.total, 1, -1)
@@ -111,30 +121,28 @@ let projectSlider = {
   change: (nextProject, prevProject, direction) => {
     let tl = new S.Timeline()
     let timer = 0
+    let animateTime = 1000;
     
     // Prepare for next project
     if (nextProject !== null) {
       if (projectSlider.projectEffect[nextProject] !== null) {
-        projectSlider.projectEffect[nextProject] = new ImageEffect(document.querySelector('#project-' + nextProject + ' .canvas'), 'photos/01-cover.png')
+        projectSlider.projectEffect[nextProject] = new ImageEffect(document.querySelector('#project-' + nextProject + ' .canvas'), 'photos/' + (nextProject > 9 ? '' : '0') + nextProject + '-cover.png')
       }
 
       projectSlider.projectEffect[nextProject].animate()
     }
-
-    console.log(projectSlider.projectEffect)
 
     if (prevProject !== null) {
       let pname1x = document.querySelectorAll('#project-' + prevProject + ' span.speed-1x')
       let pname2x = document.querySelectorAll('#project-' + prevProject + ' span.speed-2x')
       let pname3x = document.querySelectorAll('#project-' + prevProject + ' span.speed-3x')
       let pcover = document.querySelector('#project-' + prevProject + ' .project-cover .cover')
-      // let pcanvas = document.querySelector('#project-' + prevProject + ' .project-cover .canvas')
-      tl.from({el: pname1x, p: { y: [0, -300 * direction, '%'] }, d: 1000, e: 'Power4Out'})
-      tl.from({el: pname2x, p: { y: [0, -200 * direction, '%'] }, d: 1000, e: 'Power4Out'})
-      tl.from({el: pname3x, p: { y: [0, -100 * direction, '%'] }, d: 1000, e: 'Power4Out'})
-      tl.from({el: pcover, p: { y: [0, -100 * direction, '%'] }, d: 1000, e: 'Power4Out', cb: () => { projectSlider.clearProject(prevProject) }})
-      // tl.from({el: pcanvas, p: { y: [0, -100 * direction, '%'] }, d: 1000, e: 'Power4Out'})
-      timer += 1000
+      tl.from({el: pname1x, p: { y: [0, -300 * direction, '%'] }, d: animateTime, e: 'Power4Out'})
+      tl.from({el: pname2x, p: { y: [0, -200 * direction, '%'] }, d: animateTime, e: 'Power4Out'})
+      tl.from({el: pname3x, p: { y: [0, -100 * direction, '%'] }, d: animateTime, e: 'Power4Out'})
+      tl.from({el: projectSlider.currentEl, p: { y: [0, -100 * direction, '%'] }, d: animateTime, e: 'Power4Out', cb: projectSlider.updateCurrentStatus})
+      tl.from({el: pcover, p: { y: [0, -100 * direction, '%'] }, d: animateTime, e: 'Power4Out', cb: () => { projectSlider.clearProject(prevProject) }})
+      timer += animateTime
     }
 
     if (nextProject !== null) {
@@ -142,17 +150,20 @@ let projectSlider = {
       let nname2x = document.querySelectorAll('#project-' + nextProject + ' span.speed-2x')
       let nname3x = document.querySelectorAll('#project-' + nextProject + ' span.speed-3x')
       let ncover = document.querySelector('#project-' + nextProject + ' .project-cover .cover')
-      // let ncanvas = document.querySelector('#project-' + nextProject + ' .project-cover .canvas')
-      tl.from({el: nname1x, p: { y: [300 * direction, 0, '%'] }, d: 1000, delay: timer / 2, e: 'Power4Out'})
-      tl.from({el: nname2x, p: { y: [200 * direction, 0, '%'] }, d: 1000, delay: 0, e: 'Power4Out'})
-      tl.from({el: nname3x, p: { y: [100 * direction, 0, '%'] }, d: 1000, delay: 0, e: 'Power4Out'})
-      // tl.from({el: ncanvas, p: { y: [100 * direction, 0, '%'] }, d: 1000, delay: 0, e: 'Power4Out'})
-      tl.from({el: ncover , p: { y: [100 * direction, 0, '%'] }, d: 1000, delay: 0, e: 'Power4Out', cb: projectSlider.releaseWheelEvent})
+      tl.from({el: nname1x, p: { y: [300 * direction, 0, '%'] }, d: animateTime, delay: timer - 100, e: 'Power4Out'})
+      tl.from({el: nname2x, p: { y: [200 * direction, 0, '%'] }, d: animateTime, delay: 0, e: 'Power4Out'})
+      tl.from({el: nname3x, p: { y: [100 * direction, 0, '%'] }, d: animateTime, delay: 0, e: 'Power4Out'})
+      tl.from({el: projectSlider.currentEl, p: { y: [100 * direction, 0, '%'] }, d: animateTime, e: 'Power4Out'})
+      tl.from({el: ncover , p: { y: [100 * direction, 0, '%'] }, d: animateTime, delay: 0, e: 'Power4Out', cb: projectSlider.releaseWheelEvent})
 
       projectSlider.current = nextProject
     }
 
     tl.play()
+  },
+
+  updateCurrentStatus: () => {
+    projectSlider.currentEl.innerText = projectSlider.current
   },
   
   clearProject: (project) => {
@@ -163,6 +174,17 @@ let projectSlider = {
 
   releaseWheelEvent: () => {
     projectSlider.isChange = false
+    projectSlider.runAutoPlay()
+  },
+
+  cancelAutoPlay: () => {
+    projectSlider.autoPlay = false
+    // clearInterval(projectSlider.autoPlayEvent);
+  },
+
+  runAutoPlay: () => {
+    projectSlider.autoPlay = true
+    projectSlider.autoPlayEvent()
   }
 }
 
@@ -172,4 +194,4 @@ let app = {
   }
 }
 
-app.init()
+S.L(document, 'add', 'DOMContentLoaded', app.init)
