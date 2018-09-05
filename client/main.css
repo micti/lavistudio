@@ -40,9 +40,9 @@ body {
 }
 
 .project-info .project-name {
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   display: flex;
   overflow: hidden;
 }
@@ -52,26 +52,33 @@ body {
   margin-right: 2px;
 }
 
-.project-info .project-name span.speed-1x {
+.project-info span.speed-1x {
   transform: translate3d(0, 100%, 0)
 }
 
-.project-info .project-name span.speed-2x {
+.project-info span.speed-2x {
   transform: translate3d(0, 200%, 0)
 }
 
-.project-info .project-name span.speed-3x {
+.project-info span.speed-3x {
   transform: translate3d(0, 300%, 0)
 }
 
 .project-info .project-category {
   font-size: 1rem;
   margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.project-info .project-category span, .project-info .project-detail-link span {
+  display: block;
+  margin-right: 2px;
 }
 
 .project-info .project-detail-link {
   font-weight: 600;
   font-size: 1.5rem;
+  overflow: hidden;
 }
 
 .project-info .project-detail-link a {
@@ -89,6 +96,12 @@ body {
   height: 100%;
   transform: translate3d(0, -100%, 0);
   overflow: hidden;
+}
+
+.project-cover .cover .canvas {
+  width: 120%;
+  height: 120%;
+  transform: translate3d(-10%, -10%, 0);
 }
 
 .project-counter {
