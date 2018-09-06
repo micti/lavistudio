@@ -80,9 +80,8 @@ let projectSlider = {
   },
 
   autoPlayEvent: () => {
-    projectSlider.autoplayAnimation = new S.Merom({el: projectSlider.autoplayEl, p: {x: [-100, 0, '%']}, d: 10000, e: 'Power4Out', cb: projectSlider.next})
+    projectSlider.autoplayAnimation = new S.Merom({el: projectSlider.autoplayEl, p: {x: [-100, 0, '%']}, d: 15000, e: 'linear', cb: projectSlider.next})
     projectSlider.autoplayAnimation.play()
-    // projectSlider.autoplayAnimation.play({p: {x: [-100, 0, '%']}})
   },
 
   init: () => {
@@ -125,7 +124,7 @@ let projectSlider = {
   change: (nextProject, prevProject, direction) => {
     let tl = new S.Timeline()
     let timer = 0
-    let animateTime = 1000;
+    let animateTime = 2000;
     
     // Prepare for next project
     if (nextProject !== null) {
