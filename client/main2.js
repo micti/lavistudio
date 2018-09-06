@@ -124,7 +124,7 @@ let projectSlider = {
   change: (nextProject, prevProject, direction) => {
     let tl = new S.Timeline()
     let timer = 0
-    let animateTime = 2000;
+    let animateTime = 1200;
     
     // Prepare for next project
     if (nextProject !== null) {
@@ -143,7 +143,7 @@ let projectSlider = {
       tl.from({el: pname1x, p: { y: [0, -300 * direction, '%'] }, d: animateTime, e: 'Power4Out'})
       tl.from({el: pname2x, p: { y: [0, -200 * direction, '%'] }, d: animateTime, e: 'Power4Out'})
       tl.from({el: pname3x, p: { y: [0, -100 * direction, '%'] }, d: animateTime, e: 'Power4Out'})
-      tl.from({el: projectSlider.currentEl, p: { y: [0, -100 * direction, '%'] }, d: animateTime, e: 'Power4Out', cb: projectSlider.updateCurrentStatus})
+      tl.from({el: projectSlider.currentEl, p: { y: [0, -100 * direction, '%'] }, d: animateTime / 2, e: 'Power4Out', cb: projectSlider.updateCurrentStatus})
       tl.from({el: pcover, p: { y: [0, -100 * direction, '%'] }, d: animateTime, e: 'Power4Out', cb: () => { projectSlider.clearProject(prevProject) }})
       timer += animateTime
     }
@@ -153,10 +153,10 @@ let projectSlider = {
       let nname2x = document.querySelectorAll('#project-' + nextProject + ' span.speed-2x')
       let nname3x = document.querySelectorAll('#project-' + nextProject + ' span.speed-3x')
       let ncover = document.querySelector('#project-' + nextProject + ' .project-cover .cover')
-      tl.from({el: nname1x, p: { y: [300 * direction, 0, '%'] }, d: animateTime, delay: timer - 100, e: 'Power4Out'})
+      tl.from({el: nname1x, p: { y: [300 * direction, 0, '%'] }, d: animateTime, delay: timer / 2, e: 'Power4Out'})
       tl.from({el: nname2x, p: { y: [200 * direction, 0, '%'] }, d: animateTime, delay: 0, e: 'Power4Out'})
       tl.from({el: nname3x, p: { y: [100 * direction, 0, '%'] }, d: animateTime, delay: 0, e: 'Power4Out'})
-      tl.from({el: projectSlider.currentEl, p: { y: [100 * direction, 0, '%'] }, d: animateTime, e: 'Power4Out'})
+      tl.from({el: projectSlider.currentEl, p: { y: [100 * direction, 0, '%'] }, d: animateTime / 2, e: 'Power4Out'})
       tl.from({el: ncover , p: { y: [100 * direction, 0, '%'] }, d: animateTime, delay: 0, e: 'Power4Out', cb: projectSlider.releaseWheelEvent})
 
       projectSlider.current = nextProject
