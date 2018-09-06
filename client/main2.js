@@ -58,6 +58,7 @@ let projectSlider = {
   totalEl: document.getElementById('project-total'),
   currentEl: document.getElementById('project-current'),
   autoplayEl: document.getElementById('autoplay-timer'),
+  autoplayAnimation: null,
 
   wheelAndTouchEvent: (delta, type, event) => {
     if (projectSlider.isChange) {
@@ -79,14 +80,17 @@ let projectSlider = {
   },
 
   autoPlayEvent: () => {
-    let a = new S.Merom({el: projectSlider.autoplayEl, p: {x: [-100, 0, '%']}, d: 5000, e: 'Power4Out', cb: projectSlider.next})
-    a.play()
+    projectSlider.autoplayAnimation = new S.Merom({el: projectSlider.autoplayEl, p: {x: [-100, 0, '%']}, d: 10000, e: 'Power4Out', cb: projectSlider.next})
+    projectSlider.autoplayAnimation.play()
+    // projectSlider.autoplayAnimation.play({p: {x: [-100, 0, '%']}})
   },
 
   init: () => {
     let projects = document.getElementsByClassName('project')
     projectSlider.total = projects.length
     document.getElementById('project-total').innerHTML = projectSlider.total
+
+    projectSlider.autoplayAnimation = new S.Merom({el: '#autoplay-timer', p: {x: [-100, 0, '%']}, d: 10000, e: 'Power4Out', cb: projectSlider.next})
 
     // Event
     new S.WT(projectSlider.wheelAndTouchEvent).on()
@@ -179,7 +183,7 @@ let projectSlider = {
 
   cancelAutoPlay: () => {
     projectSlider.autoPlay = false
-    // clearInterval(projectSlider.autoPlayEvent);
+    projectSlider.autoplayAnimation.pause()
   },
 
   runAutoPlay: () => {
