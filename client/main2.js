@@ -54,6 +54,7 @@ let projectSlider = {
   total: 1,
   current: 0,
   isChange: false,
+  isStop: false,
   projectEffect: [],
   totalEl: document.getElementById('project-total'),
   currentEl: document.getElementById('project-current'),
@@ -61,6 +62,10 @@ let projectSlider = {
   autoplayAnimation: null,
 
   wheelAndTouchEvent: (delta, type, event) => {
+    if (projectSlider.isStop) {
+      return
+    }
+
     if (projectSlider.isChange) {
       timer = 0
       return
@@ -85,6 +90,7 @@ let projectSlider = {
   },
 
   init: () => {
+    projectSlider.isStop = false;
     let projects = document.getElementsByClassName('project')
     projectSlider.total = projects.length
     document.getElementById('project-total').innerHTML = projectSlider.total
@@ -149,6 +155,7 @@ let projectSlider = {
     }
 
     if (nextProject !== null) {
+      document.getElementById('project-' + nextProject).style.display = 'flex'
       let nname1x = document.querySelectorAll('#project-' + nextProject + ' span.speed-1x')
       let nname2x = document.querySelectorAll('#project-' + nextProject + ' span.speed-2x')
       let nname3x = document.querySelectorAll('#project-' + nextProject + ' span.speed-3x')
@@ -170,6 +177,8 @@ let projectSlider = {
   },
   
   clearProject: (project) => {
+    console.log(project)
+    document.getElementById("project-" + project).style.display = 'none'
     if (projectSlider.projectEffect[project] !== null) {
       projectSlider.projectEffect[project].removeScene()
     } 
@@ -188,12 +197,41 @@ let projectSlider = {
   runAutoPlay: () => {
     projectSlider.autoPlay = true
     projectSlider.autoPlayEvent()
+  },
+
+  stop: () => {
+    projectSlider.isStop = true
+    projectSlider.cancelAutoPlay();
+    if (projectSlider.projectEffect[projectSlider.current] !== null) {
+      projectSlider.projectEffect[projectSlider.current].removeScene()
+    }
+  }
+}
+
+let projectDetail = {
+  init: () => {
+
+    // event
+    S.L('.project-detail-link', 'add', 'click', projectDetail.open)
+  },
+
+  open: (e) => {
+    e.preventDefault()
+    let project = e.target.closest('.project-detail-link')
+    // console.log(e.target, project)
+    // let id = project.getAttribute('data-id')
+    // let image = project.getAttribute('data-image')
+    // console.log(id, image)
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 1000, e: 'Power4Out', cb: () => {
+      projectSlider.stop()
+    }}).play()
   }
 }
 
 let app = {
   init: () => {
     projectSlider.init()
+    projectDetail.init()
   }
 }
 
