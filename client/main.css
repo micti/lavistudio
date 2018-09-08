@@ -23,8 +23,36 @@ body {
   width: 100%;
   height: 100%;
   z-index: 100;
-  background-color: #ccc;
-  transform: translateX(-100%)
+  background-color: #fff;
+  transform: translateX(-100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.load .photos {
+  max-width: 300px;
+  max-height: 300px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.load .photos .photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.load .photos .photo img {
+  max-width: 300px;
+  max-height: 300px;
 }
 
 /* .main {
@@ -45,13 +73,13 @@ body {
   /* visibility: hidden; */
 }
 
-.project-info {
+.project .project-info {
   flex: none;
   width: 50%;
   padding: 15% 1% 0 10%;
 }
 
-.project-info .project-name {
+.project .project-info .project-name {
   font-size: 4rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
@@ -59,51 +87,51 @@ body {
   overflow: hidden;
 }
 
-.project-info .project-name span {
+.project .project-info .project-name span {
   display: block;
   margin-right: 2px;
 }
 
-.project-info span.speed-1x {
+.project .project-info span.speed-1x {
   transform: translate3d(0, 100%, 0)
 }
 
-.project-info span.speed-2x {
+.project .project-info span.speed-2x {
   transform: translate3d(0, 200%, 0)
 }
 
-.project-info span.speed-3x {
+.project .project-info span.speed-3x {
   transform: translate3d(0, 300%, 0)
 }
 
-.project-info .project-category {
+.project .project-info .project-category {
   font-size: 1rem;
   margin-bottom: 2rem;
   overflow: hidden;
 }
 
-.project-info .project-category span, .project-info .project-detail-link span {
+.project .project-info .project-category span, .project-info .project-detail-link span {
   display: block;
   margin-right: 2px;
 }
 
-.project-info .project-detail-link {
+.project .project-info .project-detail-link {
   font-weight: 600;
   font-size: 1.5rem;
   overflow: hidden;
 }
 
-.project-info .project-detail-link a {
+.project .project-info .project-detail-link a {
   color: #231F20;
 }
 
-.project-cover {
+.project .project-cover {
   overflow: hidden;
   flex: none;
   width: 50%;
 }
 
-.project-cover .cover {
+.project .project-cover .cover {
   width: 100%;
   height: 100%;
   max-width: 930px;
@@ -111,7 +139,7 @@ body {
   overflow: hidden;
 }
 
-.project-cover .cover .canvas {
+.project .project-cover .cover .canvas {
   width: calc(100% + 6px);
   height: calc(100% + 6px);
   transform: translate3d(-3px, -3px, 0);
@@ -168,4 +196,65 @@ body {
   background-color: #231F20;
   position: absolute;
   transform: translate3d(-100%, 0, 0)
+}
+
+.project-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: #fff;
+  display: none;
+  z-index: 101;
+}
+
+.project-container {
+  width: calc(100% - 100px);
+  margin: 50px auto;
+}
+
+.project-container .project-dcover {
+  width: 100%;
+  overflow: hidden;
+}
+
+.project-container .project-dcover .cover {
+  width: 100%;
+  transform: translateX(100%);
+}
+
+.project-container .project-dcover .cover img {
+  width: 100%;
+}
+
+.project-container .project-info {
+  display: flex;
+}
+
+.project-container .project-info .project-name {
+  flex: none;
+  width: 50%;
+}
+
+.project-container .project-info .project-name span {
+  display: block;
+  margin-right: 2px;
+}
+
+.project-container .project-info span.speed-1x {
+  transform: translate3d(0, 100%, 0)
+}
+
+.project-container .project-info span.speed-2x {
+  transform: translate3d(0, 200%, 0)
+}
+
+.project-container .project-info span.speed-3x {
+  transform: translate3d(0, 300%, 0)
+}
+
+.project-container .project-info .project-introduction {
+  flex: none;
+  width: 50%;
 }

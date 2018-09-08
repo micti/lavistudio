@@ -218,13 +218,46 @@ let projectDetail = {
   open: (e) => {
     e.preventDefault()
     let project = e.target.closest('.project-detail-link')
-    // console.log(e.target, project)
-    // let id = project.getAttribute('data-id')
-    // let image = project.getAttribute('data-image')
-    // console.log(id, image)
+    let loadPhotos = document.getElementById('load').querySelector('.photos')
+    let id = project.getAttribute('data-id')
+    let imagedata = project.getAttribute('data-image')
+    let images = imagedata.split('|')
+    let divImages = []
+    for (const image of images) {
+      let newImage = document.createElement("img");
+      newImage.src = 'photos/' + image
+
+      let newDivImage = document.createElement("div");
+      newDivImage.classList.add('photo')
+      newDivImage.appendChild(newImage)
+      
+      loadPhotos.appendChild(newDivImage)
+      divImages.push(newDivImage)
+    }
+    
     new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 1000, e: 'Power4Out', cb: () => {
       projectSlider.stop()
+      let tl = new S.Timeline()
+      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 200, e: 'linear'})
+      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 200, delay: 200, e: 'linear'})
+      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 200, delay: 200, e: 'linear'})
+      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 200, delay: 200, e: 'linear'})
+      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 200, delay: 200, e: 'linear'})
+      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 200, delay: 200, e: 'linear', cb: projectDetail.openCover})
+      tl.play()
     }}).play()
+  },
+
+  openCover: () => {
+    let pd = document.getElementById('project-page')
+    let cover = document.getElementById('project-page-cover')
+    pd.style.display = 'block'
+
+    new S.Merom({el: cover, p: {x: [100, 0, '%']}, d: 1000, e: 'Power4Out', cb: projectDetail.openContent}).play()
+  },
+
+  openContent: () => {
+
   }
 }
 
