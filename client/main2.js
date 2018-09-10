@@ -1,5 +1,65 @@
 let timer = 0;
 setInterval(function () { timer += 50; }, 50);
+/*
+
+S.BindMaker(this, ['scrollCb'])
+
+this.scroll = new S.Scroll(this.scrollCb)
+
+this.scroll.on()
+this.scroll.off()
+
+scrollCb (currentScrollY, delta, event) {
+
+}
+
+*/
+
+S.Scroll1 = function (el, cb) {
+  this.cb = cb
+  this.el = el
+  this.tick = false
+
+  S.BindMaker(this, ['getRaf', 'run'])
+}
+
+S.Scroll1.prototype = {
+
+  on: function () {
+      this.startScrollY = this.el.scrollTop
+
+      this.l('add')
+  },
+
+  off: function () {
+      this.l('remove')
+  },
+
+  l: function (action) {
+      S.L(this.el, action, 'scroll', this.getRaf)
+  },
+
+  getRaf: function (e) {
+      this.e = e
+
+      if (!this.tick) {
+          this.raf = requestAnimationFrame(this.run)
+          this.tick = true
+      }
+  },
+
+  run: function () {
+      var currentScrollY = this.el.scrollTop
+      var delta = -(currentScrollY - this.startScrollY)
+
+      // Reset start scroll y
+      this.startScrollY = currentScrollY
+
+      this.cb(currentScrollY, delta, this.e)
+      this.tick = false
+  }
+
+}
 
 // Effect
 class ImageEffect {
@@ -98,7 +158,8 @@ let projectSlider = {
     projectSlider.autoplayAnimation = new S.Merom({el: '#autoplay-timer', p: {x: [-100, 0, '%']}, d: 10000, e: 'Power4Out', cb: projectSlider.next})
 
     // Event
-    new S.WT(projectSlider.wheelAndTouchEvent).on()
+    projectSlider.scrollEvent = new S.WT(projectSlider.wheelAndTouchEvent)
+    projectSlider.scrollEvent.on()
 
     // Display first project after loading
     projectSlider.isChange = true
@@ -201,7 +262,8 @@ let projectSlider = {
 
   stop: () => {
     projectSlider.isStop = true
-    projectSlider.cancelAutoPlay();
+    projectSlider.cancelAutoPlay()
+    projectSlider.scrollEvent.off()
     if (projectSlider.projectEffect[projectSlider.current] !== null) {
       projectSlider.projectEffect[projectSlider.current].removeScene()
     }
@@ -238,12 +300,12 @@ let projectDetail = {
     new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 1000, e: 'Power4Out', cb: () => {
       projectSlider.stop()
       let tl = new S.Timeline()
-      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 200, e: 'linear'})
-      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 200, delay: 200, e: 'linear'})
-      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 200, delay: 200, e: 'linear'})
-      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 200, delay: 200, e: 'linear'})
-      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 200, delay: 200, e: 'linear'})
-      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 200, delay: 200, e: 'linear', cb: projectDetail.openCover})
+      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, e: 'Power4Out'})
+      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: projectDetail.openCover})
       tl.play()
     }}).play()
   },
@@ -253,18 +315,101 @@ let projectDetail = {
     let cover = document.getElementById('project-page-cover')
     pd.style.display = 'block'
 
-    new S.Merom({el: cover, p: {x: [100, 0, '%']}, d: 1000, e: 'Power4Out', cb: projectDetail.openContent}).play()
+    new S.Merom({el: cover, p: {x: [100, 0, '%']}, d: 700, e: 'Power4Out', cb: projectDetail.openContent}).play()
   },
 
   openContent: () => {
-
+    document.getElementById('project-page-content').style.display = 'block'
   }
 }
 
 let app = {
   init: () => {
-    projectSlider.init()
-    projectDetail.init()
+    // projectSlider.init()
+    // projectDetail.init()
+    // projectDetail.open()
+    document.getElementById('project-page').style.display = 'block'
+    let el = document.getElementById('project-page')
+    //document.getElementById('debug').innerText = ''
+    //document.getElementById('debug').innerText += el.scrollTop + '|'
+
+    //let ss = el.getElementsByClassName('section')
+
+    // for (const s of ss) {
+      // let a = s.getClientRects()
+      // console.log(a)
+      //document.getElementById('debug').innerText += a + '|'
+    // }
+
+    //let scroll = new S.Scroll((scrollY, delta, e) => {
+      //document.getElementById('debug').innerText = scrollY + '-' + delta
+    //})
+    // setInterval(() => {
+    //   document.getElementById('debug').innerText = el.scrollTop
+    // }, 10)
+
+    // scroll.on()
+    // let a = new Parallax(el, 'pppp')
+    // a.on()
+    // setTimeout(() => {a.off()}, 10000)
+    let a = new S.Scroll1(el, (y, d) => {
+      console.log(y, d)
+    }).on()
+  }
+}
+
+class Parallax {
+  constructor (el, els) {
+    this.el = el
+    this.class = els
+    this.els = this.el.getElementsByClassName(this.class)
+    this.ss = []
+    this.el.scrollTo(0, 0)
+    for (const sub of this.els) {
+      console.log(sub.getBoundingClientRect())
+      this.ss.push({
+        x1: sub.getBoundingClientRect().top,
+        x2: sub.getBoundingClientRect().top + sub.getBoundingClientRect().height
+      })
+    }
+    console.log(this.ss)
+    this.w = window.height
+    this.elw = this.el.height
+    this.css = 0
+    this.isOff = false
+  }
+
+  cb () {
+    //console.log('a')
+    let top = this.el.scrollTop
+    document.getElementById('debug').innerText = top
+    // find sc
+    for (let i = 0; i < this.ss.length; i++) {
+      const ss = this.ss[i];
+      if (ss.x1 <= top && ss.x2 >= top) {
+        this.css = i
+        break
+      }
+    }
+
+    document.getElementById('debug').innerText += '-' + this.css
+  }
+
+  on () {
+    // this.off = false
+    setTimeout(() => {
+      if (this.isOff === false) {
+        console.log('a', this.isOff)
+        this.cb()
+        this.on()
+      }
+    }, 10)
+    // this.interval = setInterval(() => { this.cb() }, 100)
+  }
+
+  off () {
+    console.log('b')
+    this.isOff = true
   }
 }
 
