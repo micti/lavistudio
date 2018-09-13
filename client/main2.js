@@ -272,7 +272,6 @@ let projectSlider = {
 
 let projectDetail = {
   init: () => {
-
     // event
     S.L('.project-detail-link', 'add', 'click', projectDetail.open)
   },
@@ -296,6 +295,8 @@ let projectDetail = {
       loadPhotos.appendChild(newDivImage)
       divImages.push(newDivImage)
     }
+
+    let effectDone = false
     
     new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 1000, e: 'Power4Out', cb: () => {
       projectSlider.stop()
@@ -305,15 +306,52 @@ let projectDetail = {
       tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
       tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
       tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: projectDetail.openCover})
+      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: () => {
+        effectDone = true
+      }})
       tl.play()
     }}).play()
+
+    fetch('project_' + id + '.txt?b').then((res) => {
+      res.text().then((text) => {
+        document.getElementById('project-page').innerHTML = text
+        let wait = () => {
+          if (!effectDone) {
+            setTimeout(() => {
+              wait()
+            }, 100)
+          } else {
+            projectDetail.openCover()
+          }
+        }
+        wait()
+      });
+    })
   },
 
   openCover: () => {
     let pd = document.getElementById('project-page')
     let cover = document.getElementById('project-page-cover')
     pd.style.display = 'block'
+    pd.scrollTop = 0
 
     new S.Merom({el: cover, p: {x: [100, 0, '%']}, d: 700, e: 'Power4Out', cb: projectDetail.openContent}).play()
   },
@@ -325,11 +363,11 @@ let projectDetail = {
 
 let app = {
   init: () => {
-    // projectSlider.init()
-    // projectDetail.init()
+    projectSlider.init()
+    projectDetail.init()
     // projectDetail.open()
-    document.getElementById('project-page').style.display = 'block'
-    let el = document.getElementById('project-page')
+    // document.getElementById('project-page').style.display = 'block'
+    // let el = document.getElementById('project-page')
     //document.getElementById('debug').innerText = ''
     //document.getElementById('debug').innerText += el.scrollTop + '|'
 
@@ -352,9 +390,9 @@ let app = {
     // let a = new Parallax(el, 'pppp')
     // a.on()
     // setTimeout(() => {a.off()}, 10000)
-    let a = new S.Scroll1(el, (y, d) => {
-      console.log(y, d)
-    }).on()
+    // let a = new S.Scroll1(el, (y, d) => {
+    //   console.log(y, d)
+    // }).on()
   }
 }
 

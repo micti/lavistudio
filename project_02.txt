@@ -1,0 +1,57 @@
+    <div class="project-dcover container">
+      <div id="project-page-cover" class="cover">
+        <img src="photos/02-dcover.png">
+      </div>
+    </div>
+    <section class="section section-project-content">
+      <div class="container">
+        <div class="project-info">
+          <div class="project-name pppp">
+            <div class="name">
+              <span class="speed-1x">F</span>
+              <span class="speed-2x">r</span>
+              <span class="speed-3x">e</span>
+              <span class="speed-2x">y</span>
+              <span class="speed-1x">a</span>
+            </div>
+            <div class="category">
+              Art direction, Branding
+            </div>
+          </div>
+        </div>
+        <div class="project-introduction pppp">
+          <p>
+            Freeya is a design studio specialized about dresses and girls’ accessories, with their slogan #befree, they aim to show to world that girls can do everything.<br>
+            <br>
+            With their ambitious to be rival to other local brands here like
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="section section-one-image">
+      <div class="container">
+        <div class="image  pppp">
+          <img src="photos/02-photo-01.png">
+        </div>
+      </div>
+    </section>
+    <section class="section section-one-small-image">
+      <div class="container">
+        <div class="image  pppp">
+          <img src="photos/02-photo-02.png">
+        </div>
+    </section>
+    <section class="section section-one-full-image">
+      <div class="fluid">
+        <div class="image  pppp">
+          <img src="photos/02-photo-03.png">
+        </div>
+      </div>
+    </section>
+    <section class="section section-one-full-image">
+      <div class="fluid">
+        <div class="image  pppp">
+          <img src="photos/02-photo-04.png">
+        </div>
+      </div>
+    </section>

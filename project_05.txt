@@ -1,0 +1,61 @@
+    <div class="project-dcover container">
+      <div id="project-page-cover" class="cover">
+        <img src="photos/05-dcover.png">
+      </div>
+    </div>
+    <section class="section section-project-content">
+      <div class="container">
+        <div class="project-info">
+          <div class="project-name pppp">
+            <div class="name">
+              <span class="speed-2x">M</span>
+              <span class="speed-3x">o</span>
+              <span class="speed-1x">r</span>
+              <span class="speed-1x">t</span>
+              <span class="speed-3x">g</span>
+              <span class="speed-3x">a</span>
+              <span class="speed-2x">t</span>
+              <span class="speed-1x">e</span>
+              <span class="speed-3x">b</span>
+              <span class="speed-1x">y</span>
+              <span class="speed-1x">M</span>
+              <span class="speed-3x">e</span>
+              <span class="speed-3x">e</span>
+              <span class="speed-2x">k</span>
+              <span class="speed-1x">e</span>
+              <span class="speed-3x">r</span>
+              <span class="speed-2x">s</span>
+            </div>
+            <div class="category">
+              <span class="speed-2x">Website Design</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-introduction pppp">
+          <p>
+            North American Construction Services, Inc. is an experienced funds control / escrow company in the contract surety industry. Founded in 1991, NACS brings additional protection to national sureties by managing the receivables and payables throughout the course of the bonded construction project. In addition to added Surety security, NACS assists small, emerging, and minority construction firms seeking the performance and payment bonds necessary to secure construction contracts.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="section section-one-image">
+      <div class="container">
+        <div class="image  pppp">
+          <img src="photos/05-photo-01.png">
+        </div>
+      </div>
+    </section>
+    <section class="section section-one-image">
+      <div class="container">
+        <div class="image  pppp">
+          <img src="photos/05-photo-02.png">
+        </div>
+      </div>
+    </section>
+    <section class="section section-one-image">
+      <div class="container">
+        <div class="image  pppp">
+          <img src="photos/05-photo-03.png">
+        </div>
+      </div>
+    </section>

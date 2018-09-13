@@ -229,7 +229,7 @@ body {
 
 .project-dcover .cover {
   width: 100%;
-  /* transform: translateX(100%); */
+  transform: translateX(100%);
 }
 
 .project-dcover .cover img {
