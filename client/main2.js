@@ -350,9 +350,12 @@ let projectDetail = {
   openCover: () => {
     let pd = document.getElementById('project-page')
     let cover = document.getElementById('project-page-cover')
+    let logo = document.getElementById('logo-home')
     pd.style.display = 'block'
+    logo.style.display = 'block'
     pd.scrollTop = 0
 
+    logo.style.opacity = 1
     new S.Merom({el: cover, p: {x: [100, 0, '%']}, d: 700, e: 'Power4Out', cb: projectDetail.openContent}).play()
   },
 
