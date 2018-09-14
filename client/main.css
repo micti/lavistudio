@@ -120,6 +120,7 @@ body {
   font-size: 1rem;
   margin-bottom: 2rem;
   overflow: hidden;
+  opacity: 0.6;
 }
 
 .project .project-info .project-category span, .project-info .project-detail-link span {
