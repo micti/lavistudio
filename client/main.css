@@ -136,14 +136,14 @@ body {
   right: 0;
   height: 2px;
   background: #231F20;
-  transform: scaleX(0);
+  transform: scale(1);
   transition: transform .25s ease-in;
-  transform-origin: right center;
+  transform-origin: left center;
 }
 
 .project .project-info .project-detail-link a:hover::after {
-  transform: scale(1);
-  transform-origin: left center;
+  transform: scaleX(0);
+  transform-origin: right center;
 }
 
 .project .project-cover {
