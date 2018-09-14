@@ -123,6 +123,27 @@ body {
 
 .project .project-info .project-detail-link a {
   color: #231F20;
+  text-decoration: none;
+  position: relative;
+}
+
+.project .project-info .project-detail-link a::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(100%);
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #231F20;
+  transform: scaleX(0);
+  transition: transform .25s ease-in;
+  transform-origin: right center;
+}
+
+.project .project-info .project-detail-link a:hover::after {
+  transform: scale(1);
+  transform-origin: left center;
 }
 
 .project .project-cover {
