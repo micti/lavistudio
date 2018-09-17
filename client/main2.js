@@ -73,7 +73,6 @@ class ImageEffect {
     this.renderer.autoResize = true;
     this.playground.appendChild(this.renderer.view);
     this.stage = new PIXI.Container();
-    console.log(url)
     this.tp = PIXI.Texture.fromImage(url);
     this.preview = new PIXI.Sprite(this.tp);
     this.preview.anchor.x = 0;
@@ -291,6 +290,7 @@ let projectDetail = {
   open: (e) => {
     e.preventDefault()
     let load = document.getElementById('load')
+    let loadsc = document.getElementById('load-screen')
     // let pd = document.getElementById('project-page')
 
     // Get project info
@@ -318,9 +318,9 @@ let projectDetail = {
     let effectDone = false
 
     // loading
+    loadsc.style.transform = 'translateX(0)'
     load.style.transform = 'translateX(-100%)'
-    load.style.zIndex = 300;
-    // pd.style.zIndex = 101;
+    loadsc.style.zIndex = 60;
     
     new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 500, e: 'Power4Out', cb: () => {
       projectSlider.stop()
@@ -382,26 +382,35 @@ let projectDetail = {
     let pd = document.getElementById('project-page')
     let cover = document.getElementById('project-page-cover')
     let logo = document.getElementById('logo-home')
+    let loadsc = document.getElementById('load-screen')
     let load = document.getElementById('load')
     load.style.transform = 'translateX(-100%)'
-    load.style.zIndex = 150;
+    loadsc.style.transform = 'translateX(0)'
+    loadsc.style.zIndex = 150;
+    // load.style.zIndex = 150;
     logo.style.opacity = 1
     new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 500, e: 'Power4Out', cb: () => {
       pd.style.display = 'none'
       logo.style.display = 'none'
       projectSlider.start()
-      new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 500, e: 'Power4Out'}).play()
+      new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 500, e: 'Power4Out', cb: () => {
+        // load.style.zIndex = 0;
+        loadsc.style.zIndex = 0;
+        loadsc.style.transform = 'translateX(-100%)'
+      }}).play()
     }}).play()
   },
 
   openCover: () => {
     let load = document.getElementById('load')
+    let loadsc = document.getElementById('load-screen')
     let pd = document.getElementById('project-page')
     let cover = document.getElementById('project-page-cover')
     let logo = document.getElementById('logo-home')
 
-    load.style.zIndex = 100;
-    // pd.style.zIndex = 101;
+    // load.style.zIndex = 0;
+    loadsc.style.zIndex = 0;
+    loadsc.style.transform = 'translateX(-100%)'
     pd.style.display = 'block'
     logo.style.display = 'block'
     pd.scrollTop = 0
