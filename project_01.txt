@@ -52,3 +52,9 @@
         </div>
       </div>
     </section>
+    <div class="next-project project-02">
+      <a class="project-detail-link" href="/project/freyza.html" data-id="02" data-image="01-lo-01.png|01-lo-02.png|01-lo-03.png">
+        <span>Next project</span>
+        <span class="title">Freyza</span>
+      </a>
+    </div>

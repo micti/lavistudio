@@ -89,9 +89,9 @@ class ImageEffect {
 
   removeScene() {
     cancelAnimationFrame(this.raf);
-    this.stage.removeChildren();
-    this.stage.destroy(true);
-    this.playground.removeChild(this.canvas);
+    // this.stage.removeChildren();
+    // this.stage.destroy(true);
+    // this.playground.removeChild(this.canvas);
   }
 
   animate () {
@@ -145,7 +145,7 @@ let projectSlider = {
   },
 
   autoPlayEvent: () => {
-    projectSlider.autoplayAnimation = new S.Merom({el: projectSlider.autoplayEl, p: {x: [-100, 0, '%']}, d: 15000, e: 'linear', cb: projectSlider.next})
+    projectSlider.autoplayAnimation = new S.Merom({el: projectSlider.autoplayEl, p: {x: [-100, 0, '%']}, d: 10000, e: 'linear', cb: projectSlider.next})
     projectSlider.autoplayAnimation.play()
   },
 
@@ -195,7 +195,7 @@ let projectSlider = {
     
     // Prepare for next project
     if (nextProject !== null) {
-      if (projectSlider.projectEffect[nextProject] !== null) {
+      if (projectSlider.projectEffect[nextProject] === undefined) {
         projectSlider.projectEffect[nextProject] = new ImageEffect(document.querySelector('#project-' + nextProject + ' .canvas'), 'photos/' + (nextProject > 9 ? '' : '0') + nextProject + '-cover.png')
       }
 
@@ -267,22 +267,41 @@ let projectSlider = {
     if (projectSlider.projectEffect[projectSlider.current] !== null) {
       projectSlider.projectEffect[projectSlider.current].removeScene()
     }
+  },
+
+  start: () => {
+    projectSlider.isStop = false
+    projectSlider.runAutoPlay()
+    projectSlider.scrollEvent.on()
+    if (projectSlider.projectEffect[projectSlider.current] !== null) {
+      projectSlider.projectEffect[projectSlider.current].animate()
+    }
+  
   }
 }
 
 let projectDetail = {
   init: () => {
+    // close
+    S.L('#logo-home', 'add', 'click', projectDetail.close)
     // event
     S.L('.project-detail-link', 'add', 'click', projectDetail.open)
   },
 
   open: (e) => {
     e.preventDefault()
+    let load = document.getElementById('load')
+    // let pd = document.getElementById('project-page')
+
+    // Get project info
     let project = e.target.closest('.project-detail-link')
-    let loadPhotos = document.getElementById('load').querySelector('.photos')
     let id = project.getAttribute('data-id')
     let imagedata = project.getAttribute('data-image')
     let images = imagedata.split('|')
+
+    // Prepare flashing load
+    let loadPhotos = load.querySelector('.photos')
+    loadPhotos.innerHTML = ''
     let divImages = []
     for (const image of images) {
       let newImage = document.createElement("img");
@@ -297,8 +316,13 @@ let projectDetail = {
     }
 
     let effectDone = false
+
+    // loading
+    load.style.transform = 'translateX(-100%)'
+    load.style.zIndex = 300;
+    // pd.style.zIndex = 101;
     
-    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 1000, e: 'Power4Out', cb: () => {
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 500, e: 'Power4Out', cb: () => {
       projectSlider.stop()
       let tl = new S.Timeline()
       tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, e: 'Power4Out'})
@@ -330,9 +354,9 @@ let projectDetail = {
       tl.play()
     }}).play()
 
-    fetch('project_' + id + '.txt?b').then((res) => {
+    fetch('project_' + id + '.txt?d').then((res) => {
       res.text().then((text) => {
-        document.getElementById('project-page').innerHTML = text
+        projectDetail.initProject(id, text)
         let wait = () => {
           if (!effectDone) {
             setTimeout(() => {
@@ -347,10 +371,37 @@ let projectDetail = {
     })
   },
 
-  openCover: () => {
+  initProject: (project, content) => {
+    document.getElementById('project-page').innerHTML = content
+    // event
+    S.L('.project-detail-link', 'add', 'click', projectDetail.open)
+  },
+
+  close: () => {
+    // document.getElementById('project-page-content').style.display = 'none'
     let pd = document.getElementById('project-page')
     let cover = document.getElementById('project-page-cover')
     let logo = document.getElementById('logo-home')
+    let load = document.getElementById('load')
+    load.style.transform = 'translateX(-100%)'
+    load.style.zIndex = 150;
+    logo.style.opacity = 1
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 500, e: 'Power4Out', cb: () => {
+      pd.style.display = 'none'
+      logo.style.display = 'none'
+      projectSlider.start()
+      new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 500, e: 'Power4Out'}).play()
+    }}).play()
+  },
+
+  openCover: () => {
+    let load = document.getElementById('load')
+    let pd = document.getElementById('project-page')
+    let cover = document.getElementById('project-page-cover')
+    let logo = document.getElementById('logo-home')
+
+    load.style.zIndex = 100;
+    // pd.style.zIndex = 101;
     pd.style.display = 'block'
     logo.style.display = 'block'
     pd.scrollTop = 0
@@ -360,7 +411,7 @@ let projectDetail = {
   },
 
   openContent: () => {
-    document.getElementById('project-page-content').style.display = 'block'
+    // document.getElementById('project-page-content').style.display = 'block'
   }
 }
 
