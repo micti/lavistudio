@@ -55,3 +55,9 @@
         </div>
       </div>
     </section>
+    <div class="next-project project-03">
+      <a class="project-detail-link" href="/project/quynh-anh-beauty.html" data-id="03" data-image="01-lo-01.png|01-lo-02.png|01-lo-03.png">
+        <span>Next project</span>
+        <span class="title">Quynh Anh Beauty</span>
+      </a>
+    </div>

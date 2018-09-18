@@ -354,7 +354,7 @@ let projectDetail = {
       tl.play()
     }}).play()
 
-    fetch('project_' + id + '.txt?d').then((res) => {
+    fetch('project_' + id + '.txt?f').then((res) => {
       res.text().then((text) => {
         projectDetail.initProject(id, text)
         let wait = () => {

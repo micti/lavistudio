@@ -57,3 +57,9 @@
         </div>
       </div>
     </section>
+    <div class="next-project project-01">
+      <a class="project-detail-link" href="/project/nasc.html" data-id="01" data-image="01-lo-01.png|01-lo-02.png|01-lo-03.png">
+        <span>Next project</span>
+        <span class="title">Tan Quang</span>
+      </a>
+    </div>

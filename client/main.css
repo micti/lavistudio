@@ -323,8 +323,28 @@ body {
   color: #fff;
 }
 
+.next-project.project-01 {
+  /* background-image: url(/photos/01-next.png); */
+}
+
 .next-project.project-02 {
-  background-image: url(/photos/01-next.png);
+  background-image: url(/photos/02-next.png);
+}
+
+.next-project.project-03 {
+  background-image: url(/photos/03-next.png);
+}
+
+.next-project.project-04 {
+  background-image: url(/photos/04-next.png);
+}
+
+.next-project.project-05 {
+  background-image: url(/photos/05-next.png);
+}
+
+.next-project.project-06 {
+  background-image: url(/photos/06-next.png);
 }
 
 .next-project a {
