@@ -296,8 +296,8 @@ let projectDetail = {
     // Get project info
     let project = e.target.closest('.project-detail-link')
     let id = project.getAttribute('data-id')
-    let imagedata = project.getAttribute('data-image')
-    let images = imagedata.split('|')
+    // let imagedata = project.getAttribute('data-image')
+    let images = ['01', '02', '03', '04', '05', '06', '01', '02', '03', '04', '05', '06']
 
     // Prepare flashing load
     let loadPhotos = load.querySelector('.photos')
@@ -305,7 +305,7 @@ let projectDetail = {
     let divImages = []
     for (const image of images) {
       let newImage = document.createElement("img");
-      newImage.src = 'photos/' + image
+      newImage.src = '/photos/' + image + '-lo.png'
 
       let newDivImage = document.createElement("div");
       newDivImage.classList.add('photo')
@@ -322,7 +322,7 @@ let projectDetail = {
     load.style.transform = 'translateX(-100%)'
     loadsc.style.zIndex = 60;
     
-    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 500, e: 'Power4Out', cb: () => {
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
       projectSlider.stop()
       let tl = new S.Timeline()
       tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, e: 'Power4Out'})
@@ -331,24 +331,24 @@ let projectDetail = {
       tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
       tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
       tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: () => {
+      tl.from({el: divImages[3], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[3], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[4], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[4], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[5], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[5], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[6], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[6], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[7], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[7], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[8], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[8], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[9], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[9], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[10], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[10], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[11], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[11], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: () => {
         effectDone = true
       }})
       tl.play()
@@ -378,23 +378,19 @@ let projectDetail = {
   },
 
   close: () => {
-    // document.getElementById('project-page-content').style.display = 'none'
     let pd = document.getElementById('project-page')
-    let cover = document.getElementById('project-page-cover')
     let logo = document.getElementById('logo-home')
     let loadsc = document.getElementById('load-screen')
     let load = document.getElementById('load')
     load.style.transform = 'translateX(-100%)'
     loadsc.style.transform = 'translateX(0)'
-    loadsc.style.zIndex = 150;
-    // load.style.zIndex = 150;
-    logo.style.opacity = 1
-    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 500, e: 'Power4Out', cb: () => {
+    loadsc.style.zIndex = 60;
+    logo.style.opacity = 0
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
       pd.style.display = 'none'
       logo.style.display = 'none'
       projectSlider.start()
-      new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 500, e: 'Power4Out', cb: () => {
-        // load.style.zIndex = 0;
+      new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
         loadsc.style.zIndex = 0;
         loadsc.style.transform = 'translateX(-100%)'
       }}).play()
@@ -403,23 +399,29 @@ let projectDetail = {
 
   openCover: () => {
     let load = document.getElementById('load')
-    let loadsc = document.getElementById('load-screen')
+    
     let pd = document.getElementById('project-page')
     let cover = document.getElementById('project-page-cover')
     let logo = document.getElementById('logo-home')
 
     // load.style.zIndex = 0;
-    loadsc.style.zIndex = 0;
-    loadsc.style.transform = 'translateX(-100%)'
+    // loadsc.style.zIndex = 0;
+    // loadsc.style.transform = 'translateX(-100%)'
     pd.style.display = 'block'
     logo.style.display = 'block'
     pd.scrollTop = 0
 
     logo.style.opacity = 1
-    new S.Merom({el: cover, p: {x: [100, 0, '%']}, d: 700, e: 'Power4Out', cb: projectDetail.openContent}).play()
+    // new S.Merom({el: cover, p: {x: [100, 0, '%']}, d: 700, e: 'Power4Out', cb: projectDetail.openContent}).play()
+    new S.Merom({el: load, p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: projectDetail.openContent}).play()
   },
 
   openContent: () => {
+    let cover = document.getElementById('project-page-cover')
+    let loadsc = document.getElementById('load-screen')
+    loadsc.style.zIndex = 0;
+    loadsc.style.transform = 'translateX(-100%)'
+    new S.Merom({el: cover, p: {opacity: [0, 1]}, d: 1500, e: 'Power4Out'}).play()
     // document.getElementById('project-page-content').style.display = 'block'
   }
 }

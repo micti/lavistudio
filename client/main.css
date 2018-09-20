@@ -31,7 +31,7 @@ body {
 .load {
   width: 100%;
   height: 100%;
-  background: #ffffff;
+  background: #ccc;
   transform: translateX(-100%);
   display: flex;
   align-items: center;
@@ -269,7 +269,8 @@ body {
 
 .project-dcover .cover {
   width: 100%;
-  transform: translateX(100%);
+  /* transform: translateX(100%); */
+  opacity: 0;
 }
 
 .project-dcover .cover img {
