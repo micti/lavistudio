@@ -16,6 +16,71 @@ body {
   font-size: 16px;
 }
 
+.contact-button {
+  background-color: #000;
+  width: 40px;
+  height: 40px;
+  top: 44px;
+  right: 44px;
+  z-index: 50;
+  position: absolute;
+}
+
+.contact-button--wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.contact-button--wrapper span {
+  position: absolute;
+  display: block;
+  height: 2px;
+  background: #fff;
+  width: 24px;
+  right: 8px;
+  transform: rotate(0deg);
+  opacity: 1;
+  transition: .25s ease-in-out;
+  /* border-radius: 2px; */
+}
+
+.contact-button--wrapper span:nth-child(1) {
+  top: 9px;
+  width: 20px;
+}
+
+.contact-button--wrapper span:nth-child(2) {
+  top: 19px;
+}
+
+.contact-button--wrapper span:nth-child(3) {
+  width: 12px;
+  top: 29px;
+}
+
+.contact-button:hover .contact-button--wrapper span {
+  width: 24px;
+}
+
+.contact-button.active .contact-button--wrapper span {
+  width: 24px !important;
+}
+
+.contact-button.active .contact-button--wrapper span:nth-child(1) {
+  transform: rotate(-45deg);
+  top: 20px;
+}
+
+.contact-button.active .contact-button--wrapper span:nth-child(2) {
+  opacity: 0;
+}
+
+.contact-button.active .contact-button--wrapper span:nth-child(3) {
+  transform: rotate(45deg);
+  top: 20px;
+}
+
 .load-screen {
   position: absolute;
   top: 0;
@@ -286,22 +351,22 @@ body {
   width: 50%;
 }
 
-.section-project-content .project-info .project-name span {
+.section-project-content .project-info .project-name .name {
+  display: flex;
+}
+
+.section-project-content .project-info .project-name .name span {
   display: block;
   margin-right: 2px;
+  transform: translateY(0);
+  opacity: 1;
+  font-size: 3rem;
+  font-weight: 600;
 }
 
-/* .project-container .project-info span.speed-1x {
-  transform: translate3d(0, 100%, 0)
-}
+.section-project-content .project-info .project-name .category {
 
-.project-container .project-info span.speed-2x {
-  transform: translate3d(0, 200%, 0)
 }
-
-.project-container .project-info span.speed-3x {
-  transform: translate3d(0, 300%, 0)
-} */
 
 .section-project-content .project-introduction {
   flex: none;
@@ -325,7 +390,7 @@ body {
 }
 
 .next-project.project-01 {
-  /* background-image: url(/photos/01-next.png); */
+  background-image: url(/photos/01-next.png);
 }
 
 .next-project.project-02 {

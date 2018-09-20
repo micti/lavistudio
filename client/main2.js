@@ -430,6 +430,9 @@ let app = {
   init: () => {
     projectSlider.init()
     projectDetail.init()
+    S.L('#contact-button', 'add', 'click', () => {
+      document.getElementById("contact-button").classList.add('active')
+    })
     // projectDetail.open()
     // document.getElementById('project-page').style.display = 'block'
     // let el = document.getElementById('project-page')

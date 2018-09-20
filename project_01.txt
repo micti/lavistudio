@@ -17,6 +17,9 @@
               <span class="speed-3x p-o">n</span>
               <span class="speed-2x p-o">g</span>
             </div>
+            <div class="category">
+              Art direction, Branding
+            </div>
           </div>
         </div>
         <div class="project-introduction pppp">
