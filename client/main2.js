@@ -279,6 +279,129 @@ let projectSlider = {
   }
 }
 
+let contactPage = {
+  contactButton: null,
+  contactPage: null,
+  isOpen: false,
+  init: () => {
+    contactPage.contactButton = document.getElementById("contact-button")
+    contactPage.contactPage = document.getElementById("contact-page")
+    S.L('#contact-button', 'add', 'click', contactPage.click)
+  },
+  click: () => {
+    // alert(contactPage.isOpen)
+    if (contactPage.isOpen === false) {
+      contactPage.contactButton.classList.add('hover')
+      return contactPage.open()
+    }
+
+    contactPage.close()
+  },
+  close: () => {
+    let loadsc = document.getElementById('load-screen')
+    let load = document.getElementById('load')
+    load.style.transform = 'translateX(-100%)'
+    loadsc.style.transform = 'translateX(0)'
+    loadsc.style.zIndex = 60;
+    contactPage.contactButton.classList.remove('active')
+    contactPage.contactButton.classList.remove('hover')
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
+      contactPage.contactPage.style.display = 'none'
+      projectSlider.start()
+      new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
+        loadsc.style.zIndex = 0;
+        loadsc.style.transform = 'translateX(-100%)'
+        contactPage.isOpen = false
+      }}).play()
+    }}).play()
+  },
+  open: () => {
+    let load = document.getElementById('load')
+    let loadsc = document.getElementById('load-screen')
+
+    // let imagedata = project.getAttribute('data-image')
+    let images = ['01', '02', '03', '04', '05', '06', '01', '02', '03', '04', '05', '06']
+
+    // Prepare flashing load
+    let loadPhotos = load.querySelector('.photos')
+    loadPhotos.innerHTML = ''
+    let divImages = []
+    for (const image of images) {
+      let newImage = document.createElement("img");
+      newImage.src = '/photos/' + image + '-lo.png'
+
+      let newDivImage = document.createElement("div");
+      newDivImage.classList.add('photo')
+      newDivImage.appendChild(newImage)
+      
+      loadPhotos.appendChild(newDivImage)
+      divImages.push(newDivImage)
+    }
+
+    let effectDone = false
+
+    // loading
+    loadsc.style.transform = 'translateX(0)'
+    load.style.transform = 'translateX(-100%)'
+    loadsc.style.zIndex = 60;
+    
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
+      projectSlider.stop()
+      let tl = new S.Timeline()
+      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, e: 'Power4Out'})
+      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[3], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[3], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[4], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[4], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[5], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[5], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[6], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[6], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[7], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[7], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[8], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[8], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[9], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[9], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[10], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[10], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[11], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[11], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: () => {
+        effectDone = true
+      }})
+      tl.play()
+    }}).play()
+
+    fetch('contact.txt?a').then((res) => {
+      res.text().then((text) => {
+        let wait = () => {
+          if (!effectDone) {
+            setTimeout(() => {
+              wait()
+            }, 100)
+          } else {
+            projectSlider.stop()
+            contactPage.contactPage.style.display = 'block'
+            contactPage.contactPage.innerHTML = text
+            contactPage.isOpen = true
+            new S.Merom({el: load, p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
+              contactPage.contactButton.classList.add('active')
+              loadsc.style.zIndex = 0;
+              loadsc.style.transform = 'translateX(-100%)'
+            }}).play()
+          }
+        }
+        wait()
+      });
+    })
+  }
+}
+
 let projectDetail = {
   init: () => {
     // close
@@ -430,9 +553,8 @@ let app = {
   init: () => {
     projectSlider.init()
     projectDetail.init()
-    S.L('#contact-button', 'add', 'click', () => {
-      document.getElementById("contact-button").classList.add('active')
-    })
+    contactPage.init()
+    
     // projectDetail.open()
     // document.getElementById('project-page').style.display = 'block'
     // let el = document.getElementById('project-page')
