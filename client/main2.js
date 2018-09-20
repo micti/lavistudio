@@ -356,13 +356,13 @@ let projectDetail = {
 
     fetch('project_' + id + '.txt?f').then((res) => {
       res.text().then((text) => {
-        projectDetail.initProject(id, text)
         let wait = () => {
           if (!effectDone) {
             setTimeout(() => {
               wait()
             }, 100)
           } else {
+            projectDetail.initProject(id, text)
             projectDetail.openCover()
           }
         }
