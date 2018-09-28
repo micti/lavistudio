@@ -554,6 +554,12 @@ let app = {
     projectSlider.init()
     projectDetail.init()
     contactPage.init()
+
+    S.L('#new-project', 'add', 'click', () => {
+      // alert('a')
+      new S.Merom({el: '#contact-page-wrapper', p: {x: [0, -50, '%']}, d: 750, e: 'Power4Out'}).play()
+    })
+
     
     // projectDetail.open()
     // document.getElementById('project-page').style.display = 'block'

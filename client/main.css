@@ -454,25 +454,34 @@ body {
   width: 100%;
   height: 100%;
   background-color: #fff;
-  display: flex;
   z-index: 70;
   overflow: hidden;
+}
+
+.contact-page .contact-page-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 200%;
+  height: 100%;
 }
 
 .contact-page .avatar {
   background: url(/photos/avatar.png);
   background-size: cover;
-  width: 50%;
+  width: 25%;
   flex: none;
 }
 
 
 .contact-page .designer-info {
   display: flex;
+  flex: none;
+  width: 25%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 .contact-page .intro {
   width: 80%;
   font-weight: 700;
@@ -519,7 +528,7 @@ body {
 }
 
 .contact-page .new-project div:hover {
-  width: 330px;
+  width: 100%;
 }
 
 .contact-page .new-project div span {
@@ -539,14 +548,43 @@ body {
   border-left: 1px solid rgba(255, 255, 255, 0.4)
 }
 
-/* .contact-page .new-project a span {
-  padding-top: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
+.contact-page .new-project-1 {
+  width: 25%;
+  flex: none;
+  background: url(/photos/new-project-1.png);
+  background-size: cover;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
-.contact-page .new-project a > span > span {
-  display: inline-block;
-  margin-left: 3rem;
-  padding-top: 3px;
-} */
+.contact-page .new-project-2 {
+  width: 25%;
+  flex: none;
+  background: url(/photos/new-project-2.png);
+  background-size: cover;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.contact-page .new-project-1 a,
+.contact-page .new-project-2 a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  text-align: center;
+}
+
+.contact-page a .project-category {
+  font-size: 3rem;
+  font-weight: 600;
+  display: block;
+}
+
+.contact-page a .icon {
+  margin-top: 1rem;
+  display: block;
+}
