@@ -507,22 +507,46 @@ body {
   margin-top: 3rem;
 }
 
-.contact-page .new-project a {
-  text-decoration: none;
-  
-  /* display: block; */
-  /* height: 40px; */
-}
-
-.contact-page .new-project a span {
-  display: inline-block;
+.contact-page .new-project div {
+  width: 300px;
+  display: flex;
   height: 40px;
   background: #000;
   color: #fff;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: width 0.2s ease-out;
 }
 
-.contact-page .new-project a > span {
-  padding-top: 7px;
+.contact-page .new-project div:hover {
+  width: 330px;
+}
+
+.contact-page .new-project div span {
+  display: block;
+  flex: none;
+  width: auto;
+  padding-top: 8px;
+}
+
+.contact-page .new-project div span.text {
+  padding-left: 8px; 
+}
+
+.contact-page .new-project div span.icon {
+  width: 40px;
+  padding-left: 8px;
+  border-left: 1px solid rgba(255, 255, 255, 0.4)
+}
+
+/* .contact-page .new-project a span {
+  padding-top: 2px;
   padding-left: 10px;
   padding-right: 10px;
 }
+
+.contact-page .new-project a > span > span {
+  display: inline-block;
+  margin-left: 3rem;
+  padding-top: 3px;
+} */
