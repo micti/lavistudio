@@ -1,5 +1,3 @@
-let timer = 0;
-setInterval(function () { timer += 50; }, 50);
 /*
 
 S.BindMaker(this, ['scrollCb'])
@@ -64,8 +62,8 @@ S.Scroll1.prototype = {
 // Effect
 class ImageEffect {
   constructor (element, url) {
-    this.width = 1000;
-    this.height = 1300;
+    this.width = 946 * 2;
+    this.height = 1080 * 2;
     this.playground = element
     this.count = 0;
     this.raf;
@@ -76,21 +74,18 @@ class ImageEffect {
     this.tp = PIXI.Texture.fromImage(url);
     this.preview = new PIXI.Sprite(this.tp);
     this.preview.anchor.x = 0;
+    this.preview.anchor.y = 0;
     this.displacementSprite = PIXI.Sprite.fromImage('/client/photo/clouds.jpg');
     this.displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
     this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
-    this.displacementSprite.scale.y = 0.6;
-    this.displacementSprite.scale.x = 0.6;
+    this.displacementSprite.scale.y = 0.8;
+    this.displacementSprite.scale.x = 0.8;
     this.stage.addChild(this.displacementSprite);
     this.stage.addChild(this.preview);
-    //this.animate();
   }
 
   removeScene() {
     cancelAnimationFrame(this.raf);
-    // this.stage.removeChildren();
-    // this.stage.destroy(true);
-    // this.playground.removeChild(this.canvas);
   }
 
   animate () {
@@ -98,20 +93,19 @@ class ImageEffect {
       this.animate()
     });
 
-    this.displacementSprite.x = this.count * 11;
-	  this.displacementSprite.y = this.count * 11;
+    this.displacementSprite.x = this.count * 12;
+	  this.displacementSprite.y = this.count * 12;
 
 	  this.count += 0.5;
     this.stage.filters = [this.displacementFilter];
     this.renderer.render(this.stage);
-    this.canvas = this.playground.querySelector('canvas');
   }
 }
 
-let isChanging = false
 let projectSlider = {
   total: 1,
   current: 0,
+  timer: 0,
   isChange: false,
   isStop: false,
   projectEffect: [],
@@ -126,15 +120,15 @@ let projectSlider = {
     }
 
     if (projectSlider.isChange) {
-      timer = 0
+      projectSlider.timer = 0
       return
     }
 
-    if (timer < 500) {
+    if (projectSlider.timer < 500) {
       return
     }
 
-    timer = 0
+    projectSlider.timer = 0
 
     if (delta < 0) {
       projectSlider.next()
@@ -155,6 +149,10 @@ let projectSlider = {
     document.getElementById('project-total').innerHTML = projectSlider.total
 
     projectSlider.autoplayAnimation = new S.Merom({el: '#autoplay-timer', p: {x: [-100, 0, '%']}, d: 10000, e: 'Power4Out', cb: projectSlider.next})
+
+    // Timer
+    projectSlider.timer = 0
+    setInterval(() => { projectSlider.timer += 50 }, 50)
 
     // Event
     projectSlider.scrollEvent = new S.WT(projectSlider.wheelAndTouchEvent)
@@ -282,12 +280,29 @@ let projectSlider = {
 let contactPage = {
   contactButton: null,
   contactPage: null,
+  backButton: null,
   isOpen: false,
   init: () => {
     contactPage.contactButton = document.getElementById("contact-button")
     contactPage.contactPage = document.getElementById("contact-page")
-    S.L('#contact-button', 'add', 'click', contactPage.click)
+    contactPage.backButton = document.getElementById("back-button")
+    contactPage.newProjectButton = document.getElementById("new-project-button")
+    S.L(contactPage.contactButton, 'add', 'click', contactPage.click)
+    S.L(contactPage.newProjectButton, 'add', 'click', contactPage.goToNewProject)
+    S.L(contactPage.backButton, 'add', 'click', contactPage.backToInfo)
   },
+
+  goToNewProject: () => {
+    new S.Merom({el: '#contact-page-wrapper', p: {x: [0, -50, '%']}, d: 750, e: 'Power4Out', cb: () => {
+      contactPage.backButton.classList.add('active')
+    }}).play()
+  },
+
+  backToInfo: () => {
+    contactPage.backButton.classList.remove('active')
+    new S.Merom({el: '#contact-page-wrapper', p: {x: [-50, 0, '%']}, d: 750, e: 'Power4Out'}).play()
+  },
+
   click: () => {
     // alert(contactPage.isOpen)
     if (contactPage.isOpen === false) {
@@ -297,6 +312,7 @@ let contactPage = {
 
     contactPage.close()
   },
+
   close: () => {
     let loadsc = document.getElementById('load-screen')
     let load = document.getElementById('load')
@@ -307,6 +323,7 @@ let contactPage = {
     contactPage.contactButton.classList.remove('hover')
     new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
       contactPage.contactPage.style.display = 'none'
+      contactPage.contactPage.style.zIndex = 40
       projectSlider.start()
       new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
         loadsc.style.zIndex = 0;
@@ -373,32 +390,19 @@ let contactPage = {
       tl.from({el: divImages[11], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
       tl.from({el: divImages[11], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: () => {
         effectDone = true
+        projectSlider.stop()
+        contactPage.contactPage.style.display = 'block'
+        contactPage.contactPage.style.zIndex = 41
+        // contactPage.contactPage.innerHTML = text
+        contactPage.isOpen = true
+        new S.Merom({el: load, p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
+          contactPage.contactButton.classList.add('active')
+          loadsc.style.zIndex = 0;
+          loadsc.style.transform = 'translateX(-100%)'
+        }}).play()
       }})
       tl.play()
     }}).play()
-
-    fetch('contact.txt?a').then((res) => {
-      res.text().then((text) => {
-        let wait = () => {
-          if (!effectDone) {
-            setTimeout(() => {
-              wait()
-            }, 100)
-          } else {
-            projectSlider.stop()
-            contactPage.contactPage.style.display = 'block'
-            contactPage.contactPage.innerHTML = text
-            contactPage.isOpen = true
-            new S.Merom({el: load, p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
-              contactPage.contactButton.classList.add('active')
-              loadsc.style.zIndex = 0;
-              loadsc.style.transform = 'translateX(-100%)'
-            }}).play()
-          }
-        }
-        wait()
-      });
-    })
   }
 }
 
@@ -554,41 +558,6 @@ let app = {
     projectSlider.init()
     projectDetail.init()
     contactPage.init()
-
-    S.L('#new-project', 'add', 'click', () => {
-      // alert('a')
-      new S.Merom({el: '#contact-page-wrapper', p: {x: [0, -50, '%']}, d: 750, e: 'Power4Out'}).play()
-    })
-
-    
-    // projectDetail.open()
-    // document.getElementById('project-page').style.display = 'block'
-    // let el = document.getElementById('project-page')
-    //document.getElementById('debug').innerText = ''
-    //document.getElementById('debug').innerText += el.scrollTop + '|'
-
-    //let ss = el.getElementsByClassName('section')
-
-    // for (const s of ss) {
-      // let a = s.getClientRects()
-      // console.log(a)
-      //document.getElementById('debug').innerText += a + '|'
-    // }
-
-    //let scroll = new S.Scroll((scrollY, delta, e) => {
-      //document.getElementById('debug').innerText = scrollY + '-' + delta
-    //})
-    // setInterval(() => {
-    //   document.getElementById('debug').innerText = el.scrollTop
-    // }, 10)
-
-    // scroll.on()
-    // let a = new Parallax(el, 'pppp')
-    // a.on()
-    // setTimeout(() => {a.off()}, 10000)
-    // let a = new S.Scroll1(el, (y, d) => {
-    //   console.log(y, d)
-    // }).on()
   }
 }
 

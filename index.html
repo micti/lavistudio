@@ -9,6 +9,7 @@
     <link href="client/main.css" rel="stylesheet">
   </head>
   <body>
+    <!-- project lists -->
     <div id="projects" class="projects">
       <div id="project-1" class="project">
         <div class="project-info">
@@ -30,7 +31,7 @@
           </div>
         </div>
         <div class="project-cover">
-          <div class="cover"><div class="canvas"></div></div>
+          <div class="cover" style="background: url(/photos/01-cover.png)"><div class="canvas"></div></div>
         </div>
       </div>
       <div id="project-2" class="project">
@@ -164,13 +165,19 @@
         </div>
       </div>
     </div>
+    <!-- end project lists -->
+    <!-- load screen -->
     <div id="load-screen" class="load-screen">
       <div id="load" class="load">
         <div class="photos">
         </div>
       </div>
     </div>
-    <div id="more-button"></div>
+    <!-- end load screen -->
+    <!-- buttons -->
+    <div id="back-button" class="back-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    </div>
     <div id="contact-button" class="contact-button">
       <div class="contact-button--wrapper">
         <span></span>
@@ -195,6 +202,8 @@
         </g>
       </svg>
     </div>
+    <!-- end buttons -->
+    <!-- helper -->
     <div class="project-counter">
       <div class="project-current">
         <span id="project-current">1</span>
@@ -207,7 +216,11 @@
         <span id="project-total">1</span>
       </div>
     </div>
+    <!-- end helper -->
+    <!-- project detail page -->
     <div id="project-page" class="project-page"></div>
+    <!-- end project detail page -->
+    <!-- contact page -->
     <div id="contact-page" class="contact-page">
       <div id="contact-page-wrapper" class="contact-page-wrapper">
         <div class="avatar">
@@ -228,7 +241,7 @@
             </li>
           </ul>
           <div class="new-project">
-            <div id="new-project">
+            <div id="new-project-button">
               <span class="text">
                 Want to start a new project?
               </span>
@@ -262,6 +275,7 @@
         </div>
       </div>
     </div>
+    <!-- end contact page -->
     
     <script src="/client/js.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.2/pixi.js"></script>
