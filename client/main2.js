@@ -277,8 +277,8 @@ let projectSlider = {
   },
 
   autoPlayEvent: () => {
-    // projectSlider.autoplayAnimation = new S.Merom({el: projectSlider.autoplayEl, p: {x: [-100, 0, '%']}, d: 5000, e: 'linear', cb: projectSlider.next})
-    // projectSlider.autoplayAnimation.play()
+    projectSlider.autoplayAnimation = new S.Merom({el: projectSlider.autoplayEl, p: {x: [-100, 0, '%']}, d: 5000, e: 'linear', cb: projectSlider.next})
+    projectSlider.autoplayAnimation.play()
   },
 
   init: () => {
@@ -397,6 +397,7 @@ let projectSlider = {
 }
 
 let contactPage = {
+  wrapper: null,
   contactButton: null,
   contactPage: null,
   backButton: null,
@@ -406,6 +407,7 @@ let contactPage = {
     contactPage.contactPage = document.getElementById("contact-page")
     contactPage.backButton = document.getElementById("back-button")
     contactPage.newProjectButton = document.getElementById("new-project-button")
+    contactPage.wrapper = document.getElementById("contact-page-wrapper")
     S.L(contactPage.contactButton, 'add', 'click', contactPage.click)
     S.L(contactPage.newProjectButton, 'add', 'click', contactPage.goToNewProject)
     S.L(contactPage.backButton, 'add', 'click', contactPage.backToInfo)
@@ -413,14 +415,14 @@ let contactPage = {
 
   goToNewProject: () => {
     contactPage.backButton.style.display = 'block'
-    new S.Merom({el: '#contact-page-wrapper', p: {x: [0, -50, '%']}, d: 750, e: 'Power4Out', cb: () => {
+    new S.Merom({el: contactPage.wrapper, p: {x: [0, -50, '%']}, d: 750, e: 'Power4Out', cb: () => {
       contactPage.backButton.classList.add('active')
     }}).play()
   },
 
   backToInfo: () => {
     contactPage.backButton.classList.remove('active')
-    new S.Merom({el: '#contact-page-wrapper', p: {x: [-50, 0, '%']}, d: 750, e: 'Power4Out', cb: () => {
+    new S.Merom({el: contactPage.wrapper, p: {x: [-50, 0, '%']}, d: 750, e: 'Power4Out', cb: () => {
       contactPage.backButton.style.display = 'none'
     }}).play()
   },
@@ -447,6 +449,7 @@ let contactPage = {
       contactPage.contactPage.style.display = 'none'
       contactPage.contactPage.style.zIndex = 40
       contactPage.backButton.classList.remove('active')
+      contactPage.wrapper.style.transform = 'translateX(0)'
       projectSlider.start()
       new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
         loadsc.style.zIndex = 0;

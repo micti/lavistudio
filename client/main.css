@@ -488,12 +488,11 @@ body {
 }
 
 .contact-page .avatar {
-  background: url(/photos/avatar.png);
+  background: #e1e1e1 url(/photos/avatar.png);
   background-size: cover;
   width: 25%;
   flex: none;
 }
-
 
 .contact-page .designer-info {
   display: flex;
@@ -507,7 +506,7 @@ body {
 .contact-page .intro {
   width: 80%;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 3rem;
 }
 
 .contact-page .card {
@@ -525,6 +524,7 @@ body {
 
 .contact-page .card li span {
   display: block;
+  font-size: 0.75rem;
 }
 
 .contact-page .card li span.info {
@@ -539,7 +539,7 @@ body {
 }
 
 .contact-page .new-project div {
-  width: 300px;
+  width: 340px;
   display: flex;
   height: 40px;
   background: #000;
@@ -547,6 +547,8 @@ body {
   justify-content: space-between;
   cursor: pointer;
   transition: width 0.2s ease-out;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .contact-page .new-project div:hover {
@@ -573,7 +575,7 @@ body {
 .contact-page .new-project-1 {
   width: 25%;
   flex: none;
-  background: url(/photos/new-project-1.png);
+  background: #000 url(/photos/new-project-1.png);
   background-size: cover;
   flex-direction: column;
   align-items: center;
@@ -584,7 +586,7 @@ body {
 .contact-page .new-project-2 {
   width: 25%;
   flex: none;
-  background: url(/photos/new-project-2.png);
+  background: #000 url(/photos/new-project-2.png);
   background-size: cover;
   flex-direction: column;
   align-items: center;
@@ -623,6 +625,16 @@ body {
   
   .project .project-info .project-detail-link {
     font-size: 1rem;
+  }
+
+  .contact-page .intro {
+    font-size: 2rem;
+  }
+
+  .contact-page a .project-category {
+    font-size: 2rem;
+    /* font-weight: 600; */
+    /* display: block; */
   }
 }
 
