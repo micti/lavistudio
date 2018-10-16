@@ -7,21 +7,25 @@ h1, h2, ul, p {
   padding: 0;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   padding: 0;
   background: #F2F2F2;
   color: #231F20;
   font-family: 'Poppins', sans-serif;
-  font-size: 16px;
+  /* font-size: 16px; */
 }
 
 .back-button {
   /* background-color: #000; */
   width: 40px;
   height: 40px;
-  top: 44px;
-  left: 50px;
+  top: 3rem;
+  left: 3rem;
   z-index: 71;
   position: absolute;
   cursor: pointer;
@@ -42,8 +46,8 @@ body {
   background-color: #000;
   width: 40px;
   height: 40px;
-  top: 44px;
-  right: 44px;
+  top: 3rem;
+  right: 3rem;
   z-index: 50;
   position: absolute;
   cursor: pointer;
@@ -167,6 +171,14 @@ body {
   z-index: 1;
 }
 
+.logo-lavi {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+}
+
 .projects-canvas {
   position: absolute;
   width: 50%;
@@ -183,18 +195,16 @@ body {
   top: 0;
   left: 0;
   display: none;
-  /* z-index: 0; */
-  /* visibility: hidden; */
+  padding: 42vh 0 0 10vw;
 }
 
 .project .project-info {
   flex: none;
-  width: 50%;
-  padding: 15% 1% 0 10%;
+  width: 100%;
 }
 
 .project .project-info .project-name {
-  font-size: 4rem;
+  font-size: 4.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
   display: flex;
@@ -219,10 +229,9 @@ body {
 }
 
 .project .project-info .project-category {
-  font-size: 1rem;
+  font-size: .75rem;
   margin-bottom: 2rem;
   overflow: hidden;
-  opacity: 0.6;
 }
 
 .project .project-info .project-category span, .project-info .project-detail-link span {
@@ -232,7 +241,7 @@ body {
 
 .project .project-info .project-detail-link {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.5rem;
   overflow: hidden;
 }
 
@@ -264,9 +273,10 @@ body {
 .project-counter {
   display: flex;
   position: absolute;
-  top: 20%;
-  left: 10%;
+  top: 37.5vh;
+  left: 10vw;
   z-index: 10;
+  font-size: 1rem;
 }
 
 .project-counter > div {
@@ -601,11 +611,35 @@ body {
   display: block;
 }
 
+@media (max-width: 1280px) {
+  .project .project-info .project-name {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .project .project-info .project-category {
+    margin-bottom: 1.5rem;
+  }
+  
+  .project .project-info .project-detail-link {
+    font-size: 1rem;
+  }
+}
+
 /* MOBILE VERSION */
 @media (max-width: 600px) {
   .projects-canvas {
     width: 100%;
     height: 60%;
+  }
+
+  .logo-lavi {
+    /* position: absolute; */
+    transform: rotate(90deg);
+    width: 80%;
+    height: 80%;
+    bottom: 0;
+    /* overflow: hidden; */
   }
   
   .project {
