@@ -17,11 +17,10 @@ body {
   background: #F2F2F2;
   color: #231F20;
   font-family: 'Poppins', sans-serif;
-  /* font-size: 16px; */
+  font-size: 1rem;
 }
 
 .back-button {
-  /* background-color: #000; */
   width: 40px;
   height: 40px;
   top: 3rem;
@@ -633,8 +632,6 @@ body {
 
   .contact-page a .project-category {
     font-size: 2rem;
-    /* font-weight: 600; */
-    /* display: block; */
   }
 }
 
@@ -642,10 +639,11 @@ body {
 @media (max-width: 600px) {
   .projects-canvas {
     width: 100%;
-    height: 60%;
+    height: 55%;
   }
 
   .logo-lavi {
+    display: none;
     /* position: absolute; */
     transform: rotate(90deg);
     width: 80%;
@@ -655,13 +653,11 @@ body {
   }
   
   .project {
-    padding-top: 68vh;
+    padding-top: 61vh;
   }
   
   .project .project-info {
     width: 100%;
-    height: 100%;
-    padding: 20px 30px 0 30px;
   }
 
   .project .project-info .project-name {
@@ -669,8 +665,7 @@ body {
   }
 
   .project-counter {
-    top: 63vh;
-    left: 30px;
+    top: 57vh;
   }
 
   .project-counter .counter-line {
@@ -696,28 +691,11 @@ body {
  
   .next-project a span.title {
     font-size: 2rem;
-    /* font-weight: 700; */
-  }
-
-  .contact-page {
-    /* position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    z-index: 40;
-    overflow: hidden;
-    display: none; */
   }
   
   .contact-page .contact-page-wrapper {
-    /* display: flex; */
-    /* flex-wrap: nowrap; */
     flex-wrap: wrap;
     flex-direction: row;
-    /* width: 200%; */
-    /* height: 100%; */
   }
   
   .contact-page .avatar {
@@ -729,84 +707,40 @@ body {
     flex: 50%;
   }
   
-  
   .contact-page .designer-info {
-    /* display: flex; */
     flex: 50%;
     order: 3;
     height: 50%;
     width: 50%;
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* justify-content: center; */
   }
   
   .contact-page .intro {
-    /* width: 80%; */
-    /* font-weight: 700; */
     font-size: 1rem;
   }
   
   .contact-page .card {
     margin-top: 0rem;
-    /* display: flex; */
     flex-wrap: wrap;
-    /* padding: 0; */
-    /* list-style: none; */
-    /* width: 80%; */
   }
   
   .contact-page .card li {
     width: 100%;
-    /* flex: none; */
   }
   
   .contact-page .card li span {
-    /* display: block; */
     margin-top: 0.5rem;
   }
   
   .contact-page .card li span.info {
-    /* font-weight: 600; */
     font-size: 1rem;
     margin-top: 0.5rem;
   }
-  
   .contact-page .new-project {
-    /* width: 80%; */
-    /* margin-top: 1rem; */
+    margin-top: 1rem;
   }
   
   .contact-page .new-project div {
-    /* width: 300px;
-    display: flex;
-    height: 40px;
-    background: #000;
-    color: #fff;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: width 0.2s ease-out; */
-  }
-  
-  .contact-page .new-project div:hover {
-    /* width: 100%; */
-  }
-  
-  .contact-page .new-project div span {
-    /* display: block;
-    flex: none;
-    width: auto;
-    padding-top: 8px; */
-  }
-  
-  .contact-page .new-project div span.text {
-    /* padding-left: 8px;  */
-  }
-  
-  .contact-page .new-project div span.icon {
-    /* width: 40px;
-    padding-left: 8px;
-    border-left: 1px solid rgba(255, 255, 255, 0.4) */
+    width: 320px;
   }
   
   .contact-page .new-project-1 {
@@ -814,12 +748,6 @@ body {
     height: 50%;
     order: 2;
     flex: 50%;
-    /* background: url(/photos/new-project-1.png); */
-    /* background-size: cover; */
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    /* display: flex; */
   }
   
   .contact-page .new-project-2 {
@@ -827,30 +755,19 @@ body {
     height: 50%;
     flex: 50%;
     order: 4;
-    /* background: url(/photos/new-project-2.png);
-    background-size: cover;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    display: flex; */
-  }
-  
-  .contact-page .new-project-1 a,
-  .contact-page .new-project-2 a {
-    /* text-decoration: none;
-    color: #fff;
-    display: block;
-    text-align: center; */
   }
   
   .contact-page a .project-category {
     font-size: 1.5rem;
-    /* font-weight: 600; */
-    /* display: block; */
   }
-  
-  .contact-page a .icon {
-    margin-top: 1rem;
-    display: block;
+
+  .back-button {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .contact-button {
+    top: 1rem;
+    right: 1rem;
   }
 }
