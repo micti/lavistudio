@@ -654,6 +654,7 @@ body {
   
   .project {
     padding-top: 61vh;
+    padding-left: 30px;
   }
   
   .project .project-info {
@@ -666,6 +667,7 @@ body {
 
   .project-counter {
     top: 57vh;
+    left: 30px;
   }
 
   .project-counter .counter-line {
@@ -769,5 +771,23 @@ body {
   .contact-button {
     top: 1rem;
     right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project {
+    padding-top: 62vh;
+  }
+  
+  .project .project-info {
+    width: 100%;
+  }
+
+  .project .project-info .project-name {
+    font-size: 2rem;
+  }
+
+  .project-counter {
+    top: 57vh;
   }
 }
