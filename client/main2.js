@@ -7,8 +7,8 @@
     //  OPTIONS
     /// ---------------------------      
     options                     = options || {};
-    options.stageWidth          = options.hasOwnProperty('stageWidth') ? options.stageWidth : 960;
-    options.stageHeight         = options.hasOwnProperty('stageHeight') ? options.stageHeight : 1080;
+    options.stageWidth          = 960;
+    options.stageHeight         = 1080;
     options.pixiSprites         = options.hasOwnProperty('sprites') ? options.sprites : [];
     options.centerSprites       = options.hasOwnProperty('centerSprites') ? options.centerSprites : false;
     options.texts               = options.hasOwnProperty('texts') ? options.texts : [];
@@ -19,7 +19,6 @@
     options.navElement          = options.hasOwnProperty('navElement')  ?  options.navElement : document.querySelectorAll( '.scene-nav' ); 
     options.displaceAutoFit     = options.hasOwnProperty('displaceAutoFit')  ?  options.displaceAutoFit : false; 
     options.displaceScaleTo     = ( options.autoPlay === false ) ? [ 0, 0 ] : [ 20, 20 ];
-    options.textColor           = options.hasOwnProperty('textColor') ? options.textColor : '#fff';
     options.displacementCenter  = options.hasOwnProperty('displacementCenter') ? options.displacementCenter : false;
     options.dispatchPointerOver = options.hasOwnProperty('dispatchPointerOver') ? options.dispatchPointerOver : false;
 
@@ -701,6 +700,67 @@ let app = {
     }
   },
 
+  loading: () => {
+    let manifest = [
+      '/photos/01-cover.png',
+      '/photos/02-cover.png',
+      '/photos/03-cover.png',
+      '/photos/04-cover.png',
+      '/photos/05-cover.png',
+      '/photos/06-cover.png',
+    ]
+
+    let preload = new createjs.LoadQueue(true)
+    
+    preload.on("progress", () => {
+      let percent = preload.progress * 100
+
+      if (percent >= 25 && percent < 50) {
+        document.getElementById('loading-letter-l').classList.add('active')
+      }
+
+      if (percent >= 50 && percent < 75) {
+        document.getElementById('loading-letter-a').classList.add('active')
+      }
+
+      if (percent >= 75) {
+        document.getElementById('loading-letter-v').classList.add('active')
+      }
+      
+      // console.log(preload.progress)
+    })
+
+    preload.on('complete', () => {
+      document.getElementById('loading-letter-i').classList.add('active')
+      // document.getElementById('load').classList.add('is-loaded')
+      setTimeout(() => {
+        let loadsc = document.getElementById('load-screen')
+        // let load = document.getElementById('load')
+        // new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
+          // projectDetail.elProjectPage.style.display = 'none'
+          // projectDetail.elProjectPage.classList.remove('project-' + projectDetail.currentProject + '-detail')
+          // projectDetail.currentProject = null
+          // projectDetail.prevProject = null
+          // projectSlider.start()
+          new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
+            loadsc.style.zIndex = 0;
+            loadsc.style.transform = 'translateX(-100%)'
+            app.init()
+          }}).play()
+        // }}).play()
+
+        
+      }, 1000)
+    })
+    
+    preload.setMaxConnections(5);
+  
+    while (manifest.length > 0) {
+      var item = manifest.shift();
+      preload.loadFile(item);
+    }
+  },
+
   init: () => {
     let spriteImagesSrc = [
       'photos/01-cover.png',
@@ -730,4 +790,4 @@ let app = {
   }
 }
 
-S.L(document, 'add', 'DOMContentLoaded', app.init)
+S.L(document, 'add', 'DOMContentLoaded', app.loading)
