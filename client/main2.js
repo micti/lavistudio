@@ -534,7 +534,12 @@ let contactPage = {
 }
 
 let projectDetail = {
+  elProjectPage: null,
+  prevProject: null,
+  currentProject: null,
+
   init: () => {
+    projectDetail.elProjectPage = document.getElementById('project-page')
     // close
     S.L('#logo-home', 'add', 'click', projectDetail.close)
     // event
@@ -543,14 +548,17 @@ let projectDetail = {
 
   open: (e) => {
     e.preventDefault()
-    let load = document.getElementById('load')
-    let loadsc = document.getElementById('load-screen')
-    // let pd = document.getElementById('project-page')
 
     // Get project info
     let project = e.target.closest('.project-detail-link')
     let id = project.getAttribute('data-id')
-    // let imagedata = project.getAttribute('data-image')
+    if (projectDetail.currentProject !== null) {
+      projectDetail.prevProject = projectDetail.currentProject
+    }
+    projectDetail.currentProject = id
+
+    let load = document.getElementById('load')
+    let loadsc = document.getElementById('load-screen')
     let images = ['01', '02', '03', '04', '05', '06', '01', '02', '03', '04', '05', '06']
 
     // Prepare flashing load
@@ -608,7 +616,7 @@ let projectDetail = {
       tl.play()
     }}).play()
 
-    fetch('project_' + id + '.txt?f').then((res) => {
+    fetch('project_' + id + '.txt?vf3ffeffvddd3').then((res) => {
       res.text().then((text) => {
         let wait = () => {
           if (!effectDone) {
@@ -616,8 +624,7 @@ let projectDetail = {
               wait()
             }, 100)
           } else {
-            projectDetail.initProject(id, text)
-            projectDetail.openCover()
+            projectDetail.initProject(text)
           }
         }
         wait()
@@ -625,24 +632,37 @@ let projectDetail = {
     })
   },
 
-  initProject: (project, content) => {
-    document.getElementById('project-page').innerHTML = content
+  initProject: (content) => {
+    if (projectDetail.prevProject !== null) {
+      // this.elProjectPage.innerHTML = '' 
+      projectDetail.elProjectPage.classList.remove('project-' + projectDetail.prevProject + '-detail')
+    }
+
+    projectDetail.elProjectPage.classList.add('project-' + projectDetail.currentProject + '-detail')
+    projectDetail.elProjectPage.innerHTML = content
+
+    projectDetail.openCover()
     // event
     S.L('.project-detail-link', 'add', 'click', projectDetail.open)
   },
 
   close: () => {
-    let pd = document.getElementById('project-page')
-    let logo = document.getElementById('logo-home')
+    if (projectDetail.currentProject === null) {
+      return
+    }
+
+    // let pd = document.getElementById('project-page')
     let loadsc = document.getElementById('load-screen')
     let load = document.getElementById('load')
     load.style.transform = 'translateX(-100%)'
     loadsc.style.transform = 'translateX(0)'
     loadsc.style.zIndex = 60;
-    logo.style.opacity = 0
+
     new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
-      pd.style.display = 'none'
-      logo.style.display = 'none'
+      projectDetail.elProjectPage.style.display = 'none'
+      projectDetail.elProjectPage.classList.remove('project-' + projectDetail.currentProject + '-detail')
+      projectDetail.currentProject = null
+      projectDetail.prevProject = null
       projectSlider.start()
       new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
         loadsc.style.zIndex = 0;
@@ -653,118 +673,19 @@ let projectDetail = {
 
   openCover: () => {
     let load = document.getElementById('load')
-    
-    let pd = document.getElementById('project-page')
-    let cover = document.getElementById('project-page-cover')
-    let logo = document.getElementById('logo-home')
-
-    // load.style.zIndex = 0;
-    // loadsc.style.zIndex = 0;
-    // loadsc.style.transform = 'translateX(-100%)'
-    pd.style.display = 'block'
-    logo.style.display = 'block'
-    pd.scrollTop = 0
-
-    logo.style.opacity = 1
-    // new S.Merom({el: cover, p: {x: [100, 0, '%']}, d: 700, e: 'Power4Out', cb: projectDetail.openContent}).play()
+    projectDetail.elProjectPage.style.display = 'block'
+    projectDetail.elProjectPage.scrollTop = 0
     new S.Merom({el: load, p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: projectDetail.openContent}).play()
   },
 
   openContent: () => {
     let cover = document.getElementById('project-page-cover')
     let loadsc = document.getElementById('load-screen')
-    loadsc.style.zIndex = 0;
+    loadsc.style.zIndex = 0
     loadsc.style.transform = 'translateX(-100%)'
-    new S.Merom({el: cover, p: {opacity: [0, 1]}, d: 1500, e: 'Power4Out'}).play()
-    // document.getElementById('project-page-content').style.display = 'block'
-  }
-}
-
-let loading = {
-  effectDone: false,
-  cb: null,
-  prevPageCallback: null,
-  nextPageCallback: null,
-
-  loadPage: (page, options) => {
-    loading.isFinish = false
-    this.openLoad()
-  },
-
-  openLoad: () => {
-    let load = document.getElementById('load')
-    let loadsc = document.getElementById('load-screen')
-    let images = ['01', '02', '03', '04', '05', '06', '01', '02', '03', '04', '05', '06']
-
-    // Prepare flashing load
-    let loadPhotos = load.querySelector('.photos').querySelectorAll('.photo')
-    loadPhotos.innerHTML = ''
-    this.divImages = []
-    for (const image of images) {
-      let newImage = document.createElement("img");
-      newImage.src = '/photos/' + image + '-lo.png'
-
-      let newDivImage = document.createElement("div");
-      newDivImage.classList.add('photo')
-      newDivImage.appendChild(newImage)
-      
-      loadPhotos.appendChild(newDivImage)
-      this.divImages.push(newDivImage)
-    }
-
-    this.effectDone = false
-
-    // loading
-    loadsc.style.transform = 'translateX(0)'
-    load.style.transform = 'translateX(-100%)'
-    loadsc.style.zIndex = 60;
-    
-    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
-      this.playLoadingEffect()
-      this.callback()
+    new S.Merom({el: cover, p: {opacity: [0, 1]}, d: 1500, e: 'Power4Out', cb: () => {
+      document.getElementById('project-page-content').style.display = 'block'
     }}).play()
-  },
-
-  callback: () => {
-    // Set for previous page
-    if (this.prevPageCallback !== null) {
-      this.prevPageCallback()
-    }
-    // Set for next page
-    
-      this.nextPageCallback()
-  },
-
-  playLoadingEffect: () => {
-    // projectSlider.stop()
-    let tl = new S.Timeline()
-    tl.from({el: this.divImages[0], p: {opacity: [0, 1]}, d: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[3], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[3], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[4], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[4], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[5], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[5], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[6], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[6], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[7], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[7], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[8], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[8], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[9], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[9], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[10], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[10], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[11], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
-    tl.from({el: this.divImages[11], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: () => {
-      this.effectDone = true
-    }})
-    tl.play()
   }
 }
 

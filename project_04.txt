@@ -1,60 +1,61 @@
     <div class="project-dcover container">
       <div id="project-page-cover" class="cover">
-        <img src="photos/04-dcover.png">
       </div>
     </div>
-    <section class="section section-project-content">
-      <div class="container">
-        <div class="project-info">
-          <div class="project-name pppp">
-            <div class="name">
-              <span class="speed-2x">N</span>
-              <span class="speed-3x">A</span>
-              <span class="speed-2x">S</span>
-              <span class="speed-1x">C</span>
-            </div>
-            <div class="category">
-              <span class="speed-2x">Website Design</span>
+    <div id="project-page-content" class="project-content">
+      <section class="section section-project-content">
+        <div class="container">
+          <div class="project-info">
+            <div class="project-name">
+              <div class="name">
+                <span class="speed-2x">N</span>
+                <span class="speed-3x">A</span>
+                <span class="speed-2x">S</span>
+                <span class="speed-1x">C</span>
+              </div>
+              <div class="category">
+                <span class="speed-2x">Website Design</span>
+              </div>
             </div>
           </div>
+          <div class="project-introduction">
+            <p>
+              North American Construction Services, Inc. is an experienced funds control / escrow company in the contract surety industry. Founded in 1991, NACS brings additional protection to national sureties by managing the receivables and payables throughout the course of the bonded construction project. In addition to added Surety security, NACS assists small, emerging, and minority construction firms seeking the performance and payment bonds necessary to secure construction contracts.
+            </p>
+          </div>
         </div>
-        <div class="project-introduction pppp">
-          <p>
-            North American Construction Services, Inc. is an experienced funds control / escrow company in the contract surety industry. Founded in 1991, NACS brings additional protection to national sureties by managing the receivables and payables throughout the course of the bonded construction project. In addition to added Surety security, NACS assists small, emerging, and minority construction firms seeking the performance and payment bonds necessary to secure construction contracts.
-          </p>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image">
+            <img src="photos/04-photo-01.png">
+          </div>
         </div>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image">
+            <img src="photos/04-photo-02.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image">
+            <img src="photos/04-photo-03.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-one-image-full">
+        <div class="fluid">
+          <div class="image">
+            <img src="photos/04-photo-04.png">
+          </div>
+      </section>
+      <div class="next-project project-05">
+        <a class="project-detail-link" href="/project/nasc.html" data-id="05">
+          <span>Next project</span>
+          <span class="title">Mortgate by Meekers</span>
+        </a>
       </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/04-photo-01.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/04-photo-02.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/04-photo-03.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-full-image">
-      <div class="fluid">
-        <div class="image  pppp">
-          <img src="photos/04-photo-04.png">
-        </div>
-    </section>
-    <div class="next-project project-05">
-      <a class="project-detail-link" href="/project/nasc.html" data-id="05" data-image="01-lo-01.png|01-lo-02.png|01-lo-03.png">
-        <span>Next project</span>
-        <span class="title">Mortgate by Meekers</span>
-      </a>
     </div>

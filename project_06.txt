@@ -1,65 +1,66 @@
     <div class="project-dcover container">
       <div id="project-page-cover" class="cover">
-        <img src="photos/06-dcover.png">
       </div>
     </div>
-    <section class="section section-project-content">
-      <div class="container">
-        <div class="project-info">
-          <div class="project-name pppp">
-            <div class="name">
-              <span class="speed-1x">W</span>
-              <span class="speed-2x">e</span>
-              <span class="speed-3x">s</span>
-              <span class="speed-2x">t</span>
-              <span class="speed-3x">l</span>
-              <span class="speed-1x">i</span>
-              <span class="speed-1x">n</span>
-              <span class="speed-3x">g</span>
-              <span class="speed-2x">M</span>
-              <span class="speed-3x">a</span>
-              <span class="speed-1x">c</span>
-              <span class="speed-2x">h</span>
-              <span class="speed-1x">i</span>
-              <span class="speed-2x">n</span>
-              <span class="speed-3x">e</span>
-            </div>
-            <div class="category">
-              <span class="speed-2x">Website Design</span>
+    <div id="project-page-content" class="project-content">
+      <section class="section section-project-content">
+        <div class="container">
+          <div class="project-info">
+            <div class="project-name">
+              <div class="name">
+                <span class="speed-1x">W</span>
+                <span class="speed-2x">e</span>
+                <span class="speed-3x">s</span>
+                <span class="speed-2x">t</span>
+                <span class="speed-3x">l</span>
+                <span class="speed-1x">i</span>
+                <span class="speed-1x">n</span>
+                <span class="speed-3x">g</span>
+                <span class="speed-2x">M</span>
+                <span class="speed-3x">a</span>
+                <span class="speed-1x">c</span>
+                <span class="speed-2x">h</span>
+                <span class="speed-1x">i</span>
+                <span class="speed-2x">n</span>
+                <span class="speed-3x">e</span>
+              </div>
+              <div class="category">
+                <span class="speed-2x">Website Design</span>
+              </div>
             </div>
           </div>
+          <div class="project-introduction">
+            <p>
+              Westling Machine specializes in manufaturing high quality tool organization products and factory correct classic VW restoration parts. All are Made in the USA!
+            </p>
+          </div>
         </div>
-        <div class="project-introduction pppp">
-          <p>
-            Westling Machine specializes in manufaturing high quality tool organization products and factory correct classic VW restoration parts. All are Made in the USA!
-          </p>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/06-photo-01.png">
+          </div>
         </div>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/06-photo-02.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/06-photo-03.png">
+          </div>
+        </div>
+      </section>
+      <div class="next-project">
+        <a class="project-detail-link" href="/project/nasc.html" data-id="01">
+          <span>Next project</span>
+          <span class="title">Tan Quang</span>
+        </a>
       </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/06-photo-01.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/06-photo-02.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/06-photo-03.png">
-        </div>
-      </div>
-    </section>
-    <div class="next-project project-01">
-      <a class="project-detail-link" href="/project/nasc.html" data-id="01" data-image="01-lo-01.png|01-lo-02.png|01-lo-03.png">
-        <span>Next project</span>
-        <span class="title">Tan Quang</span>
-      </a>
     </div>

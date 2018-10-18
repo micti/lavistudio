@@ -1,114 +1,115 @@
     <div class="project-dcover container">
       <div id="project-page-cover" class="cover">
-        <img src="photos/03-dcover.png">
       </div>
     </div>
-    <section class="section section-project-content">
-      <div class="container">
-        <div class="project-info">
-          <div class="project-name pppp">
-            <div class="name">
-              <span class="speed-2x">Q</span>
-              <span class="speed-3x">u</span>
-              <span class="speed-1x">y</span>
-              <span class="speed-1x">n</span>
-              <span class="speed-3x">h</span>
-              <span class="speed-3x">A</span>
-              <span class="speed-2x">n</span>
-              <span class="speed-1x">h</span>
-              <span class="speed-3x">B</span>
-              <span class="speed-1x">e</span>
-              <span class="speed-1x">a</span>
-              <span class="speed-3x">u</span>
-              <span class="speed-3x">t</span>
-              <span class="speed-2x">y</span>
-            </div>
-            <div class="category">
-              <span class="speed-2x">Art direction, Branding</span>
+    <div id="project-page-content" class="project-content">
+      <section class="section section-project-content">
+        <div class="container">
+          <div class="project-info">
+            <div class="project-name">
+              <div class="name">
+                <span class="speed-2x">Q</span>
+                <span class="speed-3x">u</span>
+                <span class="speed-1x">y</span>
+                <span class="speed-1x">n</span>
+                <span class="speed-3x">h</span>
+                <span class="speed-3x">A</span>
+                <span class="speed-2x">n</span>
+                <span class="speed-1x">h</span>
+                <span class="speed-3x">B</span>
+                <span class="speed-1x">e</span>
+                <span class="speed-1x">a</span>
+                <span class="speed-3x">u</span>
+                <span class="speed-3x">t</span>
+                <span class="speed-2x">y</span>
+              </div>
+              <div class="category">
+                <span class="speed-2x">Art direction, Branding</span>
+              </div>
             </div>
           </div>
+          <div class="project-introduction">
+            <p>
+              Injectable fillers are fast, easy, and highly effective, restoring the appearance of youthful skin. So Quynh Anh lead the filler trend now in Vietnam which many injection filler services without using surgery, which is outpatient procedure is safe and non-surgical, you’ll enjoy the results with minimal pain, downtime, and side effects.
+            </p>
+          </div>
         </div>
-        <div class="project-introduction pppp">
-          <p>
-            Injectable fillers are fast, easy, and highly effective, restoring the appearance of youthful skin. So Quynh Anh lead the filler trend now in Vietnam which many injection filler services without using surgery, which is outpatient procedure is safe and non-surgical, you’ll enjoy the results with minimal pain, downtime, and side effects.
-          </p>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/03-photo-01.png">
+          </div>
         </div>
+      </section>
+      <section class="section section-one-image-full">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/03-photo-02.png">
+          </div>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/03-photo-03.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/03-photo-04.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/03-photo-05.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/03-photo-06.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-one-image-full">
+        <div class="fluid">
+          <div class="image  pppp">
+            <img src="photos/03-photo-07.png">
+          </div>
+      </section>
+      <section class="section section-two-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/03-photo-08.png">
+          </div>
+          <div class="image  pppp">
+            <img src="photos/03-photo-09.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/03-photo-10.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/03-photo-11.png">
+          </div>
+        </div>
+      </section>
+      <div class="next-project">
+        <a class="project-detail-link" href="/project/nasc.html" data-id="04">
+          <span>Next project</span>
+          <span class="title">NASC</span>
+        </a>
       </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/03-photo-01.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-full-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/03-photo-02.png">
-        </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/03-photo-03.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/03-photo-04.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/03-photo-05.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/03-photo-06.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-full-image">
-      <div class="fluid">
-        <div class="image  pppp">
-          <img src="photos/03-photo-07.png">
-        </div>
-    </section>
-    <section class="section section-two-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/03-photo-08.png">
-        </div>
-        <div class="image  pppp">
-          <img src="photos/03-photo-09.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/03-photo-10.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/03-photo-11.png">
-        </div>
-      </div>
-    </section>
-    <div class="next-project project-04">
-      <a class="project-detail-link" href="/project/nasc.html" data-id="04" data-image="01-lo-01.png|01-lo-02.png|01-lo-03.png">
-        <span>Next project</span>
-        <span class="title">NASC</span>
-      </a>
     </div>

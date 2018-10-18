@@ -1,63 +1,81 @@
     <div class="project-dcover container">
       <div id="project-page-cover" class="cover">
-        <img src="photos/01-dcover.png">
       </div>
     </div>
-    <section class="section section-project-content">
-      <div class="container">
-        <div class="project-info">
-          <div class="project-name pppp">
-            <div class="name">
-              <span class="speed-1x p-o">T</span>
-              <span class="speed-3x p-o">a</span>
-              <span class="speed-2x p-o">n</span>
-              <span class="speed-1x p-o">Q</span>
-              <span class="speed-2x p-o">u</span>
-              <span class="speed-3x p-o">a</span>
-              <span class="speed-3x p-o">n</span>
-              <span class="speed-2x p-o">g</span>
-            </div>
-            <div class="category">
-              Art direction, Branding
+    <div id="project-page-content" class="project-content">
+      <section class="section section-project-content">
+        <div class="container">
+          <div class="project-info">
+            <div class="project-name">
+              <div class="name">
+                <span class="speed-1x p-o">T</span>
+                <span class="speed-3x p-o">a</span>
+                <span class="speed-2x p-o">n</span>
+                <span class="speed-1x p-o">Q</span>
+                <span class="speed-2x p-o">u</span>
+                <span class="speed-3x p-o">a</span>
+                <span class="speed-3x p-o">n</span>
+                <span class="speed-2x p-o">g</span>
+              </div>
+              <div class="category">
+                Art direction, Branding
+              </div>
             </div>
           </div>
+          <div class="project-introduction">
+            <p>
+              Tan Quang Project Co,. distributes high-quality mistorizers & industrial refrigerating machines to companies in Vietnam.  The redefinition of the company’s logo, as well as an easy to find presentation of its services.<br>
+              <br>
+              By selecting specific design elements, the branding uses typography and colors allow the company to create a timeless impression to customers
+            </p>
+          </div>
         </div>
-        <div class="project-introduction pppp">
-          <p>
-            Tan Quang Project Co,. distributes high-quality mistorizers & industrial refrigerating machines to companies in Vietnam.  The redefinition of the company’s logo, as well as an easy to find presentation of its services.<br>
-            <br>
-            By selecting specific design elements, the branding uses typography and colors allow the company to create a timeless impression to customers
-          </p>
+      </section>
+      <section class="section section-image section-one-image">
+        <div class="container">
+          <div class="image">
+            <img src="photos/01-photo-01.png">
+          </div>
         </div>
+      </section>
+      <section class="section section-image section-two-image">
+        <div class="container">
+          <div class="image">
+            <img src="photos/01-photo-02.png">
+          </div>
+          <div class="image">
+            <img src="photos/01-photo-03.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-image section-one-image-full">
+        <div class="container">
+          <div class="image">
+            <img src="photos/01-photo-04.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-image section-two-image">
+        <div class="container">
+          <div class="image">
+            <img src="photos/01-photo-05.png">
+          </div>
+          <div class="image">
+            <img src="photos/01-photo-06.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-image section-one-image-full">
+        <div class="container">
+          <div class="image">
+            <img src="photos/01-photo-07.png">
+          </div>
+        </div>
+      </section>
+      <div class="next-project">
+        <a class="project-detail-link" href="/project/freyza.html" data-id="02">
+          <span>Next project</span>
+          <span class="title">Freyza</span>
+        </a>
       </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/01-photo-01.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-two-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/01-photo-02.png">
-        </div>
-        <div class="image  pppp">
-          <img src="photos/01-photo-03.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-full-image">
-      <div class="fluid">
-        <div class="image  pppp">
-          <img src="photos/01-photo-04.png">
-        </div>
-      </div>
-    </section>
-    <div class="next-project project-02">
-      <a class="project-detail-link" href="/project/freyza.html" data-id="02" data-image="01-lo-01.png|01-lo-02.png|01-lo-03.png">
-        <span>Next project</span>
-        <span class="title">Freyza</span>
-      </a>
     </div>

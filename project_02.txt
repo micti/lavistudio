@@ -1,63 +1,64 @@
     <div class="project-dcover container">
       <div id="project-page-cover" class="cover">
-        <img src="photos/02-dcover.png">
       </div>
     </div>
-    <section class="section section-project-content">
-      <div class="container">
-        <div class="project-info">
-          <div class="project-name pppp">
-            <div class="name">
-              <span class="speed-1x">F</span>
-              <span class="speed-2x">r</span>
-              <span class="speed-3x">e</span>
-              <span class="speed-2x">y</span>
-              <span class="speed-1x">a</span>
-            </div>
-            <div class="category">
-              Art direction, Branding
+    <div id="project-page-content" class="project-content">
+      <section class="section section-project-content">
+        <div class="container">
+          <div class="project-info">
+            <div class="project-name">
+              <div class="name">
+                <span class="speed-1x">F</span>
+                <span class="speed-2x">r</span>
+                <span class="speed-3x">e</span>
+                <span class="speed-2x">y</span>
+                <span class="speed-1x">a</span>
+              </div>
+              <div class="category">
+                Art direction, Branding
+              </div>
             </div>
           </div>
+          <div class="project-introduction">
+            <p>
+              Freeya is a design studio specialized about dresses and girls’ accessories, with their slogan #befree, they aim to show to world that girls can do everything.<br>
+              <br>
+              With their ambitious to be rival to other local brands here like
+            </p>
+          </div>
         </div>
-        <div class="project-introduction pppp">
-          <p>
-            Freeya is a design studio specialized about dresses and girls’ accessories, with their slogan #befree, they aim to show to world that girls can do everything.<br>
-            <br>
-            With their ambitious to be rival to other local brands here like
-          </p>
+      </section>
+      <section class="section section-one-image">
+        <div class="container">
+          <div class="image  pppp">
+            <img src="photos/02-photo-01.png">
+          </div>
         </div>
+      </section>
+      <section class="section section-one-image-small">
+        <div class="container">
+          <div class="image">
+            <img src="photos/02-photo-02.png">
+          </div>
+      </section>
+      <section class="section section-one-image-full">
+        <div class="fluid">
+          <div class="image">
+            <img src="photos/02-photo-03.png">
+          </div>
+        </div>
+      </section>
+      <section class="section section-one-image-full">
+        <div class="fluid">
+          <div class="image">
+            <img src="photos/02-photo-04.png">
+          </div>
+        </div>
+      </section>
+      <div class="next-project">
+        <a class="project-detail-link" href="/project/quynh-anh-beauty.html" data-id="03">
+          <span>Next project</span>
+          <span class="title">Quynh Anh Beauty</span>
+        </a>
       </div>
-    </section>
-    <section class="section section-one-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/02-photo-01.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-small-image">
-      <div class="container">
-        <div class="image  pppp">
-          <img src="photos/02-photo-02.png">
-        </div>
-    </section>
-    <section class="section section-one-full-image">
-      <div class="fluid">
-        <div class="image  pppp">
-          <img src="photos/02-photo-03.png">
-        </div>
-      </div>
-    </section>
-    <section class="section section-one-full-image">
-      <div class="fluid">
-        <div class="image  pppp">
-          <img src="photos/02-photo-04.png">
-        </div>
-      </div>
-    </section>
-    <div class="next-project project-03">
-      <a class="project-detail-link" href="/project/quynh-anh-beauty.html" data-id="03" data-image="01-lo-01.png|01-lo-02.png|01-lo-03.png">
-        <span>Next project</span>
-        <span class="title">Quynh Anh Beauty</span>
-      </a>
     </div>
