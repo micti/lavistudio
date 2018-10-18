@@ -700,6 +700,23 @@ let app = {
     }
   },
 
+  loading2: () => {
+    let manifest = [
+      '/photos/01-dcover.png',
+      '/photos/02-dcover.png',
+      '/photos/03-dcover.png',
+      '/photos/04-dcover.png',
+      '/photos/05-dcover.png',
+      '/photos/06-dcover.png',
+    ]
+    let preload = new createjs.LoadQueue(true)
+    preload.setMaxConnections(5)
+    while (manifest.length > 0) {
+      var item = manifest.shift()
+      preload.loadFile(item)
+    }
+  },
+
   loading: () => {
     let manifest = [
       '/photos/01-cover.png',
@@ -708,6 +725,12 @@ let app = {
       '/photos/04-cover.png',
       '/photos/05-cover.png',
       '/photos/06-cover.png',
+      'photos/01-lo.png',
+      'photos/02-lo.png',
+      'photos/03-lo.png',
+      'photos/04-lo.png',
+      'photos/05-lo.png',
+      'photos/06-lo.png'
     ]
 
     let preload = new createjs.LoadQueue(true)
@@ -726,31 +749,23 @@ let app = {
       if (percent >= 75) {
         document.getElementById('loading-letter-v').classList.add('active')
       }
-      
-      // console.log(preload.progress)
     })
 
     preload.on('complete', () => {
       document.getElementById('loading-letter-i').classList.add('active')
-      // document.getElementById('load').classList.add('is-loaded')
       setTimeout(() => {
         let loadsc = document.getElementById('load-screen')
-        // let load = document.getElementById('load')
-        // new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
-          // projectDetail.elProjectPage.style.display = 'none'
-          // projectDetail.elProjectPage.classList.remove('project-' + projectDetail.currentProject + '-detail')
-          // projectDetail.currentProject = null
-          // projectDetail.prevProject = null
-          // projectSlider.start()
-          new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
-            loadsc.style.zIndex = 0;
-            loadsc.style.transform = 'translateX(-100%)'
-            app.init()
-          }}).play()
-        // }}).play()
-
-        
+        new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
+          loadsc.style.zIndex = 0;
+          loadsc.style.transform = 'translateX(-100%)'
+          document.getElementById('load-logo').style.display = 'none'
+          document.getElementById('load-photos').style.display = 'block'
+          app.init()
+        }}).play()
       }, 1000)
+
+      // loading something else
+      app.loading2()
     })
     
     preload.setMaxConnections(5);
@@ -768,7 +783,7 @@ let app = {
       'photos/03-cover.png',
       'photos/04-cover.png',
       'photos/05-cover.png',
-      'photos/06-cover.png',
+      'photos/06-cover.png'
     ]
     app.slideShow = new CanvasSlideshow({
       sprites: spriteImagesSrc,
