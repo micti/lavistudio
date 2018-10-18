@@ -28,27 +28,27 @@
           </div>
         </div>
       </section>
-      <section class="section section-one-image">
+      <section class="section section-image section-one-image">
         <div class="container">
           <div class="image  pppp">
             <img src="photos/02-photo-01.png">
           </div>
         </div>
       </section>
-      <section class="section section-one-image-small">
+      <section class="section section-image section-one-image-small">
         <div class="container">
           <div class="image">
             <img src="photos/02-photo-02.png">
           </div>
       </section>
-      <section class="section section-one-image-full">
+      <section class="section section-image section-one-image-full">
         <div class="fluid">
           <div class="image">
             <img src="photos/02-photo-03.png">
           </div>
         </div>
       </section>
-      <section class="section section-one-image-full">
+      <section class="section section-image section-one-image-full">
         <div class="fluid">
           <div class="image">
             <img src="photos/02-photo-04.png">

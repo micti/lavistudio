@@ -616,7 +616,7 @@ let projectDetail = {
       tl.play()
     }}).play()
 
-    fetch('project_' + id + '.txt?vf3ffeffvddd3').then((res) => {
+    fetch('project_' + id + '.txt?v12345678').then((res) => {
       res.text().then((text) => {
         let wait = () => {
           if (!effectDone) {

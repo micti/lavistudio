@@ -35,73 +35,73 @@
           </div>
         </div>
       </section>
-      <section class="section section-one-image">
+      <section class="section section-image section-one-image">
         <div class="container">
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-01.png">
           </div>
         </div>
       </section>
-      <section class="section section-one-image-full">
+      <section class="section section-image section-one-image-full">
         <div class="container">
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-02.png">
           </div>
       </section>
-      <section class="section section-one-image">
+      <section class="section section-image section-one-image">
         <div class="container">
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-03.png">
           </div>
         </div>
       </section>
-      <section class="section section-one-image">
+      <section class="section section-image section-one-image">
         <div class="container">
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-04.png">
           </div>
         </div>
       </section>
-      <section class="section section-one-image">
+      <section class="section section-image section-one-image">
         <div class="container">
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-05.png">
           </div>
         </div>
       </section>
-      <section class="section section-one-image">
+      <section class="section section-image section-one-image">
         <div class="container">
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-06.png">
           </div>
         </div>
       </section>
-      <section class="section section-one-image-full">
+      <section class="section section-image section-one-image-full">
         <div class="fluid">
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-07.png">
           </div>
       </section>
-      <section class="section section-two-image">
+      <section class="section section-image section-two-image">
         <div class="container">
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-08.png">
           </div>
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-09.png">
           </div>
         </div>
       </section>
-      <section class="section section-one-image">
+      <section class="section section-image section-one-image">
         <div class="container">
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-10.png">
           </div>
         </div>
       </section>
-      <section class="section section-one-image">
+      <section class="section section-image section-one-image">
         <div class="container">
-          <div class="image  pppp">
+          <div class="image">
             <img src="photos/03-photo-11.png">
           </div>
         </div>
