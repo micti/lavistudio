@@ -49,7 +49,7 @@ body {
 
 .load .logo-svg .letter {
   opacity: .07;
-  fill: #fff;
+  fill: #231f20;
   transition: .7s cubic-bezier(0.075, 0.82, 0.165, 1)
 }
 
@@ -258,7 +258,7 @@ body {
 .project .project-info .project-name {
   font-size: 4.5rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 10px;
   display: flex;
   overflow: hidden;
 }
