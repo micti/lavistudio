@@ -671,12 +671,11 @@ let app = {
       document.getElementById('loading-letter-i').classList.add('active')
       setTimeout(() => {
         let loadsc = document.getElementById('load-screen')
-        new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 1500, e: 'Power4Out', cb: () => {
+        new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
           loadsc.style.zIndex = 0;
           loadsc.style.transform = 'translateX(-100%)'
           document.getElementById('load-logo').style.display = 'none'
           document.getElementById('load-photos').style.display = 'block'
-          // document.getElementById('load').style.opacity = 1
           app.init()
         }}).play()
       }, 1000)
