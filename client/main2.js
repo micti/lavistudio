@@ -719,18 +719,19 @@ let app = {
 
   loading: () => {
     let manifest = [
+      '/client/photo/clouds.jpg',
       '/photos/01-cover.png',
       '/photos/02-cover.png',
       '/photos/03-cover.png',
       '/photos/04-cover.png',
       '/photos/05-cover.png',
       '/photos/06-cover.png',
-      'photos/01-lo.png',
-      'photos/02-lo.png',
-      'photos/03-lo.png',
-      'photos/04-lo.png',
-      'photos/05-lo.png',
-      'photos/06-lo.png'
+      '/photos/01-lo.png',
+      '/photos/02-lo.png',
+      '/photos/03-lo.png',
+      '/photos/04-lo.png',
+      '/photos/05-lo.png',
+      '/photos/06-lo.png'
     ]
 
     let preload = new createjs.LoadQueue(true)
