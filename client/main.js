@@ -1,355 +1,811 @@
-// Effect
-class ImageEffect {
-  constructor (element, url) {
-    this.width = 1000;
-    this.height = 1300;
-    this.playground = element
-    this.count = 0;
-    this.raf;
-    this.renderer = PIXI.autoDetectRenderer(this.width, this.height, {transparent:true});
-    this.renderer.autoResize = true;
-    this.playground.appendChild(this.renderer.view);
-    this.stage = new PIXI.Container();
-    console.log(url)
-    this.tp = PIXI.Texture.fromImage(url);
-    this.preview = new PIXI.Sprite(this.tp);
-    this.preview.anchor.x = 0;
-    this.displacementSprite = PIXI.Sprite.fromImage('/client/photo/clouds.jpg');
-    this.displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-    this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
-    this.displacementSprite.scale.y = 0.6;
-    this.displacementSprite.scale.x = 0.6;
-    this.stage.addChild(this.displacementSprite);
-    this.stage.addChild(this.preview);
-    this.animate();
-  }
+(function() {  
+  window.CanvasSlideshow = function( options ) {
+    //  SCOPE
+    /// ---------------------------      
+    var that  =   this;
+    
+    //  OPTIONS
+    /// ---------------------------      
+    options                     = options || {};
+    options.stageWidth          = 960;
+    options.stageHeight         = 1080;
+    options.pixiSprites         = options.hasOwnProperty('sprites') ? options.sprites : [];
+    options.centerSprites       = options.hasOwnProperty('centerSprites') ? options.centerSprites : false;
+    options.texts               = options.hasOwnProperty('texts') ? options.texts : [];
+    options.autoPlay            = options.hasOwnProperty('autoPlay') ? options.autoPlay : true;
+    options.autoPlaySpeed       = options.hasOwnProperty('autoPlaySpeed') ? options.autoPlaySpeed : [10, 3];
+    options.displaceScale       = options.hasOwnProperty('displaceScale') ? options.displaceScale : [200, 70];
+    options.displacementImage   = options.hasOwnProperty('displacementImage') ? options.displacementImage : '';
+    options.navElement          = options.hasOwnProperty('navElement')  ?  options.navElement : document.querySelectorAll( '.scene-nav' ); 
+    options.displaceAutoFit     = options.hasOwnProperty('displaceAutoFit')  ?  options.displaceAutoFit : false; 
+    options.displaceScaleTo     = ( options.autoPlay === false ) ? [ 0, 0 ] : [ 20, 20 ];
+    options.displacementCenter  = options.hasOwnProperty('displacementCenter') ? options.displacementCenter : false;
+    options.dispatchPointerOver = options.hasOwnProperty('dispatchPointerOver') ? options.dispatchPointerOver : false;
 
-  removeScene() {
-    cancelAnimationFrame(this.raf);
-    this.stage.removeChildren();
-    this.stage.destroy(true);
-    this.playground.removeChild(this.canvas);
-  }
+    //  PIXI VARIABLES
+    /// ---------------------------    
+    var renderer            = new PIXI.autoDetectRenderer( options.stageWidth, options.stageHeight, { transparent: true });
+    var stage               = new PIXI.Container();
+    var slidesContainer     = new PIXI.Container();
+    var displacementSprite  = new PIXI.Sprite.fromImage( options.displacementImage );
+    var displacementFilter  = new PIXI.filters.DisplacementFilter( displacementSprite );
 
-  animate () {
-    this.raf = requestAnimationFrame(() => {
-      this.animate()
-    });
+    //  SLIDES ARRAY INDEX
+    /// ---------------------------    
+    this.currentIndex = 0;
 
-    this.displacementSprite.x = this.count * 11;
-	  this.displacementSprite.y = this.count * 11;
+    /// ---------------------------
+    //  INITIALISE PIXI
+    /// ---------------------------      
+    this.initPixi = function() {
+      // Add canvas to the HTML
+      document.getElementById('projects-canvas').appendChild( renderer.view );
 
-	  this.count += 0.5;
-    this.stage.filters = [this.displacementFilter];
-    this.renderer.render(this.stage);
-    this.canvas = this.playground.querySelector('canvas');
-  }
-}
+      // Add child container to the main container 
+      stage.addChild( slidesContainer );
+      // Enable Interactions
+      stage.interactive = true;
+      renderer.view.style.objectFit = 'cover';
+      renderer.view.style.width     = '100%';
+      renderer.view.style.height    = '100%';
+      renderer.view.style.top       = '0%';
+      renderer.view.style.left      = '0%';
+      renderer.view.style.webkitTransform = 'translate( -0%, -0% ) scale(1.2)';           
+      renderer.view.style.transform = 'translate( -0%, -0% ) scale(1.2)';
+      displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
 
-let main = () => {
+      // Set the filter to stage and set some default values for the animation
+      stage.filters = [displacementFilter];
 
-  let isChangingProject = false
-  let isDetailView = false
+      displacementSprite.scale.x = 2;
+      displacementSprite.scale.y = 2;
 
-  let project = 1
-  let totalProject = 3;
-  let current = 0;
-  let currentDetailProject = null
+      // PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
+      displacementFilter.autoFit = options.displaceAutoFit;
+      
+      stage.addChild( displacementSprite );
+    };
 
-  let cursorEl = document.querySelector('.cursor')
-  let loadingCircle = document.getElementById('loading-circle')
+    /// ---------------------------
+    //  LOAD SLIDES TO CANVAS
+    /// ---------------------------          
+    this.loadPixiSprites = function( sprites ) {
+      var rSprites = options.sprites;
 
-  let rectangleOnRight = document.getElementById('rectange-on-right')
-  let closeDetailButton = document.getElementById('close-detail')
-  let pd = document.getElementById("project-detail")
-  let projectWrapper = document.getElementById("project-wrapper")
+      for ( var i = 0; i < rSprites.length; i++ ) {
+        
+        var texture   = new PIXI.Texture.fromImage( sprites[i] );
+        var image     = new PIXI.Sprite( texture );
+        
+        if ( options.centerSprites === true ) {
+          image.anchor.set(0.5);
+          image.x = renderer.width / 2;
+          image.y = renderer.height / 2;            
+        }
+        // image.transform.scale.x = 1.3;
+        // image.transform.scale.y = 1.3;
+        if ( i !== 0  ) {
+          TweenMax.set( image, { alpha: 0 } );
+        }
 
-  let openDetail = (event, project) => {
-    // Tiến trình
-    // 1. Animation chuyển cảnh (kéo dài hình lên tràn màn hình, dấu các thông tin khác)
-    // 2. Loading (animation hình tròn)
-    // 3. Chèn nội dung chi tiết vào (animation 0 -> 1)
-    // 4. Hiện thỉ close button
+        slidesContainer.addChild( image );
+      }
+    };
+    
 
-    //
-    let loadDone = (data) => {
-        currentDetailProject.classList.remove('clicked')
-        cursorEl.classList.remove('active')
-        loadingCircle.style['opacity'] = 0
-        pd.innerHTML = data
-        pd.classList.add('active')
-        pd.scrollTop = 0
-        S.L('#next-project', 'add', 'click', nextProjectDetail)
-        new S.Merom({el: pd, p: {opacity: [0, 1]}, d: 500, e: 'Power4Out'}).play()
-        new S.Merom({el: closeDetailButton, p: {y: [22, 0, 'px']}, d: 500, e: 'Power4Out'}).play()
+
+    /// ---------------------------
+    //  DEFAULT RENDER/ANIMATION
+    /// ---------------------------        
+    var ticker = new PIXI.ticker.Ticker()
+    ticker.autoStart = true
+    ticker.add(function(delta) {
+      displacementSprite.x += options.autoPlaySpeed[0] * delta
+      displacementSprite.y += options.autoPlaySpeed[1]
+      renderer.render(stage)
+    })
+
+    /// ---------------------------
+    //  TRANSITION BETWEEN SLIDES
+    /// ---------------------------    
+    var slideImages = slidesContainer.children  
+    this.moveSlider = function(newIndex, oldIndex) {
+
+      var baseTimeline = new TimelineMax()
+      // baseTimeline.clear()
+      // if (baseTimeline.isActive() ) {
+      //   return;
+      // }        
+      baseTimeline
+        .to(displacementFilter.scale, 0.7, { x: options.displaceScale[0], y: options.displaceScale[1]  })
+        .to(slideImages[oldIndex], 0.5, { alpha: 0 })
+        .to(slideImages[newIndex], 0.5, { alpha: 1 })          
+        .to(displacementFilter.scale, 0.7, { x: options.displaceScaleTo[0], y: options.displaceScaleTo[1] } );
     }
 
-    let loadContent = () => {
-      let id = currentDetailProject.getAttribute('data-project-id')
-      fetch('/project_' + id + '.txt').then(res => {
-        return res.text()
-      }).then(data => {
-        new S.Merom({el: loadingCircle, line: {elWithLength: this.el, start: 80, end: 100}, d: 500, e: 'Power4Out', cb: () => {
-          loadDone(data)
-        }}).play()
-      }).catch(e => {
-        console.log(e)
-      })
+    /// ---------------------------
+    //  INIT FUNCTIONS
+    /// ---------------------------    
+
+    this.init = function() {      
+      that.initPixi();
+      that.loadPixiSprites( options.pixiSprites );
+
+      /*
+      if ( options.fullScreen === true ) {
+        window.addEventListener("resize", function( event ){ 
+          scaleToWindow( renderer.view );
+        });
+        scaleToWindow( renderer.view );  
+      }
+      */
     }
+ 
+    /// ---------------------------
+    //  CENTER DISPLACEMENT
+    /// ---------------------------
+    if ( options.displacementCenter === true ) {
+      displacementSprite.anchor.set(0.5);
+      displacementSprite.x = renderer.view.width / 2;
+      displacementSprite.y = renderer.view.height / 2;        
+    }
+    
+    
+    /// ---------------------------
+    //  START 
+    /// ---------------------------           
+    this.init();
 
-    currentDetailProject = project
-
-    // Hiển thị chuột
-    cursorEl.style['top'] = event.pageY  - 41 + 'px'
-    cursorEl.style['left'] = event.pageX  - 41 + 'px'
-    cursorEl.classList.add('active')
-
-    // Thiết lập trạng thái đã click vào project el
-    currentDetailProject.classList.add('clicked')
-
-    // Animation chuyển cảnh
-    let tl = new S.Timeline()
-    tl.from({el: '#cursor-text', p: {x: [0, -45, 'px']}, d: 500, e: 'Power4Out'})
-    tl.from({el: project, p: {height: [50, 100, 'vh']}, d: 500, e: 'Power4Out'})
-    tl.from({el: '.movex101', p: {x: [0, -365, 'px']}, d: 500, e: 'Power4Out'})
-    tl.from({el: rectangleOnRight, p: {x: [0, 30, 'vw']}, d: 500, e: 'Power4Out'})
-    tl.from({el: project, p: {y: [0, -25, 'vh']}, d: 500, e: 'Power4Out'})
-    tl.play()
-
-    let tl2 = new S.Timeline()
-    tl2.from({el: '.category-text-mask', p: {x: [-150, 0, 'px']}, d: 500, e: 'Power4Out'})
-    tl2.from({el: '.category-text', p: {x: [-150, 0, 'px']}, d: 0, delay: 500, e: 'Power4Out'})
-    tl2.from({el: '.category-text-mask', p: {x: [0, 150, 'px']}, d: 500, e: 'Power4Out', cb: () => {
-      new S.Merom({el: loadingCircle, line: {elWithLength: this.el, start: 0, end: 80}, d: 500, e: 'Power4Out', cb: loadContent}).play()
-    }})
-    tl2.play()
+    
+    /// ---------------------------
+    //  HELPER FUNCTIONS
+    /// ---------------------------
+    function scaleToWindow( canvas, backgroundColor ) {
+      var scaleX, scaleY, scale, center;
+    
+      //1. Scale the canvas to the correct size
+      //Figure out the scale amount on each axis
+      scaleX = window.innerWidth / canvas.offsetWidth;
+      scaleY = window.innerHeight / canvas.offsetHeight;
+    
+      //Scale the canvas based on whichever value is less: `scaleX` or `scaleY`
+      scale = Math.min(scaleX, scaleY);
+      canvas.style.transformOrigin = "0 0";
+      canvas.style.transform = "scale(" + scale + ")";
+    
+      //2. Center the canvas.
+      //Decide whether to center the canvas vertically or horizontally.
+      //Wide canvases should be centered vertically, and 
+      //square or tall canvases should be centered horizontally
+      if (canvas.offsetWidth > canvas.offsetHeight) {
+        if (canvas.offsetWidth * scale < window.innerWidth) {
+          center = "horizontally";
+        } else {
+          center = "vertically";
+        }
+      } else {
+        if (canvas.offsetHeight * scale < window.innerHeight) {
+          center = "vertically";
+        } else {
+          center = "horizontally";
+        }
+      }
+    
+      //Center horizontally (for square or tall canvases)
+      var margin;
+      if (center === "horizontally") {
+        margin = (window.innerWidth - canvas.offsetWidth * scale) / 2;
+        canvas.style.marginTop = 0 + "px";
+        canvas.style.marginBottom = 0 + "px";
+        canvas.style.marginLeft = margin + "px";
+        canvas.style.marginRight = margin + "px";
+      }
+    
+      //Center vertically (for wide canvases) 
+      if (center === "vertically") {
+        margin = (window.innerHeight - canvas.offsetHeight * scale) / 2;
+        canvas.style.marginTop = margin + "px";
+        canvas.style.marginBottom = margin + "px";
+        canvas.style.marginLeft = 0 + "px";
+        canvas.style.marginRight = 0 + "px";
+      }
+    
+      //3. Remove any padding from the canvas  and body and set the canvas
+      //display style to "block"
+      canvas.style.paddingLeft = 0 + "px";
+      canvas.style.paddingRight = 0 + "px";
+      canvas.style.paddingTop = 0 + "px";
+      canvas.style.paddingBottom = 0 + "px";
+      canvas.style.display = "block";
+    
+      //4. Set the color of the HTML body background
+      document.body.style.backgroundColor = backgroundColor;
+    
+      //Fix some quirkiness in scaling for Safari
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf("safari") != -1) {
+        if (ua.indexOf("chrome") > -1) {
+          // Chrome
+        } else {
+          // Safari
+          //canvas.style.maxHeight = "100%";
+          //canvas.style.minHeight = "100%";
+        }
+      }
+    
+      //5. Return the `scale` value. This is important, because you'll nee this value 
+      //for correct hit testing between the pointer and sprites
+      return scale;
+    } // http://bit.ly/2y1Yk2k 
   }
+})(); 
 
-  let closeDetail = () => {
-    new S.Merom({el: closeDetailButton, p: {y: [0, -22, 'px']}, d: 500, e: 'Power4Out'}).play()
-    new S.Merom({el: pd, p: {opacity: [1, 0]}, d: 1000, e: 'Power4Out'}).play({cb: () => {
-      pd.classList.remove('active')
-      let tl = new S.Timeline()
-      tl.from({el: '#cursor-text', p: {x: [-45, 0, 'px']}, d: 500, e: 'Power4Out'})
-      tl.from({el: currentDetailProject, p: {height: [100, 50, 'vh']}, d: 500, e: 'Power4Out'})
-      tl.from({el: '.movex101', p: {x: [-365, 0, 'px']}, d: 500, e: 'Power4Out'})
-      tl.from({el: rectangleOnRight, p: {x: [30, 0, 'vw']}, d: 500, e: 'Power4Out'})
-      tl.from({el: currentDetailProject, p: {y: [-25, 0, 'vh']}, d: 500, e: 'Power4Out'})
-      tl.play()
+let projectSlider = {
+  total: 1,
+  current: 0,
+  timer: 0,
+  isChange: false,
+  isStop: false,
+  projectEffect: [],
+  totalEl: document.getElementById('project-total'),
+  currentEl: document.getElementById('project-current'),
+  autoplayEl: document.getElementById('autoplay-timer'),
+  autoplayAnimation: null,
 
-      let tl2 = new S.Timeline()
-      tl2.from({el: '.category-text-mask', p: {x: [150, 0, 'px']}, d: 500, e: 'Power4Out'})
-      tl2.from({el: '.category-text', p: {x: [0, -150, 'px']}, d: 0, delay: 500, e: 'Power4Out'})
-      tl2.from({el: '.category-text-mask', p: {x: [0, -150, 'px']}, d: 500, e: 'Power4Out'})
-      tl2.play()
-      currentDetailProject = null
-    }})
-  }
-
-  let nextProjectDetail = () => {
-    let nextProjectEl = currentDetailProject.nextElementSibling
-
-    if (!nextProjectEl) {
+  wheelAndTouchEvent: (delta, type, event) => {
+    if (projectSlider.isStop) {
       return
     }
 
-    let id = nextProjectEl.getAttribute('data-project-id')
-    // let v = id * 75 - 75
-
-    currentDetailProject.style['height'] = '50vh'
-    currentDetailProject.style['transform'] = 'translate3d(0px, 0px, 0px)'
-
-    new S.Merom({el: closeDetailButton, p: {y: [0, -22, 'px']}, d: 500, e: 'Power4Out'}).play()
-    let tl2 = new S.Timeline()
-    tl2.from({el: '.category-text-mask', p: {x: [150, 0, 'px']}, d: 500, e: 'Power4Out'})
-    tl2.from({el: '.category-text', p: {x: [0, -150, 'px']}, d: 0, delay: 500, e: 'Power4Out'})
-    tl2.from({el: '.category-text-mask', p: {x: [0, -150, 'px']}, d: 500, e: 'Power4Out'})
-    tl2.play()
-
-    new S.Merom({el: pd, p: {opacity: [1, 0]}, d: 1000, e: 'Power4Out'}).play({cb: () => {
-      pd.classList.remove('active')
-      isDetailView = false
-      // project++
-      // isChangingProject = true
-      nextProject()
-      setTimeout(() => {
-        // isChangingProject = false
-
-        let e = document.createEvent('HTMLEvents')
-        e.initEvent('click', false, true)
-        nextProjectEl.dispatchEvent(e)
-      }, 2500)
-    }})
-  }
-
-  /* PROJECT SLIDE */
-  let releaseWheelEvent = () => {
-    isChangingProject = false
-  }
-
-  let nextProject = () => {
-    if (project === totalProject) {
-      return releaseWheelEvent()
+    if (projectSlider.isChange) {
+      projectSlider.timer = 0
+      return
     }
 
-    let now = current
-    let end = now - 75
-    current = end
-    project++
-
-    let tl = new S.Timeline()
-    tl.from({el: '.name', p: {x: [-25, -30, 'vw'], opacity: [1, 0]}, d: 500, e: 'Power4Out'})
-    tl.from({el: '.movex100', p: {x: [0, -100, '%']}, d: 500, e: 'Power4Out'})
-    tl.from({el: projectWrapper, p: {y: [now, end, 'vh']}, d: 1000, delay: 500, e: 'Power4Out'})
-    tl.from({el: '.movex100', p: {x: [-100, 0, '%']}, d: 500, delay: 1500, e: 'Power4Out'})
-    tl.from({el: '.name', p: {x: [-30, -25, 'vw'], opacity: [0, 1]}, d: 500, delay: 0, e: 'Power4Out', cb: releaseWheelEvent})
-    tl.play()
-
-  }
-
-  let prevProject = () => {
-    if (project === 1) {
-      return releaseWheelEvent()
+    if (projectSlider.timer < 500) {
+      return
     }
 
-    let now = current
-    let end = now + 75
-    current = end
-    project--
-    let tl = new S.Timeline()
-    tl.from({el: '.name', p: {x: [-25, -30, 'vw'], opacity: [1, 0]}, d: 500, e: 'Power4Out'})
-    tl.from({el: '.movex100', p: {x: [0, -100, '%']}, d: 500, e: 'Power4Out'})
-    tl.from({el: projectWrapper, p: {y: [now, end, 'vh']}, d: 1000, delay: 500, e: 'Power4Out'})
-    tl.from({el: '.movex100', p: {x: [-100, 0, '%']}, d: 500, delay: 1500, e: 'Power4Out'})
-    tl.from({el: '.name', p: {x: [-30, -25, 'vw'], opacity: [0, 1]}, d: 500, delay: 0, e: 'Power4Out', cb: releaseWheelEvent})
+    projectSlider.timer = 0
 
-    tl.play()
-  }
-
-  /* EVENT */
-  S.L('.project', 'add', 'click', (e) => {
-    if (isDetailView) return
-    isDetailView = true
-    let selectedProject = e.target.closest('.project')
-
-    openDetail(e, selectedProject)
-  })
-
-  S.L(closeDetailButton, 'add', 'click', (e) => {
-    if (!isDetailView) return
-    isDetailView = false
-
-    closeDetail()
-  })
-
-  S.L(document, 'add', 'mouseWheel', (e) => {
-    if (isDetailView) return
-    if (isChangingProject) return
-    isChangingProject = true
-    if (e.deltaY > 0) {
-      nextProject()
+    if (delta < 0) {
+      projectSlider.next()
     } else {
-      prevProject()
+      projectSlider.prev()
     }
-  })
+  },
 
-  var ts;
-  document.addEventListener('touchstart', function (e) {
-    if (isDetailView) return
-    if (isChangingProject) return
-    ts = e.originalEvent.touches[0].clientY
-  });
+  autoPlayEvent: () => {
+    projectSlider.autoplayAnimation = new S.Merom({el: projectSlider.autoplayEl, p: {x: [-100, 0, '%']}, d: 5000, e: 'linear', cb: projectSlider.next})
+    projectSlider.autoplayAnimation.play()
+  },
 
-  document.addEventListener('touchend', function (e) {
-    if (isDetailView) return
-    if (isChangingProject) return
-    var te = e.originalEvent.changedTouches[0].clientY
-    if (ts > te + 5) {
-      isChangingProject = true
-      prevProject()
-    } else if (ts < te - 5) {
-      isChangingProject = true
-      nextProject()
+  init: () => {
+    projectSlider.isStop = false;
+    let projects = document.getElementsByClassName('project')
+    projectSlider.total = projects.length
+    document.getElementById('project-total').innerHTML = projectSlider.total
+
+    projectSlider.autoplayAnimation = new S.Merom({el: '#autoplay-timer', p: {x: [-100, 0, '%']}, d: 5000, e: 'Power4Out', cb: projectSlider.next})
+
+    // Timer
+    projectSlider.timer = 0
+    setInterval(() => { projectSlider.timer += 50 }, 50)
+
+    // Event
+    projectSlider.scrollEvent = new S.WT(projectSlider.wheelAndTouchEvent)
+    projectSlider.scrollEvent.on()
+
+    // Display first project after loading
+    projectSlider.isChange = true
+    projectSlider.change(1, null, 1)
+  },
+  
+  next: () => {
+    projectSlider.isChange = true
+    projectSlider.cancelAutoPlay()
+
+    if (projectSlider.current === projectSlider.total) {
+      app.slideShow.moveSlider(0, projectSlider.current - 1)
+      projectSlider.change(1, projectSlider.current, 1)
+    } else {
+      app.slideShow.moveSlider(projectSlider.current, projectSlider.current - 1)
+      projectSlider.change(projectSlider.current + 1, projectSlider.current, 1)
+      
     }
-  });
-}
+  },
 
-let preload = (cb) => {
-  let manifest = [
-    "01_big.png",
-    "02_big.png",
-    "03_big.png",
-    "clouds.jpg",
-    "avatar.png"
-  ]
-  let preload = new createjs.LoadQueue(true, "/client/photo/")
+  prev: () => {
+    projectSlider.isChange = true
+    projectSlider.cancelAutoPlay()
+    
+    if (projectSlider.current === 1) {
+      app.slideShow.moveSlider(projectSlider.total - 1, 0)
+      projectSlider.change(projectSlider.total, 1, -1)
+    } else {
+      app.slideShow.moveSlider(projectSlider.current - 2, projectSlider.current - 1)
+      projectSlider.change(projectSlider.current - 1, projectSlider.current, -1)
+    }
+  },
 
-  preload.on("progress", () => {
-    document.getElementById('loading-bar').style['transform'] = 'translateX(' + ((preload.progress * 2 * 100) - 200) + 'px)'
-  })
-  preload.on('complete', () => {
-    document.getElementById('load').classList.add('is-loaded')
-    setTimeout(() => {
-      document.getElementById('load').classList.add('is-closed')
-      cb()
-    }, 500)
-  })
-  preload.setMaxConnections(5);
+  change: (nextProject, prevProject, direction) => {
+    let tl = new S.Timeline()
+    let timer = 0
+    let animateTime = 1200;
 
-  while (manifest.length > 0) {
-    var item = manifest.shift();
-    preload.loadFile(item);
+    if (prevProject !== null) {
+      let pname1x = document.querySelectorAll('#project-' + prevProject + ' span.speed-1x')
+      let pname2x = document.querySelectorAll('#project-' + prevProject + ' span.speed-2x')
+      let pname3x = document.querySelectorAll('#project-' + prevProject + ' span.speed-3x')
+      tl.from({el: pname1x, p: { y: [0, -300 * direction, '%'] }, d: animateTime, e: 'Power4Out'})
+      tl.from({el: pname2x, p: { y: [0, -200 * direction, '%'] }, d: animateTime, e: 'Power4Out'})
+      tl.from({el: pname3x, p: { y: [0, -100 * direction, '%'] }, d: animateTime, e: 'Power4Out', cb: () => { projectSlider.clearProject(prevProject) }})
+      tl.from({el: projectSlider.currentEl, p: { y: [0, -100 * direction, '%'] }, d: animateTime / 2, e: 'Power4Out', cb: projectSlider.updateCurrentStatus})
+      timer += animateTime
+    }
+
+    if (nextProject !== null) {
+      document.getElementById('project-' + nextProject).style.display = 'flex'
+      let nname1x = document.querySelectorAll('#project-' + nextProject + ' span.speed-1x')
+      let nname2x = document.querySelectorAll('#project-' + nextProject + ' span.speed-2x')
+      let nname3x = document.querySelectorAll('#project-' + nextProject + ' span.speed-3x')
+      tl.from({el: nname1x, p: { y: [300 * direction, 0, '%'] }, d: animateTime, delay: timer / 2, e: 'Power4Out'})
+      tl.from({el: nname2x, p: { y: [200 * direction, 0, '%'] }, d: animateTime, delay: 0, e: 'Power4Out'})
+      tl.from({el: nname3x, p: { y: [100 * direction, 0, '%'] }, d: animateTime, delay: 0, e: 'Power4Out', cb: projectSlider.releaseWheelEvent})
+      tl.from({el: projectSlider.currentEl, p: { y: [100 * direction, 0, '%'] }, d: animateTime / 2, e: 'Power4Out'})
+      projectSlider.current = nextProject
+    }
+
+    tl.play()
+  },
+
+  updateCurrentStatus: () => {
+    projectSlider.currentEl.innerText = projectSlider.current
+  },
+  
+  clearProject: (project) => {
+    document.getElementById("project-" + project).style.display = 'none'
+  },
+
+  releaseWheelEvent: () => {
+    projectSlider.isChange = false
+    projectSlider.runAutoPlay()
+  },
+
+  cancelAutoPlay: () => {
+    projectSlider.autoPlay = false
+    projectSlider.autoplayAnimation.pause()
+  },
+
+  runAutoPlay: () => {
+    projectSlider.autoPlay = true
+    projectSlider.autoPlayEvent()
+  },
+
+  stop: () => {
+    projectSlider.isStop = true
+    projectSlider.cancelAutoPlay()
+    projectSlider.scrollEvent.off()
+  },
+
+  start: () => {
+    projectSlider.isStop = false
+    projectSlider.runAutoPlay()
+    projectSlider.scrollEvent.on()
   }
 }
 
-let intro = () => {
-  // Logo Lavi
-  let L = Snap.select('#L')
-  let A = Snap.select('#A')
-  let V = Snap.select('#V')
-  let I = Snap.select('#I')
-  let tran1 = function(){
-    L.animate({ d: 'M46.1238868,368.606044 L46.1238868,0.0364992047 L0.995847113,0.0364992047 L0.995847113,367.971815 C0.995847113,386.134652 0.995847113,402.603682 0.995847113,417.378906 L0.995847113,453.785703 L46.1238868,453.785703 L46.1238868,411.125 L46.1238868,399.117188 L46.1238868,392.488281 C46.1238868,385.71255 46.1238868,377.751804 46.1238868,368.606044 Z' }, 1000, mina.backout);
-    A.animate({ d: 'M352.126833,119.847656 L352.126833,183.535156 C352.126833,207.290045 352.126833,228.006504 352.126833,245.684533 L352.126833,259.556489 L352.126833,431.275963 L352.126833,453.317734 L396.484519,453.317734 L396.484519,242.826492 C396.484519,217.02512 396.484519,208.336862 396.484519,216.761719 L396.484519,119.847656 L352.126833,119.847656 Z' }, 1000, mina.backout);
-    V.animate({ d: 'M551.251859 127.292398 551.251859 450.740296 586.650095 450.740296 586.650095 127.292398 Z' }, 1000, mina.backout);
-    I.animate({ d: 'M733.496361 450.740296 762.96875 450.740296 762.96875 127.292398 733.496361 127.292398' }, 1000, mina.backout, tran2);
+let contactPage = {
+  wrapper: null,
+  contactButton: null,
+  contactPage: null,
+  backButton: null,
+  isOpen: false,
+  init: () => {
+    contactPage.contactButton = document.getElementById("contact-button")
+    contactPage.contactPage = document.getElementById("contact-page")
+    contactPage.backButton = document.getElementById("back-button")
+    contactPage.newProjectButton = document.getElementById("new-project-button")
+    contactPage.wrapper = document.getElementById("contact-page-wrapper")
+    S.L(contactPage.contactButton, 'add', 'click', contactPage.click)
+    S.L(contactPage.newProjectButton, 'add', 'click', contactPage.goToNewProject)
+    S.L(contactPage.backButton, 'add', 'click', contactPage.backToInfo)
+  },
+
+  goToNewProject: () => {
+    contactPage.backButton.style.display = 'block'
+    new S.Merom({el: contactPage.wrapper, p: {x: [0, -50, '%']}, d: 750, e: 'Power4Out', cb: () => {
+      contactPage.backButton.classList.add('active')
+    }}).play()
+  },
+
+  backToInfo: () => {
+    contactPage.backButton.classList.remove('active')
+    new S.Merom({el: contactPage.wrapper, p: {x: [-50, 0, '%']}, d: 750, e: 'Power4Out', cb: () => {
+      contactPage.backButton.style.display = 'none'
+    }}).play()
+  },
+
+  click: () => {
+    // alert(contactPage.isOpen)
+    if (contactPage.isOpen === false) {
+      contactPage.contactButton.classList.add('hover')
+      return contactPage.open()
+    }
+
+    contactPage.close()
+  },
+
+  close: () => {
+    let loadsc = document.getElementById('load-screen')
+    let load = document.getElementById('load')
+    load.style.transform = 'translateX(-100%)'
+    loadsc.style.transform = 'translateX(0)'
+    loadsc.style.zIndex = 60;
+    contactPage.contactButton.classList.remove('active')
+    contactPage.contactButton.classList.remove('hover')
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
+      contactPage.contactPage.style.display = 'none'
+      contactPage.contactPage.style.zIndex = 40
+      contactPage.backButton.classList.remove('active')
+      contactPage.wrapper.style.transform = 'translateX(0)'
+      projectSlider.start()
+      new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
+        loadsc.style.zIndex = 0;
+        contactPage.backButton.style.display = 'none'
+        loadsc.style.transform = 'translateX(-100%)'
+        contactPage.isOpen = false
+      }}).play()
+    }}).play()
+  },
+  open: () => {
+    let load = document.getElementById('load')
+    let loadsc = document.getElementById('load-screen')
+
+    // let imagedata = project.getAttribute('data-image')
+    let images = ['01', '02', '03', '04', '05', '06', '01', '02', '03', '04', '05', '06']
+
+    // Prepare flashing load
+    let loadPhotos = load.querySelector('.photos')
+    loadPhotos.innerHTML = ''
+    let divImages = []
+    for (const image of images) {
+      let newImage = document.createElement("img");
+      newImage.src = '/photos/' + image + '-lo.png'
+
+      let newDivImage = document.createElement("div");
+      newDivImage.classList.add('photo')
+      newDivImage.appendChild(newImage)
+      
+      loadPhotos.appendChild(newDivImage)
+      divImages.push(newDivImage)
+    }
+
+    let effectDone = false
+
+    // loading
+    loadsc.style.transform = 'translateX(0)'
+    load.style.transform = 'translateX(-100%)'
+    loadsc.style.zIndex = 60;
+    
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
+      projectSlider.stop()
+      let tl = new S.Timeline()
+      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, e: 'Power4Out'})
+      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[3], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[3], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[4], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[4], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[5], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[5], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[6], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[6], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[7], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[7], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[8], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[8], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[9], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[9], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[10], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[10], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[11], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[11], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: () => {
+        effectDone = true
+        projectSlider.stop()
+        contactPage.contactPage.style.display = 'block'
+        contactPage.contactPage.style.zIndex = 41
+        // contactPage.contactPage.innerHTML = text
+        contactPage.isOpen = true
+        new S.Merom({el: load, p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
+          contactPage.contactButton.classList.add('active')
+          loadsc.style.zIndex = 0;
+          loadsc.style.transform = 'translateX(-100%)'
+        }}).play()
+      }})
+      tl.play()
+    }}).play()
   }
-  let tran2 = function() {
-    L.animate({ d: 'M56.1461876,400.579438 C49.4461965,392.99627 46.1238868,382.324685 46.1238868,368.606044 L46.1238868,0.0364992047 L0.995847113,0.0364992047 L0.995847113,367.971815 C0.995847113,395.21607 7.69583828,416.352428 21.0542917,431.31195 C34.3989023,446.299048 53.142266,453.785703 77.1459534,453.785703 L114.729581,453.785703 L114.729581,411.967978 L84.662679,411.967978 C72.3147614,411.967978 62.8461788,408.176394 56.1461876,400.579438;' }, 1000, mina.backout);
-    A.animate({ d: 'M329.33569,406.61316 C314.123453,412.287417 292.801829,415.131516 265.275571,415.131516 C239.586212,415.131516 219.761319,410.014926 205.651221,399.837511 C191.609156,389.632213 184.588123,375.272299 184.588123,356.75777 C184.588123,339.302806 190.194064,325.765451 201.337912,316.215411 C212.549793,306.637488 228.442363,301.841556 248.961195,301.841556 L352.126833,301.841556 L352.126833,382.619556 C352.126833,392.950329 344.547928,400.938903 329.33569,406.61316 M270.514132,121.032116 C246.307898,121.032116 224.251514,125.186732 204.426622,133.495964 C184.64255,141.791254 168.695553,153.432543 156.558419,168.364065 L188.901432,191.088978 C212.495367,171.737948 240.334577,162.048492 272.364637,162.048492 C297.809077,162.048492 317.511509,169.367865 331.308655,183.978729 C345.22826,198.589593 352.126833,219.167489 352.126833,245.684533 L352.126833,259.556489 L248.648242,259.556489 C214.577185,259.556489 188.098639,268.019079 169.185393,284.958201 C150.272146,301.911264 140.856342,325.821218 140.856342,356.75777 C140.856342,388.93513 151.142972,413.876767 171.648197,431.540855 C192.167028,449.218885 221.108378,458.043958 258.499458,458.043958 C273.289889,458.043958 287.087035,456.789208 299.890895,454.265767 C312.762788,451.728384 324.165162,448.047785 334.138839,443.223969 C341.119051,439.822203 346.901878,435.709412 352.126833,431.275963 L352.126833,453.317734 L396.484519,453.317734 L396.484519,242.826492 C396.484519,204.124433 385.503951,174.135914 363.529208,152.90276 C341.527251,131.655664 310.55851,121.032116 270.514132,121.032116' }, 1000, mina.backout);
-    V.animate({ d: 'M568.950977 392.477271 471.125621 127.292398 423.612408 127.292398 551.251859 450.740296 586.650095 450.740296 713.672135 127.292398 666.158922 127.292398 Z' }, 1000, mina.backout);
-    I.animate({ d: 'M733.496361 450.740296 781.491855 450.740296 781.491855 127.292398 733.496361 127.292398' }, 1000, mina.backout);
+}
+
+let projectDetail = {
+  elProjectPage: null,
+  prevProject: null,
+  currentProject: null,
+
+  init: () => {
+    projectDetail.elProjectPage = document.getElementById('project-page')
+    // close
+    S.L('#logo-home', 'add', 'click', projectDetail.close)
+    // event
+    S.L('.project-detail-link', 'add', 'click', projectDetail.open)
+  },
+
+  open: (e) => {
+    e.preventDefault()
+
+    // Get project info
+    let project = e.target.closest('.project-detail-link')
+    let id = project.getAttribute('data-id')
+    if (projectDetail.currentProject !== null) {
+      projectDetail.prevProject = projectDetail.currentProject
+    }
+    projectDetail.currentProject = id
+
+    let load = document.getElementById('load')
+    let loadsc = document.getElementById('load-screen')
+    let images = ['01', '02', '03', '04', '05', '06', '01', '02', '03', '04', '05', '06']
+
+    // Prepare flashing load
+    let loadPhotos = load.querySelector('.photos')
+    loadPhotos.innerHTML = ''
+    let divImages = []
+    for (const image of images) {
+      let newImage = document.createElement("img");
+      newImage.src = '/photos/' + image + '-lo.png'
+
+      let newDivImage = document.createElement("div");
+      newDivImage.classList.add('photo')
+      newDivImage.appendChild(newImage)
+      
+      loadPhotos.appendChild(newDivImage)
+      divImages.push(newDivImage)
+    }
+
+    let effectDone = false
+
+    // loading
+    loadsc.style.transform = 'translateX(0)'
+    load.style.transform = 'translateX(-100%)'
+    loadsc.style.zIndex = 60;
+    
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
+      projectSlider.stop()
+      let tl = new S.Timeline()
+      tl.from({el: divImages[0], p: {opacity: [0, 1]}, d: 100, e: 'Power4Out'})
+      tl.from({el: divImages[0], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[1], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[2], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[3], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[3], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[4], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[4], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[5], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[5], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[6], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[6], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[7], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[7], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[8], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[8], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[9], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[9], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[10], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[10], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[11], p: {opacity: [0, 1]}, d: 100, delay: 100, e: 'Power4Out'})
+      tl.from({el: divImages[11], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: () => {
+        effectDone = true
+      }})
+      tl.play()
+    }}).play()
+
+    fetch('project_' + id + '.txt?v12345678').then((res) => {
+      res.text().then((text) => {
+        let wait = () => {
+          if (!effectDone) {
+            setTimeout(() => {
+              wait()
+            }, 100)
+          } else {
+            projectDetail.initProject(text)
+          }
+        }
+        wait()
+      });
+    })
+  },
+
+  initProject: (content) => {
+    if (projectDetail.prevProject !== null) {
+      // this.elProjectPage.innerHTML = '' 
+      projectDetail.elProjectPage.classList.remove('project-' + projectDetail.prevProject + '-detail')
+    }
+
+    projectDetail.elProjectPage.classList.add('project-' + projectDetail.currentProject + '-detail')
+    projectDetail.elProjectPage.innerHTML = content
+
+    projectDetail.openCover()
+    // event
+    S.L('.project-detail-link', 'add', 'click', projectDetail.open)
+  },
+
+  close: () => {
+    if (projectDetail.currentProject === null) {
+      return
+    }
+
+    // let pd = document.getElementById('project-page')
+    let loadsc = document.getElementById('load-screen')
+    let load = document.getElementById('load')
+    load.style.transform = 'translateX(-100%)'
+    loadsc.style.transform = 'translateX(0)'
+    loadsc.style.zIndex = 60;
+
+    new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
+      projectDetail.elProjectPage.style.display = 'none'
+      projectDetail.elProjectPage.classList.remove('project-' + projectDetail.currentProject + '-detail')
+      projectDetail.currentProject = null
+      projectDetail.prevProject = null
+      projectSlider.start()
+      new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
+        loadsc.style.zIndex = 0;
+        loadsc.style.transform = 'translateX(-100%)'
+      }}).play()
+    }}).play()
+  },
+
+  openCover: () => {
+    let load = document.getElementById('load')
+    projectDetail.elProjectPage.style.display = 'block'
+    projectDetail.elProjectPage.scrollTop = 0
+    new S.Merom({el: load, p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: projectDetail.openContent}).play()
+  },
+
+  openContent: () => {
+    let cover = document.getElementById('project-page-cover')
+    let loadsc = document.getElementById('load-screen')
+    loadsc.style.zIndex = 0
+    loadsc.style.transform = 'translateX(-100%)'
+    new S.Merom({el: cover, p: {opacity: [0, 1]}, d: 1500, e: 'Power4Out', cb: () => {
+      document.getElementById('project-page-content').style.display = 'block'
+    }}).play()
   }
-
-  let tl = new S.Timeline()
-  tl.from({el: '.avatar', p: {opacity: [0, 0.5]}, d: 2000, e: 'Power4Out'}) // 0 - .5
-  tl.from({el: '.is-animation-introtext', p: {x: [-365, 0, 'px']}, d: 500, delay: 2000, e: 'Power4Out', cb: displayProject}) // 2 - 2.5
-  tran1()
-  tl.play()
 }
 
-let displayProject = () => {
-  photoEffect()
+let app = {
+  page: 'project',
+  projectid: null,
+  config: {
+    'z': {
+      'project': 0,
+      'project-detail': 40,
+      'contact': 50,
+      'load': 80
+    }
+  },
 
-  let tl = new S.Timeline()
-  tl.from({el: '.photo', p: {width: [0, 100, '%']}, d: 500, delay: 500, e: 'Power4Out'})
-  tl.from({el: '.movex100', p: {x: [-100, 0, '%']}, d: 500, e: 'Power4Out'})
-  tl.from({el: '.name', p: {x: [-30, -25, 'vw'], opacity: [0, 1]}, d: 500, e: 'Power4Out', cb: main})
-  tl.from({el: '#rectange-on-right', p: {x: [30, 0, 'vw']}, d: 500, e: 'Power4Out'})
-  tl.play()
+  loading2: () => {
+    let manifest = [
+      '/photos/01-dcover.png',
+      '/photos/02-dcover.png',
+      '/photos/03-dcover.png',
+      '/photos/04-dcover.png',
+      '/photos/05-dcover.png',
+      '/photos/06-dcover.png',
+      '/photos/avatar.png',
+      '/photos/new-project-1.png',
+      '/photos/new-project-2.png'
+    ]
+    let preload = new createjs.LoadQueue(true)
+    preload.setMaxConnections(5)
+    while (manifest.length > 0) {
+      var item = manifest.shift()
+      preload.loadFile(item)
+    }
+  },
+
+  loading: () => {
+    let manifest = [
+      '/client/photo/clouds.jpg',
+      '/photos/01-cover.png',
+      '/photos/02-cover.png',
+      '/photos/03-cover.png',
+      '/photos/04-cover.png',
+      '/photos/05-cover.png',
+      '/photos/06-cover.png',
+      '/photos/01-lo.png',
+      '/photos/02-lo.png',
+      '/photos/03-lo.png',
+      '/photos/04-lo.png',
+      '/photos/05-lo.png',
+      '/photos/06-lo.png'
+    ]
+
+    let preload = new createjs.LoadQueue(true)
+    
+    preload.on("progress", () => {
+      let percent = preload.progress * 100
+
+      if (percent >= 25 && percent < 50) {
+        document.getElementById('loading-letter-l').classList.add('active')
+      }
+
+      if (percent >= 50 && percent < 75) {
+        document.getElementById('loading-letter-a').classList.add('active')
+      }
+
+      if (percent >= 75) {
+        document.getElementById('loading-letter-v').classList.add('active')
+      }
+    })
+
+    preload.on('complete', () => {
+      document.getElementById('loading-letter-i').classList.add('active')
+      setTimeout(() => {
+        let loadsc = document.getElementById('load-screen')
+        new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
+          loadsc.style.zIndex = 0;
+          loadsc.style.transform = 'translateX(-100%)'
+          document.getElementById('load-logo').style.display = 'none'
+          document.getElementById('load-photos').style.display = 'block'
+          app.init()
+        }}).play()
+      }, 1000)
+
+      app.loading2()
+    })
+    
+    preload.setMaxConnections(5);
+  
+    while (manifest.length > 0) {
+      var item = manifest.shift();
+      preload.loadFile(item);
+    }
+  },
+
+  init: () => {
+    let spriteImagesSrc = [
+      'photos/01-cover.png',
+      'photos/02-cover.png',
+      'photos/03-cover.png',
+      'photos/04-cover.png',
+      'photos/05-cover.png',
+      'photos/06-cover.png'
+    ]
+    app.slideShow = new CanvasSlideshow({
+      sprites: spriteImagesSrc,
+      displacementImage: '/client/photo/clouds.jpg',
+      autoPlaySpeed: [10, 3],
+      displaceScale: [200, 70]
+    });
+
+    projectSlider.init()
+    projectDetail.init()
+    contactPage.init()
+  },
+
+  setPage: (page, options) => {
+    this.page = page
+    if (page === 'project-detail') {
+      this.projectid = options.projectid
+    }
+  }
 }
 
-let photoEffect = () => {
-  new ImageEffect(document.getElementById('canvas-01'), '/client/photo/01_big.png')
-  new ImageEffect(document.getElementById('canvas-02'), '/client/photo/02_big.png')
-  new ImageEffect(document.getElementById('canvas-03'), '/client/photo/03_big.png')
-}
-
-S.L(document, 'add', 'DOMContentLoaded', () => {
-  preload(intro)
-})
-
-// S.L(document, 'add', 'DOMContentLoaded', main)
-// S.L(document, 'add', 'DOMContentLoaded', abc)
-
-
+S.L(document, 'add', 'DOMContentLoaded', app.loading)
