@@ -159,6 +159,8 @@ let projectSlider = {
   totalEl: document.getElementById('project-total'),
   currentEl: document.getElementById('project-current'),
   autoplayEl: document.getElementById('autoplay-timer'),
+  scrollHelperEl: document.getElementById('scroll-helper'),
+  hasScrolled: false,
   autoplayAnimation: null,
 
   wheelAndTouchEvent: (delta, type, event) => {
@@ -176,6 +178,11 @@ let projectSlider = {
     }
 
     projectSlider.timer = 0
+
+    if (!projectSlider.hasScrolled) {
+      projectSlider.hasScrolled = true
+      projectSlider.scrollHelperEl.classList.add('hide')
+    }
 
     if (delta < 0) {
       projectSlider.next()
