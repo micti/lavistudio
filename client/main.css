@@ -110,9 +110,13 @@ body {
   height: 101px;
   z-index: 41;
   display: block;
-  opacity: 1;
+  opacity: 0;
   transition: opacity .25s ease-in;
   cursor: pointer;
+}
+
+body.loaded .logo-home {
+  opacity: 1;
 }
 
 .back-button {
@@ -145,6 +149,12 @@ body {
   z-index: 50;
   position: absolute;
   cursor: pointer;
+  opacity: 0;
+  transition: .5s ease-in;
+}
+
+body.loaded .contact-button {
+  opacity: 1;
 }
 
 .contact-button--wrapper {
@@ -230,13 +240,17 @@ body {
   padding-top: 4px;
   z-index: 41;
   display: block;
-  opacity: 1;
+  opacity: 0;
   transition: opacity .25s ease-in;
   font-size: 12px;
 }
 
+body.loaded .scroll-helper {
+  opacity: 1;
+}
+
 .scroll-helper.hide {
-  opacity: 0;
+  opacity: 0 !important;
 }
 
 .scroll-helper .text {
@@ -278,6 +292,12 @@ body {
   height: 100%;
   left: 0;
   overflow: hidden;
+  opacity: 0;
+  transition: opacity .25s ease-in;
+}
+
+body.loaded .logo-lavi {
+  opacity: 1;
 }
 
 .projects-canvas {

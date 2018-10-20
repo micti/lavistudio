@@ -683,6 +683,7 @@ let app = {
           loadsc.style.transform = 'translateX(-100%)'
           document.getElementById('load-logo').style.display = 'none'
           document.getElementById('load-photos').style.display = 'block'
+          document.body.classList.add('loaded')
           app.init()
         }}).play()
       }, 1000)
