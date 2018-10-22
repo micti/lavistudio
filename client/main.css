@@ -497,6 +497,11 @@ body.loaded .project-counter {
   background-size: cover;
 }
 
+.project-content .project-scroll-helper {
+  text-align: center;
+  margin: 30px auto 0 auto;
+}
+
 .project-content .section {
   margin-top: 30px;
 }
@@ -630,6 +635,10 @@ body.loaded .project-counter {
 
   .project-dcover {
     margin-top: 100px;
+  }
+
+  .project-content .project-scroll-helper {
+    display: none;
   }
 
   .project-content .section-project-content .project-info {
