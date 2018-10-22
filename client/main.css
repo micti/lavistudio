@@ -771,7 +771,7 @@ body.loaded .project-counter {
 .contact-page .new-project div {
   width: 340px;
   display: flex;
-  height: 40px;
+  height: 60px;
   background: #000;
   color: #fff;
   justify-content: space-between;
@@ -789,16 +789,16 @@ body.loaded .project-counter {
   display: block;
   flex: none;
   width: auto;
-  padding-top: 8px;
+  padding-top: 18px;
 }
 
 .contact-page .new-project div span.text {
-  padding-left: 8px; 
+  padding-left: 18px; 
 }
 
 .contact-page .new-project div span.icon {
-  width: 40px;
-  padding-left: 8px;
+  width: 60px;
+  padding-left: 18px;
   border-left: 1px solid rgba(255, 255, 255, 0.4)
 }
 
