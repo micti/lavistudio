@@ -678,14 +678,19 @@ let app = {
       document.getElementById('loading-letter-i').classList.add('active')
       setTimeout(() => {
         let loadsc = document.getElementById('load-screen')
-        new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
+        let load = document.getElementById('load')
+        loadsc.querySelector('.logo-svg').style.transform = 'scale(5, 5)'
+        loadsc.querySelector('.logo-svg').style.opacity = 0
+        new S.Merom({el: load, p: {opacity: [1, 0]}, d: 1000, e: 'Power4Out', cb: () => {
           loadsc.style.zIndex = 0;
           loadsc.style.transform = 'translateX(-100%)'
+          load.style.opacity = 1
           document.getElementById('load-logo').style.display = 'none'
           document.getElementById('load-photos').style.display = 'block'
           document.body.classList.add('loaded')
           app.init()
         }}).play()
+        
       }, 1000)
 
       app.loading2()

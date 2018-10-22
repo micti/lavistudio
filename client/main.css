@@ -47,6 +47,10 @@ body {
   justify-content: center;
 }
 
+.load .logo-svg {
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+
 .load .logo-svg .letter {
   opacity: .07;
   fill: #231f20;
