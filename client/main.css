@@ -302,7 +302,7 @@ body.loaded .logo-lavi {
 }
 
 .projects {
-  -webkit-overflow-scrolling: touch;
+  
 }
 
 .projects-canvas {
@@ -315,6 +315,7 @@ body.loaded .logo-lavi {
 }
 
 .project {
+  -webkit-overflow-scrolling: touch;
   position: absolute;
   width: 100%;
   height: 100%;
