@@ -301,6 +301,10 @@ body.loaded .logo-lavi {
   opacity: 1;
 }
 
+.projects {
+  -webkit-overflow-scrolling: touch;
+}
+
 .projects-canvas {
   position: absolute;
   width: 50%;
