@@ -242,7 +242,6 @@ body.loaded .contact-button {
   text-align: center;
   overflow: hidden;
   padding-top: 4px;
-  z-index: 41;
   display: block;
   opacity: 0;
   transition: opacity .25s ease-in;
@@ -251,10 +250,6 @@ body.loaded .contact-button {
 
 body.loaded .scroll-helper {
   opacity: 1;
-}
-
-.scroll-helper.hide {
-  opacity: 0 !important;
 }
 
 .scroll-helper .text {
