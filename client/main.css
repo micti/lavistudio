@@ -285,6 +285,7 @@ body.loaded .scroll-helper {
 
 .projects {
   z-index: 1;
+  background: #F2F2F2;
 }
 
 .logo-lavi {
@@ -299,10 +300,6 @@ body.loaded .scroll-helper {
 
 body.loaded .logo-lavi {
   opacity: 1;
-}
-
-.projects {
-  
 }
 
 .projects-canvas {
