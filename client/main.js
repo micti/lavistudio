@@ -163,8 +163,6 @@ let projectSlider = {
   autoplayAnimation: null,
 
   wheelAndTouchEvent: (delta, type, event) => {
-    event.preventDefault()
-    
     if (projectSlider.isStop) {
       return
     }
