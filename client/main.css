@@ -466,6 +466,7 @@ body.loaded .project-counter {
   display: none;
   z-index: 40;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .project-page .container {
