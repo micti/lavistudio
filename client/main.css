@@ -1064,3 +1064,8 @@ body.loaded .project-counter {
 .project-06-detail .next-project {
   background-image: url(/photos/01-next.png);
 }
+
+.image {
+  opacity: 0;
+  transform: translateY(40px);
+}
