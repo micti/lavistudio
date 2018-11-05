@@ -1067,5 +1067,11 @@ body.loaded .project-counter {
 
 .image {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(80px);
+  transition: .7s ease-in-out;
+}
+
+.image.active {
+  opacity: 1;
+  transform: translateY(0px);
 }

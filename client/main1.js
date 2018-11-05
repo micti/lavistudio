@@ -723,58 +723,67 @@ let app = {
     var controller = new ScrollMagic.Controller();
 
     // create a scene
-    var tween1 = TweenMax.to('#section-1 .image', 1, {
-      transform: 'translateY(0)',
-      opacity: 1,
-      ease: Linear.easeNone
-    })
-    var scene1 = new ScrollMagic.Scene({
-      triggerElement: '#section-1'
-    }).setTween(tween1)
+    // var tween1 = TweenMax.to('#section-1 .image', 1, {
+    //   transform: 'translateY(0)',
+    //   opacity: 1,
+    //   ease: Linear.easeNone
+    // })
+    // var scene1 = new ScrollMagic.Scene({
+    //   triggerElement: '#section-1'
+    // }).setClassToggle("#section-1 .image", "active")//.setTween(tween1)
 
-    var tween2 = TweenMax.to('#section-2 .image', 1, {
-      transform: 'translateY(0)',
-      opacity: 1,
-      ease: Linear.easeNone
-    })
-    var scene2 = new ScrollMagic.Scene({
-      triggerElement: '#section-2'
-    }).setTween(tween2)
+    // var tween2 = TweenMax.to('#section-2 .image', 1, {
+    //   transform: 'translateY(0)',
+    //   opacity: 1,
+    //   ease: Linear.easeNone
+    // })
+    // var scene2 = new ScrollMagic.Scene({
+    //   triggerElement: '#section-2'
+    // }).setClassToggle("#section-2 .image", "active")//.setTween(tween2)
 
-    var tween3 = TweenMax.to('#section-3 .image', 1, {
-      transform: 'translateY(0)',
-      opacity: 1,
-      ease: Linear.easeNone
-    })
-    var scene3 = new ScrollMagic.Scene({
-      triggerElement: '#section-3'
-    }).setTween(tween3)
+    // var tween3 = TweenMax.to('#section-3 .image', 1, {
+    //   transform: 'translateY(0)',
+    //   opacity: 1,
+    //   ease: Linear.easeNone
+    // })
+    // var scene3 = new ScrollMagic.Scene({
+    //   triggerElement: '#section-3'
+    // }).setClassToggle("#section-3 .image", "active")//.setTween(tween3)
 
-    var tween4 = TweenMax.to('#section-4 .image', 1, {
-      transform: 'translateY(0)',
-      opacity: 1,
-      ease: Linear.easeNone
-    })
-    var scene4 = new ScrollMagic.Scene({
-      triggerElement: '#section-4'
-    }).setTween(tween4)
+    // var tween4 = TweenMax.to('#section-4 .image', 1, {
+    //   transform: 'translateY(0)',
+    //   opacity: 1,
+    //   ease: Linear.easeNone
+    // })
+    // var scene4 = new ScrollMagic.Scene({
+    //   triggerElement: '#section-4'
+    // }).setClassToggle("#section-4 .image", "active")//.setTween(tween4)
 
-    var tween5 = TweenMax.to('#section-5 .image', 1, {
-      transform: 'translateY(0)',
-      opacity: 1,
-      ease: Linear.easeNone
-    })
-    var scene5 = new ScrollMagic.Scene({
-      triggerElement: '#section-5'
-    }).setTween(tween5)
+    // var tween5 = TweenMax.to('#section-5 .image', 1, {
+    //   transform: 'translateY(0)',
+    //   opacity: 1,
+    //   ease: Linear.easeNone
+    // })
+    // var scene5 = new ScrollMagic.Scene({
+    //   triggerElement: '#section-5'
+    // }).setClassToggle("#section-5 .image", "active")//.setTween(tween5)
 
-    controller.addScene([
-      scene1,
-      scene2,
-      scene3,
-      scene4,
-      scene5
-    ]);
+    // controller.addScene([
+    //   // scene1,
+    //   // scene2,
+    //   // scene3,
+    //   // scene4,
+    //   // scene5
+    //   scenes
+    // ]);
+
+    let sections = document.querySelectorAll('.section-image')
+    for (const section of sections) {
+      let id = section.id
+      new ScrollMagic.Scene({
+        triggerElement: '#' + id
+      }).setClassToggle('#' + id + ' .image', 'active').addTo(controller)
+    }
 
     // controller.addTo(controller); // assign the scene to the controller
   },

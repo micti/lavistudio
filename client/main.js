@@ -446,6 +446,7 @@ let projectDetail = {
   elProjectPage: null,
   prevProject: null,
   currentProject: null,
+  parallax: null,
 
   init: () => {
     projectDetail.elProjectPage = document.getElementById('project-page')
@@ -525,7 +526,7 @@ let projectDetail = {
       tl.play()
     }}).play()
 
-    fetch('project_' + id + '.txt?v12345670').then((res) => {
+    fetch('project_' + id + '.txt?v12345679').then((res) => {
       res.text().then((text) => {
         let wait = () => {
           if (!effectDone) {
@@ -568,6 +569,9 @@ let projectDetail = {
     loadsc.style.zIndex = 60;
 
     new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
+      // clear parallax
+      if (projectDetail.parallax !== null) projectDetail.parallax.destroy()
+
       projectDetail.elProjectPage.style.display = 'none'
       projectDetail.elProjectPage.classList.remove('project-' + projectDetail.currentProject + '-detail')
       projectDetail.currentProject = null
@@ -594,6 +598,15 @@ let projectDetail = {
     loadsc.style.transform = 'translateX(-100%)'
     new S.Merom({el: cover, p: {opacity: [0, 1]}, d: 1500, e: 'Power4Out', cb: () => {
       document.getElementById('project-page-content').style.display = 'block'
+      // Call prallax
+      projectDetail.parallax = new ScrollMagic.Controller()
+      let sections = document.querySelectorAll('.section-image')
+      for (const section of sections) {
+        let id = section.id
+        new ScrollMagic.Scene({
+          triggerElement: '#' + id
+        }).setClassToggle('#' + id + ' .image', 'active').addTo(projectDetail.parallax)
+      }
     }}).play()
   }
 }

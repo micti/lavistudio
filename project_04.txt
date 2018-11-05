@@ -36,28 +36,28 @@
           </div>
         </div>
       </section>
-      <section class="section section-image section-one-image">
+      <section id="section-1" class="section section-image section-one-image">
         <div class="container">
           <div class="image">
             <img src="photos/04-photo-01.png">
           </div>
         </div>
       </section>
-      <section class="section section-image section-one-image">
+      <section id="section-2" class="section section-image section-one-image">
         <div class="container">
           <div class="image">
             <img src="photos/04-photo-02.png">
           </div>
         </div>
       </section>
-      <section class="section section-image section-one-image">
+      <section id="section-3" class="section section-image section-one-image">
         <div class="container">
           <div class="image">
             <img src="photos/04-photo-03.png">
           </div>
         </div>
       </section>
-      <section class="section section-image section-one-image-full">
+      <section id="section-4" class="section section-image section-one-image-full">
         <div class="fluid">
           <div class="image">
             <img src="photos/04-photo-04.png">

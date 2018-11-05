@@ -42,14 +42,14 @@
           </div>
         </div>
       </section>
-      <section class="section section-image section-one-image">
+      <section id="section-1" class="section section-image section-one-image">
         <div class="container">
           <div class="image">
             <img src="photos/01-photo-01.png">
           </div>
         </div>
       </section>
-      <section class="section section-image section-two-image">
+      <section id="section-2" class="section section-image section-two-image">
         <div class="container">
           <div class="image">
             <img src="photos/01-photo-02.png">
@@ -59,14 +59,14 @@
           </div>
         </div>
       </section>
-      <section class="section section-image section-one-image-full">
+      <section id="section-3" class="section section-image section-one-image-full">
         <div class="container">
           <div class="image">
             <img src="photos/01-photo-04.png">
           </div>
         </div>
       </section>
-      <section class="section section-image section-two-image">
+      <section id="section-4" class="section section-image section-two-image">
         <div class="container">
           <div class="image">
             <img src="photos/01-photo-05.png">
@@ -76,7 +76,7 @@
           </div>
         </div>
       </section>
-      <section class="section section-image section-one-image-full">
+      <section id="section-5" class="section section-image section-one-image-full">
         <div class="container">
           <div class="image">
             <img src="photos/01-photo-07.png">
