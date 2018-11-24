@@ -345,6 +345,7 @@ body.loaded .logo-lavi {
 .project .project-info .project-name span {
   display: block;
   margin-right: 2px;
+  z-index: 3;
 }
 
 .project .project-info span.speed-1x {
