@@ -1098,3 +1098,139 @@ body.loaded .project-counter {
   opacity: 1;
   transform: translateY(0px);
 }
+
+/***
+ * FORM
+ */
+.new-project-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f2f2f2;
+  display: none;
+  z-index: 40;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.new-project-form h1 {
+  font-size: 4rem;
+}
+
+.new-project-form div.tagline {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.new-project-form div.tagline p {
+  font-size: 1.1rem;
+}
+
+.new-project-form form {
+  width: 80%;
+  margin: 0 auto;
+}
+.new-project-form h2 {
+  position: relative;
+  margin: 4rem 0;
+}
+
+.new-project-form h2 {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.new-project-form h2 small {
+  position: absolute;
+  top: -3.5rem;
+  font-size: 8rem;
+  opacity: 0.2;
+}
+
+.new-project-form .form-fields {
+  display: flex;
+}
+
+.new-project-form .form-fields .form-field {
+  flex: 1 1 25%;
+}
+
+.new-project-form .form-row {
+  margin-left: -15px;
+  margin-right: -15px;
+  display: flex;
+}
+
+.new-project-form .form-row + .form-row {
+  margin-top: 45px;
+}
+
+.new-project-form .form-row .form-col {
+  padding-left: 15px;
+  padding-right: 15px;
+  flex: 0 0 50%;
+}
+
+.new-project-form .form-row .form-col input {
+  width: 100%;
+  height: 60px;
+  border: 1px solid #231F20;
+  background: transparent;
+  font-size: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.new-project-form .form-row .form-fullcol {
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+}
+
+.new-project-form .form-row .form-fullcol textarea {
+  width: 100%;
+  border: 1px solid #231F20;
+  background: transparent;
+  resize: none;
+  height: 250px;
+  font-size: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-family: inherit;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.new-project-form .form-action {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.new-project-form a {
+  color: #231F20;
+  text-decoration: none;
+  position: relative;
+}
+
+.new-project-form a::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #231F20;
+  transform: scale(1);
+  transition: transform .25s ease-in;
+  transform-origin: left center;
+}
+
+.new-project-form a:hover::after {
+  transform: scaleX(0);
+  transform-origin: right center;
+}
