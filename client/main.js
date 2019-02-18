@@ -311,9 +311,13 @@ let contactPage = {
   contactPage: null,
   backButton: null,
   isOpen: false,
+  formPage: null,
+
   init: () => {
     contactPage.contactButton = document.getElementById("contact-button")
+    contactPage.contactButton = document.getElementById("contact-button")
     contactPage.contactPage = document.getElementById("contact-page")
+    contactPage.formPage = document.getElementById("new-project-form-page")
     contactPage.backButton = document.getElementById("back-button")
     contactPage.newProjectButton = document.getElementById("new-project-button")
     contactPage.wrapper = document.getElementById("contact-page-wrapper")
@@ -324,14 +328,14 @@ let contactPage = {
 
   goToNewProject: () => {
     contactPage.backButton.style.display = 'block'
-    new S.Merom({el: contactPage.wrapper, p: {x: [0, -50, '%']}, d: 750, e: 'Power4Out', cb: () => {
+    new S.Merom({el: contactPage.contactPage, p: {x: [0, -100, '%']}, d: 750, e: 'Power4Out', cb: () => {
       contactPage.backButton.classList.add('active')
     }}).play()
   },
 
   backToInfo: () => {
     contactPage.backButton.classList.remove('active')
-    new S.Merom({el: contactPage.wrapper, p: {x: [-50, 0, '%']}, d: 750, e: 'Power4Out', cb: () => {
+    new S.Merom({el: contactPage.contactPage, p: {x: [-100, 0, '%']}, d: 750, e: 'Power4Out', cb: () => {
       contactPage.backButton.style.display = 'none'
     }}).play()
   },
@@ -357,8 +361,10 @@ let contactPage = {
     new S.Merom({el: '#load', p: {x: [-100, 0, '%']}, d: 700, e: 'Power4Out', cb: () => {
       contactPage.contactPage.style.display = 'none'
       contactPage.contactPage.style.zIndex = 40
+      contactPage.formPage.style.display = 'none'
+      contactPage.formPage.style.zIndex = 40
       contactPage.backButton.classList.remove('active')
-      contactPage.wrapper.style.transform = 'translateX(0)'
+      contactPage.contactPage.style.transform = 'translateX(0)'
       projectSlider.start()
       new S.Merom({el: '#load', p: {x: [0, 100, '%']}, d: 700, e: 'Power4Out', cb: () => {
         loadsc.style.zIndex = 0;
@@ -368,6 +374,7 @@ let contactPage = {
       }}).play()
     }}).play()
   },
+
   open: () => {
     let load = document.getElementById('load')
     let loadsc = document.getElementById('load-screen')
@@ -427,6 +434,8 @@ let contactPage = {
       tl.from({el: divImages[11], p: {opacity: [1, 0]}, d: 100, delay: 100, e: 'Power4Out', cb: () => {
         effectDone = true
         projectSlider.stop()
+        contactPage.formPage.style.display = 'block'
+        contactPage.formPage.style.zIndex = 41
         contactPage.contactPage.style.display = 'block'
         contactPage.contactPage.style.zIndex = 41
         // contactPage.contactPage.innerHTML = text

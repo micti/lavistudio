@@ -221,7 +221,7 @@
     <!-- end load screen -->
     <!-- buttons -->
     <div id="back-button" class="back-button">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
     </div>
     <div id="contact-button" class="contact-button">
       <div class="contact-button--wrapper">
@@ -265,8 +265,141 @@
     <!-- project detail page -->
     <div id="project-page" class="project-page"></div>
     <!-- end project detail page -->
+
+    <!-- form page -->
+    <div id="new-project-form-page" class="new-project-form-page">
+      <form>
+        <div class="form-heading">
+          <h1>We're here to help you<br>
+            start your project</h1>
+        </div>
+        <div class="tagline">
+          <p>
+            Let's start from scratch! Briefly describe your needs so that we<br>
+            can be of help and start a creative discussion.
+          </p>
+        </div>
+        <div>
+          <h2><small>01</small>Field of interest</h2>
+          <div class="form-fields">
+            <div class="form-field">
+              <input id="form-field-branding" name="field" type="radio" value="1">
+              <label for="form-field-branding">Branding</label>
+            </div>
+            <div class="form-field">
+              <input id="form-field-website" name="field" type="radio" value="2">
+              <label for="form-field-website">Website</label>
+            </div>
+            <div class="form-field">
+              <input id="form-field-posm" name="field" type="radio" value="3">
+              <label for="form-field-posm">POSM</label>
+            </div>
+            <div class="form-field">
+              <input id="form-field-application" name="field" type="radio" value="4">
+              <label for="form-field-application">Application</label>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2><small>02</small>Contact Information</h2>
+
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-input-field">
+                <label>Fullname</label>
+                <input type="text">
+              </div>
+            </div>
+            <div class="form-col">
+              <div class="form-input-field">
+                <label>Email</label>
+                <input type="text">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-input-field">
+                <label>Mobile Phone</label>
+                <input type="text">
+              </div>
+            </div>
+            <div class="form-col">
+              <div class="form-input-field">
+                <label>Website</label>
+                <input type="text">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-fullcol">
+              <div class="form-input-field">
+                <label>Self Description</label>
+                <textarea></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2><small>03</small>Business Description</h2>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-input-field">
+                <label>Ideal Timeline</label>
+                <input type="text">
+              </div>
+            </div>
+            <div class="form-col">
+              <div class="form-input-field">
+                <label>Budget</label>
+                <input type="text">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-input-field">
+                <label>Target Audience</label>
+                <input type="text">
+              </div>
+            </div>
+            <div class="form-col">
+              <div class="form-input-field">
+                <label>Target Market</label>
+                <input type="text">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-fullcol">
+              <div class="form-input-field">
+                <label>Project Description</label>
+                <textarea></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-action">
+          <a href="#">Submit</a>
+        </div>
+      </form>
+  
+    </div>
+    <!-- end form page -->
+
     <!-- contact page -->
     <div id="contact-page" class="contact-page">
+      <div id="form-page-wrapper" class="form-page-wrapper">
+        
+      </div>
       <div id="contact-page-wrapper" class="contact-page-wrapper">
         <div class="avatar"></div>
         <div class="designer-info">
@@ -293,28 +426,6 @@
               </span>
             </div>
           </div>
-        </div>
-        <div class="new-project-1">
-          <a href="https://goo.gl/forms/dNOhJUcvZllhJKWY2" target="_blank">
-            <span class="project-category">
-              Website Design<br>
-              UI/UX Design
-            </span>
-            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-            </span>
-          </a>
-        </div>
-        <div class="new-project-2">
-          <a href="https://goo.gl/forms/dNOhJUcvZllhJKWY2" target="_blank">
-            <span class="project-category">
-              Logo Design<br>
-              Branding Design
-            </span>
-            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-            </span>
-          </a>
         </div>
       </div>
     </div>
