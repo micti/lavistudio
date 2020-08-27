@@ -268,7 +268,7 @@
 
     <!-- form page -->
     <div id="new-project-form-page" class="new-project-form-page">
-      <form netlify method="post">
+      <form id="new-project-form" action="/contact" netlify method="post">
         <div class="form-heading">
           <h1>We're here to help you<br>
             start your project</h1>
@@ -308,13 +308,13 @@
             <div class="form-col">
               <div class="form-input-field">
                 <label>Fullname</label>
-                <input type="text">
+                <input name="fullname" type="text">
               </div>
             </div>
             <div class="form-col">
               <div class="form-input-field">
                 <label>Email</label>
-                <input type="text">
+                <input name="email" type="text">
               </div>
             </div>
           </div>
@@ -323,13 +323,13 @@
             <div class="form-col">
               <div class="form-input-field">
                 <label>Mobile Phone</label>
-                <input type="text">
+                <input name="mobile" type="text">
               </div>
             </div>
             <div class="form-col">
               <div class="form-input-field">
                 <label>Website</label>
-                <input type="text">
+                <input name="Website" type="text">
               </div>
             </div>
           </div>
@@ -338,7 +338,7 @@
             <div class="form-fullcol">
               <div class="form-input-field">
                 <label>Self Description</label>
-                <textarea></textarea>
+                <textarea name="self-desc"></textarea>
               </div>
             </div>
           </div>
@@ -351,13 +351,13 @@
             <div class="form-col">
               <div class="form-input-field">
                 <label>Ideal Timeline</label>
-                <input type="text">
+                <input name="ideal-time" type="text">
               </div>
             </div>
             <div class="form-col">
               <div class="form-input-field">
                 <label>Budget</label>
-                <input type="text">
+                <input name="budget" type="text">
               </div>
             </div>
           </div>
@@ -366,13 +366,13 @@
             <div class="form-col">
               <div class="form-input-field">
                 <label>Target Audience</label>
-                <input type="text">
+                <input name="target-audience" type="text">
               </div>
             </div>
             <div class="form-col">
               <div class="form-input-field">
                 <label>Target Market</label>
-                <input type="text">
+                <input name="target-market" type="text">
               </div>
             </div>
           </div>
@@ -381,14 +381,14 @@
             <div class="form-fullcol">
               <div class="form-input-field">
                 <label>Project Description</label>
-                <textarea></textarea>
+                <textarea name="project-desc"></textarea>
               </div>
             </div>
           </div>
         </div>
 
         <div class="form-action">
-          <a href="#">Submit</a>
+          <a id="form-submit" href="#">Submit</a>
         </div>
       </form>
   

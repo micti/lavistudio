@@ -316,6 +316,7 @@ let contactPage = {
   init: () => {
     contactPage.contactButton = document.getElementById("contact-button")
     contactPage.contactButton = document.getElementById("contact-button")
+    contactPage.newProjectFormButton = document.getElementById("form-submit")
     contactPage.contactPage = document.getElementById("contact-page")
     contactPage.formPage = document.getElementById("new-project-form-page")
     contactPage.backButton = document.getElementById("back-button")
@@ -324,6 +325,14 @@ let contactPage = {
     S.L(contactPage.contactButton, 'add', 'click', contactPage.click)
     S.L(contactPage.newProjectButton, 'add', 'click', contactPage.goToNewProject)
     S.L(contactPage.backButton, 'add', 'click', contactPage.backToInfo)
+    S.L(contactPage.backButton, 'add', 'click', contactPage.backToInfo)
+
+    // form submit
+    S.L(contactPage.newProjectFormButton, 'add', 'click', (e) => {
+      e.preventDefault()
+      let a = new FormData(document.getElementById("new-project-form"))
+      console.log(a);
+    })
   },
 
   goToNewProject: () => {
